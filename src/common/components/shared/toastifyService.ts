@@ -52,3 +52,20 @@ export const handleAuthorizationSignUpError = (text: string) => {
         style: {padding: 0,  right: 0}
     });
 }
+export const handleAddPlayersError = (text: string) => {
+    return () => toast("Пользователь с таким логином уже существует", {type: "error",
+        bodyStyle: {
+            background: "#FF5761",
+            color: "white",
+            padding: "4px 16px",
+            margin: 0,
+        },
+
+        draggable: true,
+        icon: ()=> null,
+        closeButton: ()=> null,
+        closeOnClick: true,
+        hideProgressBar: true,
+        style: {padding: 0,  right: 0}
+    });
+}
