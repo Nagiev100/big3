@@ -11,26 +11,48 @@ interface ICard{
 export const Card = ({ imageUrl,contentName,contentYear}:ICard ) => {
     return (
 
-            <Container widthProps='364px' heightProps='380px' backgroundProps='#707070' display='flex' flexDirection='column' >
-              {/* <Container display='flex' justifyContent='center'>*/}
-                   <Image src={imageUrl} widthProps='150px' heightProps='150px'   />
-{/*
-               </Container>
-*/}
+            <ContainerCard>
+                <ImageContainer>
+                    <Image src={imageUrl} widthProps='150px' heightProps='150px' margin='65px 107px'  />
+                </ImageContainer>
                 <CardContent>
                     <p>{contentName}</p>
-                    <p>Year of foundation:{contentYear}</p>
+                    <Text>Year of foundation:{contentYear}</Text>
                 </CardContent>
-            </Container>
+            </ContainerCard>
 
 
     );
 };
-
+const ContainerCard =styled.div`
+    width:364px;
+    height:380px;
+    background: linear-gradient(121.57deg, #707070 1.62%, #393939 81.02%);
+    display:flex ;
+    flex-direction:column ;
+    justify-content:flex-end;
+`
+const ImageContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
 export const CardContent = styled.div`
   max-width: 364px;
   height: 100px;
   background-color: #303030;
-  
+  width: 364px;
+  color: #fff;
+  align-self: flex-end;
+  text-align: center;
+  padding: 24px 0;
+`
+const Text = styled.p`
+ color: #9C9C9C;   
+ font-size: 14px;
+ font-style: normal;
+ font-weight: 500;
+ line-height: 24px;
 `

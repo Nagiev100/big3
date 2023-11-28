@@ -2,12 +2,12 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {get} from "../../../../api/baseFetch";
 import {IPlayerResponse} from "./playerSlice";
 
-export const fetchPlayers = createAsyncThunk<IPlayerResponse, {page?: number, pageSize?: number, name?: string}>(
+export const fetchPlayers = createAsyncThunk<IPlayerResponse, {page?: number, pageSize?: number, name?: string,teams?:string}>(
     'player/getPlayers',
     async (params, { rejectWithValue }) => {
         try {
             const token = localStorage.getItem("token");
-            const response = get (`Player/GetPlayers?pageSize=${params.pageSize}&page=${params.page}&name=${params.name}`, token!)
+            const response = get (`Player/GetPlayers?pageSize=${params.pageSize}&page=${params.page}&name=${params.name}${params.teams}`, token!)
 
             return response
         }

@@ -15,6 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import {PlayerDetail} from "./modules/players/components/playerDetail";
 
 
+
+
 function App() {
     return (
         <>

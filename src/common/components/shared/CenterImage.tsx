@@ -6,13 +6,17 @@ export interface IImageUrl {
 }
 interface ContainerProps {
     widthProps?: string,
-    backgroundProps?:string,
+    backgroundProps?:string | [string,string],
     heightProps?:string,
     flexDirection?:string,
     justifyContent?:string,
     marginLeft?:string,
     marginTop?:string,
-    display?:string
+    marginRight?:string,
+    display?:string,
+    gridTemplateColumn?:string,
+    gridTemplateRows?:string,
+    margin?:string,
 }
 
 export const CenterImage = ({imageUrl}:IImageUrl) => {
@@ -33,10 +37,14 @@ export const Container = styled.div<ContainerProps>`
   justify-content:${props => props.justifyContent};
   align-items: center;
   width:${props => props.widthProps};
-  background:${props => props.backgroundProps};
+  background-color:${props => props.backgroundProps};
   height: ${props => props.heightProps} ;
   margin-left: ${props => props.marginLeft};
+  margin-right: ${props => props.marginRight};
   margin-top:${props => props.marginTop};
+  margin: ${props => props.margin};
+  grid-template-columns: ${props => props.gridTemplateColumn};
+  grid-template-rows:${props => props.gridTemplateRows} ;
 `
 export const ImageText = styled.h2`
   font-size: 36px;

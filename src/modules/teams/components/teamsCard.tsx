@@ -13,11 +13,13 @@ import {Card} from "../../../common/components/shared/CardCompanent";
 import {ContainerGrid} from "../../../common/components/shared/GridComponent";
 import {Button} from "../../../common/components/shared/ButtonCompanent";
 import {Input} from "../../../common/components/shared/InputComponent";
+import PrevIcon from '../../../assests/icons/chevron_left_24px (1).png'
+import NextIcon from '../../../assests/icons/chevron_right_24px.png'
 
 
 
 
-interface IOptions {
+export interface IOptions {
     value:number,
     label:number
 }
@@ -34,7 +36,6 @@ export const TeamsCard : FC = () => {
     useEffect(()=>{
         dispatch(fetchTeams({page,pageSize, name}));
     },[page,pageSize, name])
-    console.log(name)
 
     const updatePageSize = (params: any) => {
         setPageSize(params.value)
@@ -55,6 +56,25 @@ export const TeamsCard : FC = () => {
 
     ]
 
+    const colourStyles = {
+        control: (base: {}) => ({
+            ...base,
+            boxShadow: "none",
+            height: '40px',
+            background: '#FFF',
+            border: 'solid 1px #D1D1D1',
+            marginTop:'30px'
+        }),
+        option: (styles: any, {data, isDisabled, isFocused, isSelected}: any) => {
+            return {
+                ...styles,
+                backgroundColor: isFocused ? "#C60E2E" : null,
+                color: isFocused ? "#ffffff" : null,
+
+            };
+        },
+    };
+
 
 
 
@@ -62,16 +82,25 @@ export const TeamsCard : FC = () => {
         <Container display='flex' flexDirection='row' justifyContent='space-between'  >
             <ContainerSearch>
                 <Input
+                    borderColor='#D1D1D1'
                     widthProps='364px'
                     heightProps='40px'
                     type='search'
                     placeholder='Search...'
                     onChange={(val)=>setName(val.target.value)}
+
                 />
                 <ImgSearch src={SearchImg}/>
             </ContainerSearch>
             <Link to='/layout/addTeam'>
-            <Button>
+            <Button
+                padding='8px 24px'
+                marginLeft='40px'
+                border='none'
+                backgroundColor='#E4163A'
+                color='#FFF'
+                backgroundHover='#FF5761'
+                backgroundActive='#C60E2E'>
                <ButtonText>Add </ButtonText>
                 +
             </Button>
@@ -98,23 +127,27 @@ export const TeamsCard : FC = () => {
 
             {
                 selector.data?.count && (
-                    <ReactPaginate
-                        breakLabel={'...'}
-                        nextLabel='>'
-                        previousLabel={'<'}
-                        onPageChange={({selected})=>{setPage(selected +1)}}
-                        initialPage={page}
-                        pageRangeDisplayed={pageSize}
-                        pageCount={Math.ceil(selector.data.count/ pageSize)}
-                        previousAriaLabel={'<'}
-                        renderOnZeroPageCount={null}
-                    />
+                    <PaginateContainer>
+                        <ReactPaginate
+                            breakLabel={'...'}
+                            nextLabel={<img src={NextIcon} width='19px' height='19px' />}
+                            previousLabel={<img src={PrevIcon} width='19px' height='19px'/>}
+                            onPageChange={({selected})=>{setPage(selected +1)}}
+                            initialPage={page}
+                            pageRangeDisplayed={pageSize}
+                            pageCount={Math.ceil(selector.data.count/ pageSize)}
+                            previousAriaLabel={'<'}
+                            renderOnZeroPageCount={null}
+                            activeClassName={'active'}
+                        />
+                    </PaginateContainer>
                 )
             }
 
            <Select
             options={options}
             onChange={updatePageSize}
+            styles={colourStyles}
            />
         </SectionPaginate>
     </div>;
@@ -122,13 +155,13 @@ export const TeamsCard : FC = () => {
 
 
 
-const ContainerSearch = styled.div`
+export const ContainerSearch = styled.div`
   position: relative;
   width: 364px;
   height: 40px;
   margin: 32px 0;
 `
-const ImgSearch = styled.img`
+export const ImgSearch = styled.img`
   position: absolute;
   content: '';
   width: 16px;
@@ -138,11 +171,44 @@ const ImgSearch = styled.img`
   right: 12px;
 `
 export const ButtonText =styled.span`
-  margin-right: 8px;
+  margin-right: 10px;
   
 `
-
-const SectionPaginate = styled.section`
+export const SectionPaginate = styled.section`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+`
+export const PaginateContainer =styled.div`
+    ul{
+      margin-top: 32px;
+      list-style: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0;
+    }
+  li{
+    margin: 0;
+    padding: 0 8px;
+    cursor: pointer;
+  }
+  li.active{
+    a{
+      background-color: #E4163A;
+      color: white;
+      border-radius: 4px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
 `

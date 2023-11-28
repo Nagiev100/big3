@@ -8,12 +8,7 @@ import {useAppSelector} from "../../core/redux/store";
 
 export const Header : FC = () => {
     const selector = useAppSelector((store) =>store.userName)
-   /* useEffect(()=>{
-        const token = localStorage.getItem('token')
-        if (token){
-            const decodingToken = decodeToken(token)
-        }
-    },[])*/
+
 
     return(
         <>

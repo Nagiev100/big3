@@ -5,7 +5,8 @@ interface InputComponent{
     heightProps?:string,
     borderColor?:string,
     background?:string,
-    padding?:string
+    padding?:string,
+    marginTop?:string
 }
 
 export const Input = styled.input<InputComponent>`
@@ -16,9 +17,12 @@ export const Input = styled.input<InputComponent>`
   font-weight: 500;
   line-height: 24px;
   text-align: left;
+  padding-left: 12px;
   border-radius: 4px;
-  background-color: /*#F6F6F6*/ ${props => props.background};
-  border: ${props => `1px solid ${props.borderColor || '#707070'}`};
+  margin-top:${props => props.marginTop} ;
+  
+  background-color:  ${props => props.background};
+  border: ${props => `1px solid ${props.borderColor || '#F6F6F6'}`};
   &:hover{
     background-color: #D1D1D1;
   }

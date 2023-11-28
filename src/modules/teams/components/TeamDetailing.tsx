@@ -10,11 +10,12 @@ import {fetchTeam} from "../../../core/redux/reducer/teamThunk";
 import {toast} from "react-toastify";
 import {getAddPlayerErrorAlert} from "../../players/helpers/getAddPlayerErrorAlert";
 import {handleNotifyError} from "../../../common/components/shared/toastifyService";
+import {Container} from "../../../common/components/shared/CenterImage";
+import {AddTextLogo} from "../../../common/components/shared/AddTextLogo";
+import {Image} from "../../../common/components/shared/ImageCompanent";
 
 
-interface IProps {
-    id: number
-}
+
 
 export interface ITeamsResponse {
     pageSize: number;
@@ -40,7 +41,6 @@ export const TeamDetailing: FC = () => {
     const dispatch = useAppDispatch()
     const teamDetail = useAppSelector(state => state.team.currentTeam)
     const [playersInTeam, setPlayersInTeam] = useState<IPlayer[] | null>(null)
-
     const {id} = useParams()
     useEffect(() => {
         const fetchDetailing = async () => {
@@ -89,44 +89,44 @@ export const TeamDetailing: FC = () => {
         }
     }, [id])
 
+
     return (
         <div>
             {teamDetail &&
                 <ContainerTeamDetail>
-                    <WrapperText>
-                        <WrapText>
-                            <TextTeams>Teams</TextTeams>
-                            <Span>/</Span>
-                            <TextTeams>{teamDetail.name}</TextTeams>
-                        </WrapText>
-                        <WrapLink>
-                            <Img src={Create} onClick={upDateTeam}/>
-                            <Img src={Delete} onClick={deleteTeam}/>
-                        </WrapLink>
-                    </WrapperText>
-                    <WrapperInformation>
-                        <LogoTeam src={'http://dev.trainee.dex-it.ru' + teamDetail.imageUrl}/>
+                    <Container display='flex' flexDirection='row' justifyContent='space-between' widthProps='1140px' heightProps='69px' backgroundProps='#FFF' >
+                        <Container display='flex' flexDirection='row' widthProps='100%' heightProps='100%' marginLeft='32px'>
+                            <AddTextLogo beforePaddingLeft='40px'>Teams {teamDetail.name}</AddTextLogo>
+
+                        </Container>
+                        <Container display='flex' flexDirection='row' marginRight='32px'>
+                            <Image widthProps='24px' heightProps='24px' marginRight='16px' src={Create} onClick={upDateTeam}/>
+                            <Image widthProps='24px' heightProps='24px' marginRight='16px' src={Delete} onClick={deleteTeam}/>
+                        </Container>
+                    </Container>
+                    <ContainerInformation>
+                        <Image widthProps='210px' heightProps='210px' marginLeft='146px' marginTop='97px' src={'http://dev.trainee.dex-it.ru' + teamDetail.imageUrl}/>
                         <div>
-                            <TeamName>{teamDetail.name}</TeamName>
+                            <Name>{teamDetail.name}</Name>
                             <TeamDetails>
                                 <li>
-                                    <LabelTeam>Year of foundation</LabelTeam>
-                                    <InformationTeam>{teamDetail.foundationYear}</InformationTeam>
+                                    <Text>Year of foundation</Text>
+                                    <TextConference>{teamDetail.foundationYear}</TextConference>
                                 </li>
                                 <li>
-                                    <LabelTeam>Conference</LabelTeam>
-                                    <InformationTeam>{teamDetail.conference}</InformationTeam>
+                                    <Text>Conference</Text>
+                                    <TextConference>{teamDetail.conference}</TextConference>
                                 </li>
                                 <ContainerDivision>
                                     <li>
                                         <LabelDivision>Division</LabelDivision>
-                                        <InformationTeam>{teamDetail.conference}</InformationTeam>
+                                        <TextConference>{teamDetail.conference}</TextConference>
                                     </li>
                                 </ContainerDivision>
 
                             </TeamDetails>
                         </div>
-                    </WrapperInformation>
+                    </ContainerInformation>
                 </ContainerTeamDetail>
             }
             {!!playersInTeam &&
@@ -146,58 +146,12 @@ const ContainerTeamDetail = styled.div`
   margin-left: 80px;
   margin-top: 32px;
 `
-const WrapperText = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 1140px;
-  height: 69px;
-  background-color: #FFF;
-`
-const WrapText = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin-left: 32px;
-`
-const TextTeams = styled.p`
-  font-family: Avenir;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 24px;
-  text-align: left;
-  color: #E4163A;
-`
-const Span = styled.span`
-  color: #9C9C9C;
-`
-const WrapLink = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-right: 32px;
-  margin-top: 24px;
-`
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-right: 16px;
-`
-
-const WrapperInformation = styled.div`
+const ContainerInformation = styled.div`
   display: grid;
   grid-template-columns: 3fr 4fr;
 `
-const LogoTeam = styled.img`
-  width: 210px;
-  height: 210px;
-  margin-left: 146px;
-  margin-top: 97px;
 
-`
-const TeamName = styled.h1`
-  font-family: Avenir;
+export const Name = styled.h1`
   font-size: 36px;
   font-weight: 800;
   line-height: normal;
@@ -209,8 +163,7 @@ const TeamDetails = styled.ul`
   grid-template-columns: 1fr 1fr;
   list-style: none;
 `
-const LabelTeam = styled.p`
-  font-family: Avenir;
+const Text = styled.p`
   font-size: 24px;
   font-weight: 800;
   line-height: normal;
@@ -218,14 +171,12 @@ const LabelTeam = styled.p`
   margin-top: 40px;
 `
 const LabelDivision = styled.p`
-  font-family: Avenir;
   font-size: 24px;
   font-weight: 800;
   line-height: normal;
   color: #FFF;
 `
-const InformationTeam = styled.p`
-  font-family: Avenir;
+const TextConference = styled.p`
   font-size: 18px;
   font-weight: 500;
   line-height: normal;

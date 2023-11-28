@@ -6,19 +6,14 @@ import Create from "../../../assests/icons/create.png";
 import Delete from "../../../assests/icons/delete.png";
 import styled from "styled-components";
 import {fetchPlayer} from "../../../core/redux/reducer/player/playerThunk";
+import {Container} from "../../../common/components/shared/CenterImage";
+import {AddTextLogo} from "../../../common/components/shared/AddTextLogo";
+import {Image} from "../../../common/components/shared/ImageCompanent";
+import { ContainerGrid } from "common/components/shared/GridComponent";
+import {Name} from "../../teams/components/TeamDetailing";
+import {create} from "domain";
 
-interface IPlayerDetail {
-    name: string,
-    number: number,
-    position: string,
-    team: number,
-    birthday: string,
-    height: number,
-    weight: number,
-    avatarUrl: string,
-    id: number,
-    teamName: string
-}
+
 export const PlayerDetail : FC = () =>{
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -38,15 +33,15 @@ export const PlayerDetail : FC = () =>{
         }
     },[])
 
-    const deleteTeam = async () => {
+    const deletePlayer = async () => {
         const token = localStorage.getItem('token')
-        const response = await remove(`Team/Delete?id=${id}`,  token!)
+        const response = await remove(`Player/Delete?id=${id}`,  token!)
         if (response){
-            navigate('/layout/teamsCard')
+            navigate('/layout/playersCard')
         }
     }
-    const upDateTeam = () => {
-        navigate('/layout/addTeam?edit=1')
+    const upDatePlayer = () => {
+        navigate('/layout/addPlayer?edit=1')
     }
 
     return(
@@ -54,41 +49,54 @@ export const PlayerDetail : FC = () =>{
             {
                 playerDetail &&
                 <ContainerTeamDetail>
-                    <WrapperText>
-                        <WrapText>
-                            <TextTeams>Teams</TextTeams>
-                            <Span>/</Span>
-                            <TextTeams>{playerDetail.name}</TextTeams>
-                        </WrapText>
-                        <WrapLink>
-                            <Img src={Create} onClick={upDateTeam}/>
-                            <Img src={Delete} onClick={deleteTeam}/>
-                        </WrapLink>
-                    </WrapperText>
+                    <Container display='flex' flexDirection='row' justifyContent='space-between' widthProps='1140px' heightProps='69px' backgroundProps='#FFF' >
+                        <Container display='flex' flexDirection='row' widthProps='100%' heightProps='100%' marginLeft='32px'>
+                            <AddTextLogo beforePaddingLeft='45px'>Players {playerDetail.name}</AddTextLogo>
+                        </Container>
+                        <Container display='flex' flexDirection='row' marginRight='32px'>
+                            <Image widthProps='24px' heightProps='24px' marginRight='16px' src={Create} onClick={upDatePlayer}/>
+                            <Image widthProps='24px' heightProps='24px' marginRight='16px' src={Delete} onClick={deletePlayer}/>
+                        </Container>
+                    </Container>
 
-                    <WrapperInformation>
-                        <LogoTeam src={'http://dev.trainee.dex-it.ru' + playerDetail.imageUrl}/>
+                    <ContainerGrid gridTemplateColumn='3fr 4fr' >
+                        <Image src={'http://dev.trainee.dex-it.ru' + playerDetail.avatarUrl} widthProps='450px' heightProps='450px'/>
                         <div>
-                            <TeamName>{playerDetail.name}</TeamName>
+                            <Container display='flex' flexDirection='row' >
+                                <Name>{playerDetail.name}</Name>
+                                <Number>#{playerDetail.number}</Number>
+                            </Container>
+
                             <TeamDetails>
-                                <li>
-                                    <LabelTeam>Year of foundation</LabelTeam>
-                                    <InformationTeam>{playerDetail.foundationYear}</InformationTeam>
-                                </li>
-                                <li>
-                                    <LabelTeam>Conference</LabelTeam>
-                                    <InformationTeam>{playerDetail.conference}</InformationTeam>
-                                </li>
-                                <ContainerDivision>
+                                <Container>
                                     <li>
-                                        <LabelDivision>Division</LabelDivision>
-                                        <InformationTeam>{playerDetail.conference}</InformationTeam>
+                                        <LabelPlayer>Position</LabelPlayer>
+                                        <InformationPlayer>{playerDetail.position}</InformationPlayer>
                                     </li>
-                                </ContainerDivision>
+
+                                    <li>
+                                        <LabelPlayer>Height</LabelPlayer>
+                                        <InformationPlayer>{playerDetail.height}</InformationPlayer>
+                                    </li>
+                                    <li>
+                                        <LabelPlayer>Age</LabelPlayer>
+                                        <InformationPlayer>{playerDetail.birthday}</InformationPlayer>
+                                    </li>
+                                </Container>
+                                <Container>
+                                    <li>
+                                        <LabelPlayer>Team</LabelPlayer>
+                                        <InformationPlayer>{playerDetail.teamName}</InformationPlayer>
+                                    </li>
+                                    <li>
+                                        <LabelPlayer>Weight</LabelPlayer>
+                                        <InformationPlayer>{playerDetail.weight}</InformationPlayer>
+                                    </li>
+                                </Container>
 
                             </TeamDetails>
                         </div>
-                    </WrapperInformation>
+                    </ContainerGrid>
                 </ContainerTeamDetail>
             }
 
@@ -98,97 +106,49 @@ export const PlayerDetail : FC = () =>{
 }
 const ContainerTeamDetail = styled.div`
   width: 1140px;
-  height: 473px;
+  height: 525px;
   background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
   margin-left: 80px;
   margin-top: 32px;
 `
-const WrapperText = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 1140px;  
-  height: 69px;
-  background-color: #FFF;
-`
-const WrapText = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin-left: 32px;
-`
-const TextTeams =styled.p`
-  font-family: Avenir;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 24px;
-  text-align: left;
-  color: #E4163A;
-`
-const Span = styled.span`
- color: #9C9C9C;
-`
-const WrapLink = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-right: 32px;
-  margin-top: 24px;
-`
-const Img =styled.img`
-  width:24px;
-  height: 24px;
-  margin-right: 16px;
-`
 
-const WrapperInformation = styled.div`
-  display:grid;
-  grid-template-columns: 3fr 4fr;
-`
-const LogoTeam = styled.img`
-  width: 210px;
-  height: 210px;
-  margin-left: 146px;
-  margin-top: 97px;
-
-`
-const TeamName = styled.h1`
-  font-family: Avenir;
+const Number = styled.p`
+  color: #FF5761;
   font-size: 36px;
+  font-style: normal;
   font-weight: 800;
   line-height: normal;
-  color: #FFFFFF;
-  margin-top: 65px;
+  padding-top: 65px;
+  padding-left: 10px;
 `
+
 const TeamDetails = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;
 `
-const LabelTeam =styled.p`
-  font-family: Avenir;
+const LabelPlayer =styled.p`
+  width: 92px;
+  height: 33px;
+  padding-top: 40px;
   font-size: 24px;
   font-weight: 800;
   line-height: normal;
   color: #FFF;
-  margin-top: 40px;
+  
 `
 const LabelDivision = styled.p`
-  font-family: Avenir;
   font-size: 24px;
   font-weight: 800;
   line-height: normal;
   color: #FFF;
 `
-const InformationTeam = styled.p`
-  font-family: Avenir;
+const InformationPlayer = styled.p`
+  width: 69px;
+  height: 25px;
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
-  color: #FFF;
-  margin-top: 8px;
-`
-const ContainerDivision = styled.div`
- margin-top: 54px;
+  color: #FFFFFF;
+  padding-top: 38px;
 `
