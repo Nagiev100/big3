@@ -107,6 +107,7 @@ export const PlayersCard: FC = () => {
       height: '40px',
       background: '#FFF',
       border: 'solid 1px #D1D1D1',
+      marginTop:'16px',
     }),
     option: (styles: any, {data, isDisabled, isFocused, isSelected}: any) => {
       return {
@@ -123,20 +124,17 @@ export const PlayersCard: FC = () => {
   };
 
 
-  return <div style={{width:'1140px', margin:'0 auto'}}>
-    <Container display='flex' flexDirection='row' justifyContent='space-between'  >
+  return <ContainerPlayersCard>
+    <WrapperSearch >
       <ContainerSearch>
-        <Input
-            borderColor='#D1D1D1'
-            widthProps='364px'
-            heightProps='40px'
+        <InputSearch
             type='search'
             placeholder='Search...'
             onChange={(val)=>setName(val.target.value)}
-
         />
         <ImgSearch src={SearchImg}/>
       </ContainerSearch>
+
       <ContainerSelect>
         <Select
             options={teams}
@@ -146,20 +144,14 @@ export const PlayersCard: FC = () => {
             styles={colourStylesMulti}
         />
       </ContainerSelect>
+
       <Link to='/layout/addPlayer'>
-        <Button
-            padding='8px 24px'
-            marginLeft='40px'
-            border='none'
-            backgroundColor='#E4163A'
-            color='#FFF'
-            backgroundHover='#FF5761'
-            backgroundActive='#C60E2E'>
+        <ButtonPlayerCard>
           <ButtonText>Add </ButtonText>
           +
-        </Button>
+        </ButtonPlayerCard>
       </Link>
-    </Container>
+    </WrapperSearch>
     {
       <ContainerGrid gridTemplateColumn='repeat(3,1fr)' gap='24px'>
         {
@@ -201,15 +193,78 @@ export const PlayersCard: FC = () => {
           styles={colourStyles}
       />
     </SectionPaginate>
-  </div>;
+  </ContainerPlayersCard>;
 };
-
-
-
-
-
+const ContainerPlayersCard =styled.div`
+  width:1140px;
+  margin: 0 auto;
+  @media ${props => props.theme.mobile}{
+    margin:0 auto;
+    width: 100%;
+    padding: 0 24px
+  }
+`
+const WrapperSearch = styled.div`
+  display:flex; 
+  flex-direction:row;
+  justify-content:space-between;
+  @media ${props => props.theme.mobile}{
+    width:100%;
+    flex-direction:column;
+    margin: 0 auto;
+  }
+`
+const InputSearch = styled.input`
+  border-color:#D1D1D1;
+  width:364px;
+  height:40px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  padding-left: 12px;
+  border-radius: 4px;
+  @media ${props => props.theme.mobile}{
+    width: 100%;
+    margin-left: 0;
+    margin-top:16px;
+  }
+  `
+const ButtonPlayerCard =styled.button`
+  padding:8px 24px;
+  width: 104px;
+  border:none;
+  background-color:#E4163A;
+  color:#FFF;
+  margin-left:40px;
+  margin-top: 32px;
+  height: 40px;
+  border-radius: 4px;
+  &:hover{
+    background-color: #FF5761;
+  }
+  &:active{
+    background-color: #C60E2E;
+  }
+  @media ${props => props.theme.mobile}{
+    width: 100%;
+    margin-left:0;
+    margin-top:16px;
+    height: auto
+  }
+`
 const ContainerSelect = styled.div`
-  padding-right:470px ;
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin: 15px 0 ;
+  @media ${props => props.theme.mobile} {
+    width: 100%;
+    margin:0;
+    height: auto;
+
+  }
+\`
 
 `
 

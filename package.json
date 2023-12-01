@@ -12,6 +12,7 @@
     "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
     "@types/redux": "^3.6.0",
+    "jwt-decode": "^4.0.0",
     "paginate": "^0.2.0",
     "react": "^18.2.0",
     "react-datepicker": "^4.23.0",

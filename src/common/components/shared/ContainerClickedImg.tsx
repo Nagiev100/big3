@@ -20,5 +20,10 @@ export const ContainerClickedImg = styled.div<ContainerClickedImg>`
   margin-left: ${props => props.marginLeft};
   background-repeat: no-repeat;
   background-size: cover;
+  @media ${props => props.theme.mobile}{
+    width:185px;
+    height:144px;
+    margin:0 auto;
+  }
   
 `

@@ -101,12 +101,11 @@ export const AddTeam: FC = () => {
 
     return (
         <>
-            <Container widthProps='1140px' heightProps='545px' backgroundProps='#FFFFFF' marginLeft='80px'
-                       marginTop='32px'>
-                <Container heightProps='69px' backgroundProps='#FFFFFF'>
+            <ContainerAddTeam>
+                <Container heightProps='69px' backgroundProps='#FFFFFF' widthProps={'100%'}>
                     <AddTextLogo beforePaddingLeft='40px'>Teams Add new team</AddTextLogo>
                 </Container>
-                <ContainerGrid gridTemplateColumn='3fr 4fr'>
+                <ContainerAddTeamGrid >
                     <ContainerClickedImg
                         marginTop='48px'
                         marginLeft='73px'
@@ -119,7 +118,7 @@ export const AddTeam: FC = () => {
                                heightProps='75px'
                         />
                     </ContainerClickedImg>
-                    <Container marginLeft='136px'>
+                    <ContainerInputAddTeam>
                         <Form>
                             <Label>Name</Label>
                             <Input
@@ -154,33 +153,21 @@ export const AddTeam: FC = () => {
                                 {...register('foundationYear', {required: true})}
                             />
                         </Form>
-                    </Container>
-                </ContainerGrid>
+                    </ContainerInputAddTeam>
+                </ContainerAddTeamGrid>
                 <Container display='flex' flexDirection='row' marginTop='26px' marginLeft='625px'>
-                    <Button
+                    <ButtonCansel
                         onClick={goBack}
-                        width='171px'
-                        backgroundColor='#FFFFFF'
-                        backgroundHover='#D1D1D1'
-                        backgroundActive='#707070'
-                        border='1px color:#9C9C9C'
-                        color='#9C9C9C'>
+                    >
                         <span>Cancel</span>
-                    </Button>
-                    <Button
+                    </ButtonCansel>
+                    <ButtonSave
                         onClick={handleSubmit(onSubmit)}
                         type='submit'
                         disabled={!isValid}
-                        width='171px'
-                        backgroundColor='#E4163A'
-                        backgroundHover='#FF5761'
-                        backgroundActive='#C60E2E'
-                        color='#FFFFFF'
-                        border='none'
-                        marginLeft='24px'
                     >
                         <span>Save</span>
-                    </Button>
+                    </ButtonSave>
 
                 </Container>
                 <InputFile
@@ -189,10 +176,73 @@ export const AddTeam: FC = () => {
                     onInputCapture={addImg}
                 />
 
-            </Container>
+            </ContainerAddTeam>
         </>
     )
 }
+export const ButtonCansel = styled.button`
+  width:171px;
+  height: 40px;
+  background-color:#FFFFFF;
+  border:1px solid #9C9C9C;
+  color:#9C9C9C;
+  &:hover{
+    background-color: #9C9C9C
+  }
+  &:active{
+    background-color:#707070
+  }
+  @media ${props => props.theme.mobile}{
+    width:100%;
+    margin-top:26px
+  }
+`
+export const ButtonSave = styled.button`
+  width:171px;
+  height: 40px;
+  border:1px solid #9C9C9C;
+  color:#fff;
+  margin-left: 24px;
+  background-color: #E4163A;
+  &:hover{
+    background-color: #FF5761
+  }
+  &:active{
+    background-color:#C60E2E
+  }
+  @media ${props => props.theme.mobile}{
+    width:100%;
+    
+    margin-top:26px
+  }
+`
+const ContainerAddTeam = styled.div`
+  width:1140px;
+  height:545px;
+  background-color:#FFFFFF;
+  margin-Left:80px;
+  margin-Top:32px;
+  @media ${props => props.theme.mobile}{
+    margin: 0 auto;
+    width:100%;
+    padding: 0 24px;
+    height:100%
+  }
+`
+const ContainerAddTeamGrid = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  @media ${props => props.theme.mobile}{
+    grid-template-columns: 1fr;
+  }
+`
+const ContainerInputAddTeam = styled.div`
+   margin-left: 136px;
+  @media ${props => props.theme.mobile}{
+    width:100%;
+    margin:0 auto;
+  }
+  `
 export const InputFile = styled.input`
   opacity: 0;
   height: 0;

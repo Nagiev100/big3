@@ -1,15 +1,34 @@
-import React, {FC, useState} from "react";
-import {Link, NavLink, useNavigate} from "react-router-dom";
+import React, {FC, useEffect, useState} from "react";
+import {NavLink, useNavigate} from "react-router-dom";
 import OutIcons from "../../assests/icons/outIcons.png";
 import styled from "styled-components";
 import {IconComponent} from '../../common/components/shared/Icon'
 import {Container} from '../components/shared/CenterImage'
-import {Image} from "./shared/ImageCompanent";
+import {Image} from "./shared/ImageCompanent"
+import UserImg from "../../assests/icons/user.png";
+import {Img, UserHeader, UserName} from "./header";
+import {useAppSelector} from "../../core/redux/store";
+import { jwtDecode } from "jwt-decode";
 
 
-export const Sidebar : FC = () => {
+
+
+export const Sidebar: FC <{showMenu?:boolean}>= ({showMenu}) => {
     const navigate = useNavigate()
     const [activeLink,setActiveLink] =useState('')
+    const selector = useAppSelector((store) =>store.userName)
+    const [userName,setUserName] = useState('')
+    const storeToken = localStorage.getItem('token')
+    useEffect(() => {
+
+        if(storeToken){
+            const decodedToken = jwtDecode(storeToken) as { user: string } | null;
+            if (decodedToken && decodedToken.user) {
+                setUserName (decodedToken.user);
+            }
+        }
+    },[storeToken])
+
     const out = () => {
         localStorage.removeItem("token")
         navigate('/')
@@ -86,88 +105,126 @@ export const Sidebar : FC = () => {
         setActiveLink(linkType)
     }
 
+
+
     return(
-        <>
-            <Container display='flex' flexDirection='column' justifyContent='space-between' widthProps='100%' heightProps='100%'>
-                <Container widthProps='100%' heightProps='100%' marginLeft='51px' marginTop='32px'>
-                    <Container>
+        <SidebarPanel showMenu={showMenu}>
+
+            <Container display='flex' flexDirection='column' justifyContent='space-between' widthProps='100%' heightProps='100%' >
+                    <Container widthProps='100%' heightProps='100%' marginLeft='51px' marginTop='0px'>
+                        <UserSidebar>
+                            <Image src={UserImg} widthProps='48px' heightProps='48px'/>
+                            <UserNameSidebar>{userName}</UserNameSidebar>
+                        </UserSidebar>
+                        <Container>
+                            <NavLink
+                                to="teamsCard"
+                                onClick={() => handleLinkClick('teamsCard')}>
+                                <IconComponent
+                                    iconSvg={iconSvg}
+                                    text={'Teams'}
+                                    onClick={() => handleIconClick('teamsCard')}
+                                    isActive={activeLink === 'teamsCard'}
+                                    iconType={'teamsCard'}
+                                />
+                            </NavLink>
+                        </Container>
+
                         <NavLink
-                            to="teamsCard"
-                            onClick={() => handleLinkClick('teamsCard')}>
+                            to="playersCard"
+                            onClick={() => handleLinkClick('playersCard')}>
                             <IconComponent
-                                iconSvg={iconSvg}
-                                text={'Teams'}
-                                onClick={() => handleIconClick('teamsCard')}
-                                isActive={activeLink === 'teamsCard'}
-                                iconType={'teamsCard'}
+                                iconSvg={iconPlayerSvg}
+                                text={'Players'}
+                                onClick={() => handleIconClick('playersCarders') }
+                                isActive={activeLink === 'playersCard'}
+                                iconType={'playersCard'}
                             />
                         </NavLink>
                     </Container>
+                <OutButtonContainer>
+                    <ContainerImgButton onClick={out} >
+                        <Image src={OutIcons} marginLeft='5px'/>
+                        <ButtonText>Sign out</ButtonText>
+                    </ContainerImgButton>
+                </OutButtonContainer>
 
-                    <NavLink
-                        to="playersCard"
-                        onClick={() => handleLinkClick('playersCard')}>
-                        <IconComponent
-                        iconSvg={iconPlayerSvg}
-                        text={'Players'}
-                        onClick={() => handleIconClick('playersCarders') }
-                        isActive={activeLink === 'playersCard'}
-                        iconType={'playersCard'}
-                        />
-                    </NavLink>
                 </Container>
-                <Container onClick={out}>
-                    <Image src={OutIcons} marginLeft='15px'/>
-                    <ButtonText>Sign out</ButtonText>
-                </Container>
-            </Container>
-        </>
+
+
+       </SidebarPanel>
     )
 }
-
-
-const ImgGroupIcons = styled.img`
-  width:24px;
-  height: 24px;
-  margin-left: 7px;
-`
-
-const TextIcons = styled.p`
-  font-family: Avenir;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 150%;
-  color: #9C9C9C;
-  width: 38px;
-`
-const ImgPersonIcons = styled.img`
-  width:24px;
-  height: 24px;
-  margin-left: 7px;
-  margin-top: 36px;
-`
-const ButtonSaybar = styled.button`
+const MySideBarLayout = styled.section`
+  max-width: 140px;
+  position: fixed;
+  height: calc(100vh - 80px);
+  width: 140px;
   display: flex;
   flex-direction: column;
-  border: none;
-  background-color: #FFF;
+  background:white;
+  bottom: 0;
+  
+`;
+const SidebarPanel =styled(MySideBarLayout)<{showMenu:boolean|undefined}>`
+  position: fixed;
+  display: block;
+  @media ${props => props.theme.mobile}{
+    display: block;
+    left: ${({showMenu}) => (showMenu? '0' : '-250px')};
+    top: 85px;
+    width: 250px;
+    transition: left 0.3s ease-in-out;
+    hight:100%
+  }
 `
-const ButtonImg = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-left: 58px;
-  margin-bottom: 4px;
+const UserSidebar = styled.div`
+  display: none;
+  
+  @media ${props => props.theme.mobile}{
+   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right:215px;
+    margin-top:16px;
+  }
 `
+const UserNameSidebar = styled.p`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #303030;
+  padding-left: 8px;
+`
+
+
+
+const OutButtonContainer = styled.div`
+  @media ${props => props.theme.mobile}{
+    margin-left:70px
+  }
+`
+const ContainerImgButton = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  @media ${props => props.theme.mobile}{
+    flex-direction: row;
+    align-items: center;
+    padding-right:300px;
+  } 
+`
+
 const ButtonText = styled.p`
   width: 46px;
   height: 18px;
-  font-family: Avenir;
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;
   color: #FF768E;
   margin-left: 5px;
-  margin-bottom: 32px;
+  margin-bottom: 0;
 `
 
 

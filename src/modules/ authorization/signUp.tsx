@@ -39,7 +39,6 @@ export const SignUp: FC = () => {
         register,
         formState: { errors, isValid },
         setError,
-        reset,
     } = useForm<SignUpFormData>({
         mode: "onBlur",
     });
@@ -75,10 +74,11 @@ export const SignUp: FC = () => {
     return (
         <>
             <Container widthProps='100vw' heightProps='100vh'>
-                <Container display='grid' gridTemplateColumn='3fr 4fr'>
-                    <Container backgroundProps='#FFFFFF' heightProps='100vh' display='flex' flexDirection='column' justifyContent='center'>
+                <Wrapper display='grid' gridTemplateColumn='3fr 4fr' >
+                    <Container backgroundProps='#FFFFFF' heightProps='100vh' widthProps={'100%'} display='flex' flexDirection='column' justifyContent='center'>
                         <SloganAuthorization>Sign Up</SloganAuthorization>
                         <Form onSubmit={handleSubmit(onSubmit)}>
+
                             <Label htmlFor='name'>Name</Label>
                             <Input borderColor={errors?.userName?'red': '#F6F6F6'}  widthProps='366px' heightProps='40px' id='name' background='#F6F6F6'
                                    {...register('userName', {required:true})}/>
@@ -106,7 +106,8 @@ export const SignUp: FC = () => {
                             <ContainerInput>
                                 <Label htmlFor='returnPassword'>Enter your password again</Label>
                                 <Input borderColor={errors?.returnPassword?'red': '#F6F6F6'} widthProps='366px' heightProps='40px' id='returnPassword' background='#F6F6F6' type={typeReturnPassword}
-                                       {...register('returnPassword', {required:true})}/>
+                                       {...register('returnPassword', {required:true})}
+                                />
                                 {typeReturnPassword === 'password'?
                                     (<ContainerIcon onClick={() => setTypeReturnPassword('text')}><img src={closeEye}/></ContainerIcon>):
                                     (<ContainerIcon onClick={()=> setTypeReturnPassword('password')}><img src={openEye}/></ContainerIcon>)
@@ -116,16 +117,13 @@ export const SignUp: FC = () => {
                                 </div>
                             </ContainerInput>
                             <ContainerCheckBox >
-                                <Input
-                                    borderColor={errors?.checkBox?'red': '#F6F6F6'}
-                                widthProps='16px'
-                                heightProps='16px'
-                                type='checkbox'
-                                {...register('checkBox',{required:true})}
+                                <InputCheckBox
+                                    type='checkbox'
+                                    {...register('checkBox',{required:true})}
                                 />
                                 <CheckBoxText>I accept the agreement</CheckBoxText>
                             </ContainerCheckBox>
-                            <Container display='flex' flexDirection='column'>
+                            <Container display='flex' flexDirection='column'  widthProps={"100%"}>
                                 <Button
                                     backgroundColor='#E4163A'
                                     backgroundHover='#FF5761'
@@ -145,19 +143,25 @@ export const SignUp: FC = () => {
                                     Not a member yet? <Link to="/" style={{color:'red'}} >Sign In</Link>
                                 </AuthorizationText>
                             </Container>
-
                         </Form>
                     </Container>
-                    <Container backgroundProps='#F5FBFF' heightProps='100vh'  display='flex' flexDirection='column' justifyContent='center'>
-                        <Image src={signUpImages} widthProps='660px' heightProps='414px'/>
-                    </Container>
-
-                </Container>
+                    <ContainerMedia>
+                        <Container backgroundProps='#F5FBFF' heightProps='100vh'  display='flex' flexDirection='column' justifyContent='center'>
+                            <Image src={signUpImages} widthProps='660px' heightProps='414px'/>
+                        </Container>
+                        </ContainerMedia>
+                </Wrapper>
             </Container>
         </>
     );
 };
 
+const Wrapper = styled(Container)`
+  @media ${props => props.theme.mobile} {
+    display: grid;
+    grid-template-columns:1fr;
+    padding: 0 24px
+`
 
 const ContainerCheckBox = styled.div`
   display:flex;
@@ -165,6 +169,22 @@ const ContainerCheckBox = styled.div`
   widthProps:366px;
   align-items: center;
   margin-top: 26px;
+  @media ${props => props.theme.mobile}{
+    magrin-top:5px
+  }
+`
+const InputCheckBox = styled.input`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  pading-left: 12px;
+  border-radius: 4px;
+  width: 16px;
+  height:16px;
+  @media ${props => props.theme.mobile}{
+    padding-top:0px
+  }
 `
 
 const ErrorsP = styled.p`
@@ -181,6 +201,17 @@ const CheckBoxText = styled.span`
   font-weight: 500;
   line-height: 24px;
 `
+const ContainerMedia =styled.div`
+  @media ${props => props.theme.mobile}{
+    display: none;
+  }
+`
+const ContainerFormSignUp = styled.div`
+  @media ${props => props.theme.mobile}{
+    margin: 0 auto;
+  }
+`
+
 
 
 

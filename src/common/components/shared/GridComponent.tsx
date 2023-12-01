@@ -13,4 +13,9 @@ export const ContainerGrid = styled.div<GridComponent>`
   gap: ${props => props.gap};
   width: ${props => props.width};
   margin-top: ${props => props.marginTop};
+  @media ${props => props.theme.mobile}{
+    grid-template-columns:repeat(2,1fr);
+    margin-top:24px;
+    margin-left: 0
+  }
 `

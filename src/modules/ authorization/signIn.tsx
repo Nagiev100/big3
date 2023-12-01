@@ -25,7 +25,8 @@ export const SignIn: FC = () => {
   const {
     handleSubmit,
     register,
-    formState: {  isValid },
+    formState: { errors, isValid },
+    setError,
   } = useForm<SignInFormData>();
   const [typePassword,setTypePassword] = useState('password')
   const [textError,setTextError] = useState(false)
@@ -49,13 +50,16 @@ export const SignIn: FC = () => {
   return(
       <>
         <Container widthProps='100vw' heightProps='100vh' >
-          <Container display='grid' gridTemplateColumn='3fr 4fr' >
-           <Container backgroundProps='#FFFFFF' heightProps='100vh' display='flex' flexDirection='column' justifyContent='center'>
+          <Wrapper display='grid' gridTemplateColumn='3fr 4fr'  >
+           <Container backgroundProps='#FFFFFF' heightProps='100vh' widthProps={"100%"} display='flex' flexDirection='column' justifyContent='center' >
              <SloganAuthorization>Sign In</SloganAuthorization>
              <Form onSubmit={handleSubmit(onSubmit)}>
                  <Label htmlFor='name'>Name</Label>
-                 <Input widthProps='366px' heightProps='40px' id='name' background='#F6F6F6'
+                 <Input borderColor={errors?.login?'red': '#F6F6F6'} widthProps='366px' heightProps='40px' id='name' background='#F6F6F6'
                         {...register('login', {required:true})}/>
+                 <div>
+                     {errors?.login && (<p>{errors?.login.message || "Required"}</p>)}
+                 </div>
                  <ContainerInput>
                      <Label htmlFor='password'>Password</Label>
                      <Input widthProps='366px' heightProps='40px' id='password' background='#F6F6F6' type={typePassword}
@@ -71,7 +75,7 @@ export const SignIn: FC = () => {
                      }
                  </ContainerInput>
              </Form>
-               <Container display='flex' flexDirection='column'>
+               <Container display='flex' widthProps={"100%"}  flexDirection='column'>
                    <Button
                        backgroundColor='#E4163A'
                        backgroundHover='#FF5761'
@@ -82,7 +86,7 @@ export const SignIn: FC = () => {
                        onClick={handleSubmit(onSubmit)}
                        disabled={!isValid}
                        padding='0'
-                       width='365px'
+                       width='366px'
                        marginTop='26px'
                    >
                        <span>Sign In</span>
@@ -92,15 +96,33 @@ export const SignIn: FC = () => {
                    </AuthorizationText>
                </Container>
            </Container>
-           <Container backgroundProps='#F5FBFF' heightProps='100vh'  display='flex' flexDirection='column' justifyContent='center'>
-             <Image src={signInImages} widthProps='605.46px' heightProps='412.05px'/>
-           </Container>
-         </Container>
+              <ContainerMedia>
+                  <Container backgroundProps='#F5FBFF' heightProps='100vh'  display='flex' flexDirection='column' justifyContent='center'>
+                      <Image src={signInImages} widthProps='605.46px' heightProps='412.05px'/>
+                  </Container>
+              </ContainerMedia>
+
+         </Wrapper>
         </Container>
       </>
   )
 
 };
+
+const Wrapper = styled(Container)`
+    @media ${props => props.theme.mobile} {
+      display: grid;
+      grid-template-columns:1fr;
+      padding: 0 24px
+  }
+`
+
+const ContainerMedia =styled.div`
+  @media ${props => props.theme.mobile}{
+    display: none;
+  }
+`
+
 
 export const SloganAuthorization =styled.h2`
   color: #344472;
@@ -109,6 +131,9 @@ export const SloganAuthorization =styled.h2`
   font-size: 36px;
   font-weight: 400;
   margin-right: 240px;
+  @media ${props => props.theme.mobile}{
+    margin-right:0px
+  }
   
 `
 export const ContainerInput = styled.div`
@@ -121,6 +146,12 @@ export const ContainerIcon = styled.span`
   content: '';
   top:62px;
   left: 340px;
+  @media ${props => props.theme.mobile}{
+    left: auto;
+    top: auto;
+    bottom: 6px;
+    right: 8px; 
+  }
 `
 export const Label = styled.label`
   font-size: 14px;
@@ -133,6 +164,9 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media ${props => props.theme.mobile}{
+   width: 100%
+  }
 `
  export const AuthorizationText =styled.p`
    color: #707070;

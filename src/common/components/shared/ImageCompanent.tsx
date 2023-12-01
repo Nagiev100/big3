@@ -23,4 +23,8 @@ export const Image = styled.img<ImageComponent>`
   margin-top: ${props => props.marginTop};
   margin-right: ${props => props.marginRight};
   margin: ${props => props.margin};
+  @media ${props => props.theme.mobile}{
+    width:58px;
+    heigth:50px
+  }
 `

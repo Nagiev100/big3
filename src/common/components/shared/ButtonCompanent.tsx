@@ -28,4 +28,9 @@ export const Button = styled.button<IButton>`
   &:active{
     background-color: /*#C60E2E*/ ${props => props.backgroundActive};
   }
+  
+  @media ${props => props.theme.mobile}{
+    width: 100%;
+    margin-right: 0
+  }
 `

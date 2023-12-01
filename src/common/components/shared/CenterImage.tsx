@@ -21,15 +21,27 @@ interface ContainerProps {
 
 export const CenterImage = ({imageUrl}:IImageUrl) => {
     return (
-        <Container widthProps='1300px' backgroundProps='#F6F6F6' justifyContent='center' display='flex'>
+        <Container widthProps='1300px' backgroundProps='#F6F6F6' justifyContent='center' display='flex' >
             <Container widthProps='556px' backgroundProps='#FFF' heightProps='570px' flexDirection='column' justifyContent='center' display='flex'>
-                <Image src={imageUrl} background='#FFF' borderRadius='15px' maxWidth='100%' maxHeight='100%'/>
+                <ImgDefaultTeamsCard  src={imageUrl} />
                 <ImageText>Empty here</ImageText>
                 <p>Add new teams to continue</p>
             </Container>
         </Container>
     )
 }
+
+const ImgDefaultTeamsCard = styled.img`
+  background:#FFF;
+  border-radius: 15px;
+  max-width: 100%;
+  max-height: 100%;
+  @media ${props => props.theme.mobile}{
+    width:339px;
+    height:225px;
+    margin-bottom:48px
+  }
+`
 
 export const Container = styled.div<ContainerProps>`
   display: ${props => props.display};
@@ -44,7 +56,19 @@ export const Container = styled.div<ContainerProps>`
   margin-top:${props => props.marginTop};
   margin: ${props => props.margin};
   grid-template-columns: ${props => props.gridTemplateColumn};
-  grid-template-rows:${props => props.gridTemplateRows} ;
+  grid-template-rows:${props => props.gridTemplateRows};
+  
+  @media ${props => props.theme.mobile}{
+    padding:0px;
+    margin:0 auto;
+    heigth:667px;
+  }
+
+\`
+  
+  
+  
+  
 `
 export const ImageText = styled.h2`
   font-size: 36px;

@@ -78,13 +78,11 @@ export const TeamsCard : FC = () => {
 
 
 
-    return<div style={{width:'1140px', margin:'0 auto'}} >
-        <Container display='flex' flexDirection='row' justifyContent='space-between'  >
+    return< ContainerTeamsCard  >
+        <WrapperSearch >
             <ContainerSearch>
-                <Input
-                    borderColor='#D1D1D1'
-                    widthProps='364px'
-                    heightProps='40px'
+                <InputSearch
+
                     type='search'
                     placeholder='Search...'
                     onChange={(val)=>setName(val.target.value)}
@@ -93,19 +91,12 @@ export const TeamsCard : FC = () => {
                 <ImgSearch src={SearchImg}/>
             </ContainerSearch>
             <Link to='/layout/addTeam'>
-            <Button
-                padding='8px 24px'
-                marginLeft='40px'
-                border='none'
-                backgroundColor='#E4163A'
-                color='#FFF'
-                backgroundHover='#FF5761'
-                backgroundActive='#C60E2E'>
+            <ButtonTeamsCard>
                <ButtonText>Add </ButtonText>
                 +
-            </Button>
+            </ButtonTeamsCard >
             </Link>
-        </Container>
+        </WrapperSearch>
         {
         <ContainerGrid gridTemplateColumn='repeat(3,1fr)' gap='24px'>
         {
@@ -150,16 +141,56 @@ export const TeamsCard : FC = () => {
             styles={colourStyles}
            />
         </SectionPaginate>
-    </div>;
+    </ContainerTeamsCard>;
 };
 
 
-
+const ContainerTeamsCard =styled.div`
+  width:1140px;
+  margin: 0 auto;
+  @media ${props => props.theme.mobile}{
+    margin:0 auto;
+    width: 100%;
+    padding: 0 24px
+  }
+`
+const WrapperSearch = styled.div`
+  display:flex; 
+  flex-direction:row;
+  justify-content:space-between;
+  @media ${props => props.theme.mobile}{
+    width:100%;
+    flex-direction:column;
+    margin: 0 auto;
+  }
+`
 export const ContainerSearch = styled.div`
   position: relative;
-  width: 364px;
+  width: 100%;
   height: 40px;
   margin: 32px 0;
+  @media ${props => props.theme.mobile}{
+    width: 100%;
+    margin:0;
+    height: auto;
+    
+  }
+`
+const InputSearch = styled.input`
+  border-color:#D1D1D1;
+  width:364px;
+  height:40px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  padding-left: 12px;
+  border-radius: 4px;
+  @media ${props => props.theme.mobile}{
+    width: 100%;
+    margin-left: 0;
+    margin-top:16px;
+  }
 `
 export const ImgSearch = styled.img`
   position: absolute;
@@ -168,7 +199,37 @@ export const ImgSearch = styled.img`
   height: 16px;
   color: Grey;
   top: 12px;
-  right: 12px;
+  left: 340px;
+  @media ${props => props.theme.mobile}{
+    right: 8px;
+    bottom: 11px;
+    left: auto;
+    top: auto;
+    margin-top:16px;
+  }
+`
+
+const ButtonTeamsCard =styled.button`
+  padding:8px 24px;
+  width: 104px;
+  border:none;
+  background-color:#E4163A;
+  color:#FFF;
+  margin-left:40px;
+  margin-top:32px;
+  height: 40px;
+  border-radius: 4px;
+  &:hover{
+    background-color: #FF5761;
+  }
+  &:active{
+    background-color: #C60E2E;
+  }
+  @media ${props => props.theme.mobile}{
+    width: 100%;
+    margin-left:0;
+    height: auto
+  }
 `
 export const ButtonText =styled.span`
   margin-right: 10px;
@@ -180,6 +241,9 @@ export const SectionPaginate = styled.section`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0;
+  @media ${props => props.theme.mobile}{
+    width: 100%;
+  }
 `
 export const PaginateContainer =styled.div`
     ul{
@@ -210,5 +274,8 @@ export const PaginateContainer =styled.div`
   a{
     text-decoration: none;
     color: inherit;
+  }
+  @media ${props => props.theme.mobile}{
+    height: auto
   }
 `

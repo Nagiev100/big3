@@ -27,16 +27,19 @@ export const IconComponent : FC <IconComponentProps> = ({iconSvg,text,onClick,ic
     const selectedIcon = isActive?'active':'default';
     return (
         <>
-            <Container >
+            <ContainerIconSidebar>
                 <ColoredIcon isActive={isActive}  onClick={handleClick}>
                     {iconSvg[selectedIcon]}
                 </ColoredIcon>
                 <TextIcons isActive={isActive}>{text}</TextIcons>
-            </Container>
+            </ContainerIconSidebar>
 
         </>
     );
 };
+const ContainerIconSidebar = styled.div`
+
+`
 const ColoredIcon = styled.svg <IColorIcon>`
   width: 24px;
   height: 24px;

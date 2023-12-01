@@ -24,4 +24,9 @@ export const AddTextLogo = styled.p <IAddTextLogo>`
     line-height: 24px;
     color: #9C9C9C;
   }
+  @media ${props => props.theme.mobile}{
+    padding-top:16px;
+    padding-left:0px;
+    
+  }
 `

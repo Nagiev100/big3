@@ -12,6 +12,7 @@ import {Image} from "../../../common/components/shared/ImageCompanent";
 import { ContainerGrid } from "common/components/shared/GridComponent";
 import {Name} from "../../teams/components/TeamDetailing";
 import {create} from "domain";
+import {containerCSS} from "react-select/dist/declarations/src/components/containers";
 
 
 export const PlayerDetail : FC = () =>{
@@ -45,28 +46,27 @@ export const PlayerDetail : FC = () =>{
     }
 
     return(
-        <div>
+        <ContainerDitail>
             {
                 playerDetail &&
-                <ContainerTeamDetail>
-                    <Container display='flex' flexDirection='row' justifyContent='space-between' widthProps='1140px' heightProps='69px' backgroundProps='#FFF' >
-                        <Container display='flex' flexDirection='row' widthProps='100%' heightProps='100%' marginLeft='32px'>
+                <ContainerDitailPlayer>
+                    <ContainerNamePlayer >
+                        <ContainerLogo>
                             <AddTextLogo beforePaddingLeft='45px'>Players {playerDetail.name}</AddTextLogo>
-                        </Container>
-                        <Container display='flex' flexDirection='row' marginRight='32px'>
-                            <Image widthProps='24px' heightProps='24px' marginRight='16px' src={Create} onClick={upDatePlayer}/>
-                            <Image widthProps='24px' heightProps='24px' marginRight='16px' src={Delete} onClick={deletePlayer}/>
-                        </Container>
-                    </Container>
+                        </ContainerLogo>
+                        <ContainerImg>
+                            <Img  src={Create} onClick={upDatePlayer}/>
+                            <Img src={Delete} onClick={deletePlayer}/>
+                        </ContainerImg>
+                    </ContainerNamePlayer>
 
-                    <ContainerGrid gridTemplateColumn='3fr 4fr' >
-                        <Image src={'http://dev.trainee.dex-it.ru' + playerDetail.avatarUrl} widthProps='450px' heightProps='450px'/>
+                    <ContainerGridAddPlayer >
+                        <ImgPlayer src={'http://dev.trainee.dex-it.ru' + playerDetail.avatarUrl} />
                         <div>
-                            <Container display='flex' flexDirection='row' >
+                            <ContainerNumber >
                                 <Name>{playerDetail.name}</Name>
                                 <Number>#{playerDetail.number}</Number>
-                            </Container>
-
+                            </ContainerNumber>
                             <TeamDetails>
                                 <Container>
                                     <li>
@@ -96,36 +96,138 @@ export const PlayerDetail : FC = () =>{
 
                             </TeamDetails>
                         </div>
-                    </ContainerGrid>
-                </ContainerTeamDetail>
+                    </ContainerGridAddPlayer>
+                </ContainerDitailPlayer>
             }
 
 
-        </div>
+        </ContainerDitail>
     )
 }
-const ContainerTeamDetail = styled.div`
+const ContainerDitail = styled.div`
   width: 1140px;
   height: 525px;
   background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
   margin-left: 80px;
   margin-top: 32px;
+  @media ${props => props.theme.mobile} {
+    width:100%;
+    height:100%;
+    margin:0 auto;
+  }
 `
+const ContainerDitailPlayer = styled.div`
+ width:100%;
+  @media ${props => props.theme.mobile} {
+    width:100%;
+    height:100%;
+    margin:0 auto;
+  }
+`
+const ContainerNamePlayer = styled.div`
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width:1140px;
+    height:69px;
+    background-color:#FFF;
+    @media ${props => props.theme.mobile} {
+      width:100%;
+      height:48px;
+    }
+`
+const ContainerLogo = styled.div`
+    display:flex;
+    flex-direction:row;
+    width:100% ;
+    height:100%;
+    margin-left:32px;
+  @media ${props => props.theme.mobile} {
+    margin-left:16px;
+  } 
+`
+const ContainerImg = styled.div`
+    display:flex;
+    flex-direction:row;
+  align-items: center;
+    margin-right: 32px;
+ 
+  @media ${props => props.theme.mobile} {
+    width:100% ;
+    padding-top:16px;
+    margin:0;
+    justify-content: flex-end;
+    
+  }
+`
+const ContainerNumber=styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+  @media ${props => props.theme.mobile} {
+    margin: 0 auto;
+    width:100%
+  }
+   
+`
+const Img = styled.img`
+    width:24px;
+    height:24px;
+    margin-right:16px;
+    @media ${props => props.theme.mobile} {
+      margin:0;
+      margin-right:10px;
+    }
+`
+const ImgPlayer = styled.img`
+  width: 450px;
+  height: 450px;
+  @media ${props => props.theme.mobile} {
+    width:143px;
+    height:112px;
+    margin: 0 auto;
+  }
+  
+`
+
+const ContainerGridAddPlayer = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  max-width: 1140px;
+ 
+  @media ${props => props.theme.mobile} {
+    grid-template-columns: 1fr;
+    width:100%;
+    margin: 0 auto;
+  }
+`
+const ContainerInformation = styled.div`
+ 
+`
+
 
 const Number = styled.p`
   color: #FF5761;
   font-size: 36px;
-  font-style: normal;
   font-weight: 800;
-  line-height: normal;
   padding-top: 65px;
   padding-left: 10px;
+  @media ${props => props.theme.mobile} {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px;
+  }
 `
 
 const TeamDetails = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;
+  @media ${props => props.theme.mobile} {
+    grid-template-columns: 1fr;
+    width:100%;
+    margin: 0 auto;
+  }
 `
 const LabelPlayer =styled.p`
   width: 92px;
@@ -135,13 +237,12 @@ const LabelPlayer =styled.p`
   font-weight: 800;
   line-height: normal;
   color: #FFF;
-  
-`
-const LabelDivision = styled.p`
-  font-size: 24px;
-  font-weight: 800;
-  line-height: normal;
-  color: #FFF;
+  @media ${props => props.theme.mobile} {
+    width: 100%;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px;
+  }
 `
 const InformationPlayer = styled.p`
   width: 69px;
@@ -151,4 +252,9 @@ const InformationPlayer = styled.p`
   line-height: normal;
   color: #FFFFFF;
   padding-top: 38px;
+  @media ${props => props.theme.mobile} {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 24px;
+  }
 `

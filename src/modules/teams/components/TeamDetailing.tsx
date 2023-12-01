@@ -94,19 +94,20 @@ export const TeamDetailing: FC = () => {
         <div>
             {teamDetail &&
                 <ContainerTeamDetail>
-                    <Container display='flex' flexDirection='row' justifyContent='space-between' widthProps='1140px' heightProps='69px' backgroundProps='#FFF' >
-                        <Container display='flex' flexDirection='row' widthProps='100%' heightProps='100%' marginLeft='32px'>
+                    <ContainerFunctional  >
+                        <ContainerLogo >
                             <AddTextLogo beforePaddingLeft='40px'>Teams {teamDetail.name}</AddTextLogo>
+                        </ContainerLogo>
+                        <ContainerButton >
+                            <Img src={Create} onClick={upDateTeam}/>
+                            <Img  src={Delete} onClick={deleteTeam}/>
+                        </ContainerButton>
+                    </ContainerFunctional >
 
-                        </Container>
-                        <Container display='flex' flexDirection='row' marginRight='32px'>
-                            <Image widthProps='24px' heightProps='24px' marginRight='16px' src={Create} onClick={upDateTeam}/>
-                            <Image widthProps='24px' heightProps='24px' marginRight='16px' src={Delete} onClick={deleteTeam}/>
-                        </Container>
-                    </Container>
+
                     <ContainerInformation>
-                        <Image widthProps='210px' heightProps='210px' marginLeft='146px' marginTop='97px' src={'http://dev.trainee.dex-it.ru' + teamDetail.imageUrl}/>
-                        <div>
+                        <ImgTeam  src={'http://dev.trainee.dex-it.ru' + teamDetail.imageUrl}/>
+                        <ContainerData>
                             <Name>{teamDetail.name}</Name>
                             <TeamDetails>
                                 <li>
@@ -125,7 +126,7 @@ export const TeamDetailing: FC = () => {
                                 </ContainerDivision>
 
                             </TeamDetails>
-                        </div>
+                        </ContainerData>
                     </ContainerInformation>
                 </ContainerTeamDetail>
             }
@@ -139,16 +140,83 @@ export const TeamDetailing: FC = () => {
         </div>
     )
 }
+const ContainerData = styled.div`
+  @media ${props => props.theme.mobile}{
+    margin-left:110px;
+    width:100%
+
+  }
+`
+const Img = styled.img`
+    width:24px;
+    height:24px;
+    margin-right:16px;
+   margin-top: 30px;
+`
+const ImgTeam = styled.img`
+    width:210px;
+    height:210px;
+    margin-left:146px ;
+    margin-top:97px;
+  @media ${props => props.theme.mobile}{
+    width:89px;
+    height:90px;
+    margin-top:48px
+
+  }
+`
 const ContainerTeamDetail = styled.div`
   width: 1140px;
   height: 473px;
   background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
   margin-left: 80px;
   margin-top: 32px;
+  @media ${props => props.theme.mobile}{
+    max-width:480px;
+    margin-left:0;
+    height:542px;
+    width:480px;
+    
+    
+  }
+`
+const ContainerFunctional = styled.div`
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:1140px;
+    height:69px;
+    background-color:#FFF;
+    @media ${props => props.theme.mobile}{
+      margin-left:0;
+      height:48px
+    }
+`
+const ContainerLogo = styled.div`
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    height:100%;
+    margin-left:32px;
+    @media ${props => props.theme.mobile}{
+      margin-right:0;
+    }
+`
+const ContainerButton = styled.div`
+    display:flex ;
+    flex-direction:row;
+    margin-right:32px
 `
 const ContainerInformation = styled.div`
   display: grid;
   grid-template-columns: 3fr 4fr;
+  @media ${props => props.theme.mobile}{
+    grid-template-columns: 1fr;
+    width: 100%;
+    height:100%;
+    margin:0 auto
+    
+  }
 `
 
 export const Name = styled.h1`
@@ -157,11 +225,21 @@ export const Name = styled.h1`
   line-height: normal;
   color: #FFFFFF;
   margin-top: 65px;
+  @media ${props => props.theme.mobile}{
+    margin-top:48px;
+   margin-left: 160px;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px
+  }
 `
 const TeamDetails = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;
+  @media ${props => props.theme.mobile}{
+    grid-template-columns: 1fr;
+  }
 `
 const Text = styled.p`
   font-size: 24px;
@@ -169,7 +247,16 @@ const Text = styled.p`
   line-height: normal;
   color: #FFF;
   margin-top: 40px;
+  @media ${props => props.theme.mobile}{
+    width:135px;
+    height:25px;
+    font-size: 17px;
+    font-weight: 800;
+    margin-top:48px;
+    margin-left:60px
+  }
 `
+
 const LabelDivision = styled.p`
   font-size: 24px;
   font-weight: 800;
@@ -182,8 +269,21 @@ const TextConference = styled.p`
   line-height: normal;
   color: #FFF;
   margin-top: 8px;
+
+  @media ${props => props.theme.mobile}{
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    margin-top:32px;
+  }
+  
+ 
 `
 const ContainerDivision = styled.div`
   margin-top: 54px;
+  @media ${props => props.theme.mobile}{
+    margin-top:0;
+  }
 `
 

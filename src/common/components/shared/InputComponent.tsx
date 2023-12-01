@@ -5,14 +5,13 @@ interface InputComponent{
     heightProps?:string,
     borderColor?:string,
     background?:string,
-    padding?:string,
-    marginTop?:string
+
+    marginTop?:string,
 }
 
 export const Input = styled.input<InputComponent>`
   width: ${props => props.widthProps || "100%"};
   height: ${props => props.heightProps};
-  padding: ${props => props.padding};
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
@@ -28,5 +27,9 @@ export const Input = styled.input<InputComponent>`
   }
   &:focus{
     background-color: #F6F6F6;
+  }
+  @media ${props => props.theme.mobile}{
+    width:100%;
+    height:40px
   }
 `

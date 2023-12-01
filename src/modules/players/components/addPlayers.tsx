@@ -11,7 +11,7 @@ import {AddTextLogo} from "../../../common/components/shared/AddTextLogo";
 import {ITypeTeam} from "../../../core/redux/reducer/teamSlice";
 import {Form, Label} from "../../ authorization/signIn";
 import {ContainerClickedImg} from "../../../common/components/shared/ContainerClickedImg";
-import {InputFile} from "../../teams/components/addTeam";
+import {ButtonCansel, ButtonSave, InputFile} from "../../teams/components/addTeam";
 import {Button} from "../../../common/components/shared/ButtonCompanent";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import DatePicker, {ReactDatePicker} from "react-datepicker";
@@ -187,12 +187,12 @@ export const AddPlayer: FC = () => {
     // @ts-ignore
     return (
         <>
-            <Container heightProps='655px' backgroundProps='#FFFFFF' marginLeft='80px'
-                       marginTop='32px' widthProps='1140px' >
+            <ContainerAddPlayer>
                 <Container heightProps='69px' backgroundProps='#FFFFFF'>
                     <AddTextLogo beforePaddingLeft='45px'>Players Add new player</AddTextLogo>
                 </Container>
-                <ContainerGrid gridTemplateColumn='3fr 4fr'>
+                <ContainerAddPlayerGrid>
+
                     <ContainerClickedImg
                         marginTop='48px'
                         marginLeft='73px'
@@ -206,7 +206,7 @@ export const AddPlayer: FC = () => {
                       />
                     </ContainerClickedImg>
 
-                    <Container marginLeft='136px'>
+                    <ContainerInputAddPlayer >
                         <Form>
                             <Label htmlFor='name'>Name</Label>
                             <Input
@@ -236,7 +236,7 @@ export const AddPlayer: FC = () => {
                                 />
                             </Container>
                             <Container widthProps={"366px"}>
-                                <ContainerGrid gridTemplateColumn='1fr 1fr' gap={"20px"} marginTop='26px' >
+                                <ContainerGridInput >
                                     <Container>
                                         <Label htmlFor='height'>Height (cm)</Label>
                                         <Input
@@ -278,7 +278,7 @@ export const AddPlayer: FC = () => {
                                             {...register('number', {required: true})}
                                         />
                                     </Container>
-                                </ContainerGrid>
+                                </ContainerGridInput>
                             </Container>
                             <InputFilePlayer
                                 type='file'
@@ -286,41 +286,65 @@ export const AddPlayer: FC = () => {
                                 onInputCapture={addImg}
                             />
                         </Form>
-                    </Container>
-                </ContainerGrid>
+                    </ContainerInputAddPlayer>
+                </ContainerAddPlayerGrid>
                 <Container display='flex' flexDirection='row' marginTop='26px' marginLeft='625px'>
-                    <Button
-                        width='171px'
-                        backgroundColor='#FFFFFF'
-                        backgroundHover='#D1D1D1'
-                        backgroundActive='#707070'
-                        border='1px color:#9C9C9C'
-                        color='#9C9C9C'
+                    <ButtonCansel
                         onClick={goBack}
                     >
-
                         <span>Cancel</span>
-                    </Button>
-                    <Button
+                    </ButtonCansel>
+                    <ButtonSave
                         onClick={handleSubmit(onSubmit)}
                         type='submit'
                         disabled={!isValid}
-                        width='171px'
-                        backgroundColor='#E4163A'
-                        backgroundHover='#FF5761'
-                        backgroundActive='#C60E2E'
-                        color='#FFFFFF'
-                        border='none'
-                        marginLeft='24px'
                     >
                         <span>Save</span>
-                    </Button>
+                    </ButtonSave>
                 </Container>
-
-            </Container>
+            </ContainerAddPlayer>
         </>
     )
 }
+const ContainerAddPlayer = styled.div`
+  width:1140px;
+  height:655px;
+  background-color:#FFFFFF;
+  margin-Left:80px;
+  margin-Top:32px;
+  @media ${props => props.theme.mobile}{
+    margin: 0 auto;
+    width:100%;
+    height:100%;
+    padding: 0 24px;
+  }
+`
+const ContainerAddPlayerGrid =styled.div`
+  max-width: 1140px;
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  @media ${props => props.theme.mobile}{
+    grid-template-columns: 1fr;
+  }
+`
+const ContainerInputAddPlayer = styled.div`
+ margin-left: 136px;
+  @media ${props => props.theme.mobile}{
+    margin:0 auto;
+    width:100% ;
+  }
+`
+const ContainerGridInput = styled.div`
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+  margin-top:26px;
+  max-width: 1140px;
+  display: grid;
+  @media ${props => props.theme.mobile}{
+    margin:0 auto;
+    width:100% ;
+  }
+`
 const InputFilePlayer = styled.input`
   opacity: 0;
   height: 0;
@@ -329,10 +353,5 @@ const InputFilePlayer = styled.input`
   overflow: hidden;
   padding: 0;
   margin: 0;
-`
-
-const Class = styled.input`
- background-color: red;
-
 `
 
