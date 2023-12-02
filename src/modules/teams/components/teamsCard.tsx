@@ -162,11 +162,10 @@ const WrapperSearch = styled.div`
     width:100%;
     flex-direction:column;
     margin: 0 auto;
-  }
+  } 
 `
 export const ContainerSearch = styled.div`
   position: relative;
-  width: 100%;
   height: 40px;
   margin: 32px 0;
   @media ${props => props.theme.mobile}{

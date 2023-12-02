@@ -114,11 +114,9 @@ export const PlayersCard: FC = () => {
         ...styles,
         backgroundColor: isFocused ? "#C60E2E" : null,
         color: isFocused ? "#ffffff" : null,
-        width:'364px',
         multiValue:{
           backgroundColor:'red'
         }
-
       };
     },
   };
@@ -126,6 +124,7 @@ export const PlayersCard: FC = () => {
 
   return <ContainerPlayersCard>
     <WrapperSearch >
+      <InputsContainer>
       <ContainerSearch>
         <InputSearch
             type='search'
@@ -139,11 +138,13 @@ export const PlayersCard: FC = () => {
         <Select
             options={teams}
             value={selectedTeams}
+            classNamePrefix="react-select"
             isMulti={true}
             onChange={(t)=> setSelectedTeams(t as any)}
             styles={colourStylesMulti}
         />
       </ContainerSelect>
+      </InputsContainer>
 
       <Link to='/layout/addPlayer'>
         <ButtonPlayerCard>
@@ -207,7 +208,8 @@ const ContainerPlayersCard =styled.div`
 const WrapperSearch = styled.div`
   display:flex; 
   flex-direction:row;
-  justify-content:space-between;
+  justify-content: space-between;
+  width: 100% ;
   @media ${props => props.theme.mobile}{
     width:100%;
     flex-direction:column;
@@ -250,22 +252,42 @@ const ButtonPlayerCard =styled.button`
     width: 100%;
     margin-left:0;
     margin-top:16px;
-    height: auto
+    height: auto;
   }
 `
+
+const InputsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  @media ${props => props.theme.mobile} {
+    flex-direction: column
+  }
+`;
+
 const ContainerSelect = styled.div`
   position: relative;
-  width: 100%;
   height: 40px;
-  margin: 15px 0 ;
+  width: fit-content;
+  margin: 0 0 0 24px;
+  width: 364px;
+  
+  div div {
+    margin: 0;
+  }
+  .react-select__value-container{
+    flex-wrap: nowrap !important;
+  }
+
+  .react-select__multi-value{
+    min-width: 30% !important;
+    margin-right: 8px;
+  }
+  
   @media ${props => props.theme.mobile} {
     width: 100%;
-    margin:0;
+    margin: 16px 0 0 0;
     height: auto;
-
   }
-\`
-
 `
 
 
