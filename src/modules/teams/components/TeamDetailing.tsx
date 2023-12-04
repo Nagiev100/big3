@@ -2,13 +2,13 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { get, remove } from "../../../api/baseFetch";
 import styled from "styled-components";
-import Create from "../../../assests/icons/create.png";
-import Delete from "../../../assests/icons/delete.png";
-import { TableTeamDetail } from "./tableTeamDetail";
 import { useAppDispatch, useAppSelector } from "../../../core/redux/store";
 import { fetchTeam } from "../../../core/redux/reducer/teamThunk";
 import { handleNotifyError } from "../../../common/components/shared/toastifyService";
 import { AddTextLogo } from "../../../common/components/shared/AddTextLogo";
+import Create from "../../../assests/icons/create.png";
+import Delete from "../../../assests/icons/delete.png";
+import { TableTeamDetail } from "./tableTeamDetail";
 
 export interface ITeamsResponse {
   pageSize: number;
@@ -82,20 +82,67 @@ export const TeamDetailing: FC = () => {
   }, [id]);
 
   return (
-    <div>
+    <ContainerDetail>
+      {teamDetail && (
+        <ContainerDitailTeam>
+          <ContainerNameTeam>
+            <ContainerLogo>
+              <AddTextLogo beforePaddingLeft="34px">
+                Team {teamDetail.name}
+              </AddTextLogo>
+            </ContainerLogo>
+            <ContainerImg>
+              <Img src={Create} onClick={upDateTeam} />
+              <Img src={Delete} onClick={deleteTeam} />
+            </ContainerImg>
+          </ContainerNameTeam>
+          <ContainerGridAddTeam>
+            <ImgTeamDitail
+              src={"http://dev.trainee.dex-it.ru" + teamDetail.imageUrl}
+            />
+
+            <TeamDetails>
+              <div>
+                <Name>{teamDetail.name}</Name>
+                <ItemContainer>
+                  <LabelTeam>Year of foundation</LabelTeam>
+                  <InformationTeam>{teamDetail.foundationYear}</InformationTeam>
+                </ItemContainer>
+                <ItemContainer>
+                  <LabelTeam>Conference</LabelTeam>
+                  <InformationTeam>{teamDetail.conference}</InformationTeam>
+                </ItemContainer>
+              </div>
+              <ContainerDivision>
+                <ItemContainer>
+                  <LabelTeam>Division</LabelTeam>
+                  <InformationTeam>{teamDetail.division}</InformationTeam>
+                </ItemContainer>
+              </ContainerDivision>
+            </TeamDetails>
+          </ContainerGridAddTeam>
+        </ContainerDitailTeam>
+      )}
+      {!!playersInTeam && (
+        <div>
+          <TableTeamDetail playersInTeam={playersInTeam} />
+        </div>
+      )}
+    </ContainerDetail>
+    /* <div>
       {teamDetail && (
         <ContainerTeamDetail>
-          <ContainerFunctional>
+          <ContainerNameTeam>
             <ContainerLogo>
               <AddTextLogo beforePaddingLeft="40px">
                 Teams {teamDetail.name}
               </AddTextLogo>
             </ContainerLogo>
-            <ContainerButton>
+            <ContainerImg>
               <Img src={Create} onClick={upDateTeam} />
               <Img src={Delete} onClick={deleteTeam} />
-            </ContainerButton>
-          </ContainerFunctional>
+            </ContainerImg>
+          </ContainerNameTeam>
 
           <ContainerInformation>
             <ImgTeam
@@ -128,46 +175,29 @@ export const TeamDetailing: FC = () => {
           <TableTeamDetail playersInTeam={playersInTeam} />
         </div>
       )}
-    </div>
+    </div>*/
   );
 };
-const ContainerData = styled.div`
-  @media ${(props) => props.theme.mobile} {
-    margin-left: 110px;
-    width: 100%;
-  }
-`;
-const Img = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-right: 16px;
-  margin-top: 30px;
-`;
-const ImgTeam = styled.img`
-  width: 210px;
-  height: 210px;
-  margin-left: 146px;
-  margin-top: 97px;
-  @media ${(props) => props.theme.mobile} {
-    width: 89px;
-    height: 90px;
-    margin-top: 48px;
-  }
-`;
-const ContainerTeamDetail = styled.div`
+const ContainerDetail = styled.div`
   width: 1140px;
-  height: 473px;
-  background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
+  height: 525px;
   margin-left: 80px;
   margin-top: 32px;
   @media ${(props) => props.theme.mobile} {
-    max-width: 480px;
-    margin-left: 0;
-    height: 542px;
-    width: 480px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
   }
 `;
-const ContainerFunctional = styled.div`
+const ContainerDitailTeam = styled.div`
+  width: 100%;
+  background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
+  @media ${(props) => props.theme.mobile} {
+    height: 100%;
+    margin: 0 auto;
+  }
+`;
+const ContainerNameTeam = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -175,7 +205,7 @@ const ContainerFunctional = styled.div`
   height: 69px;
   background-color: #fff;
   @media ${(props) => props.theme.mobile} {
-    margin-left: 0;
+    width: 100%;
     height: 48px;
   }
 `;
@@ -186,22 +216,61 @@ const ContainerLogo = styled.div`
   height: 100%;
   margin-left: 32px;
   @media ${(props) => props.theme.mobile} {
-    margin-right: 0;
+    margin-left: 16px;
   }
 `;
-const ContainerButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-right: 32px;
-`;
-const ContainerInformation = styled.div`
+const ContainerGridAddTeam = styled.div`
   display: grid;
   grid-template-columns: 3fr 4fr;
+  max-width: 1140px;
+
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
     width: 100%;
+    margin: 0 auto;
+  }
+`;
+const ContainerTeamName = styled.div`
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
     height: 100%;
     margin: 0 auto;
+  }
+`;
+
+const Img = styled.img`
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+  @media ${(props) => props.theme.mobile} {
+    margin: 0;
+    margin-right: 10px;
+  }
+\` ;
+`;
+const ImgTeamDitail = styled.img`
+  width: 210px;
+  height: 210px;
+  margin-left: 146px;
+  margin-top: 97px;
+  @media ${(props) => props.theme.mobile} {
+    width: 89px;
+    height: 90px;
+    margin-top: 48px;
+  }
+`;
+
+const ContainerImg = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-right: 32px;
+  margin-top: 23px;
+  padding-bottom: 20px;
+  align-items: center;
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    margin-top: 30px;
+    justify-content: flex-end;
   }
 `;
 
@@ -219,54 +288,62 @@ export const Name = styled.h1`
     margin-top: 0;
   }
 `;
-const TeamDetails = styled.ul`
+const TeamDetails = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
-  }
-`;
-const Text = styled.p`
-  font-size: 24px;
-  font-weight: 800;
-  line-height: normal;
-  color: #fff;
-  margin-top: 40px;
-  @media ${(props) => props.theme.mobile} {
-    width: 135px;
-    height: 25px;
-    font-size: 17px;
-    font-weight: 800;
-    margin-top: 48px;
-    margin-left: 60px;
+    width: 100%;
+    margin: 0 auto;
   }
 `;
 
-const LabelDivision = styled.p`
+const ItemContainer = styled.div`
+  @media ${(props) => props.theme.mobile} {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+const LabelTeam = styled.p`
+  height: 33px;
+  padding-top: 40px;
   font-size: 24px;
   font-weight: 800;
   line-height: normal;
   color: #fff;
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    height: fit-content;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px;
+    text-align: center;
+    padding-top: 24px;
+  }
 `;
-const TextConference = styled.p`
+const InformationTeam = styled.p`
+  width: 69px;
+  height: 25px;
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
-  color: #fff;
-  margin-top: 8px;
-
+  color: #ffffff;
+  padding-top: 38px;
   @media ${(props) => props.theme.mobile} {
     font-size: 15px;
-    font-style: normal;
+    width: auto;
+    height: fit-content;
     font-weight: 500;
     line-height: 24px;
-    margin-top: 32px;
+    padding-top: 30px;
   }
 `;
 const ContainerDivision = styled.div`
-  margin-top: 54px;
+  margin-top: 115px;
   @media ${(props) => props.theme.mobile} {
-    margin-top: 0;
+    margin: 0;
   }
 `;
