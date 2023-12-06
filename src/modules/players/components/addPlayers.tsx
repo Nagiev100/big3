@@ -45,8 +45,11 @@ export const AddPlayer: FC = () => {
   const [position, setPosition] = useState<string>("");
   const [teams, setTeams] = useState<IOptions[]>([]);
   const [team, setTeam] = useState<string>("");
+
   const [birthday, setBirthday] = useState<Date>();
+
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+
   const {
     handleSubmit,
     register,
@@ -144,9 +147,7 @@ export const AddPlayer: FC = () => {
         body: formData,
       },
     );
-
     const resultString = await imagePath?.json();
-    console.log(resultString);
     setPreviewImage(resultString);
   };
 

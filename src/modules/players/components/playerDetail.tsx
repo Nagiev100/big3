@@ -15,6 +15,17 @@ export const PlayerDetail: FC = () => {
   const dispatch = useAppDispatch();
   const playerDetail = useAppSelector((state) => state.player.currentPlayer);
   const { id } = useParams();
+
+  const getAge = (birthdateProps: string) => {
+    const birthdate = new Date(birthdateProps);
+    const year = birthdate?.getFullYear();
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    if (year) {
+      let age = currentYear - year;
+      return age;
+    }
+  };
   useEffect(() => {
     const fetchDetailing = async () => {
       try {
@@ -79,7 +90,7 @@ export const PlayerDetail: FC = () => {
                   <ItemContainer>
                     <LabelPlayer>Age</LabelPlayer>
                     <InformationPlayer>
-                      {playerDetail.birthday}
+                      {getAge(playerDetail.birthday)}
                     </InformationPlayer>
                   </ItemContainer>
                 </InfoSection>
