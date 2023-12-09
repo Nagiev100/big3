@@ -161,6 +161,8 @@ export const ContainerSearch = styled.div`
 `;
 const InputSearch = styled.input`
   border-color: #d1d1d1;
+  border-style: solid;
+  border-width: 1px;
   width: 364px;
   height: 40px;
   font-size: 14px;

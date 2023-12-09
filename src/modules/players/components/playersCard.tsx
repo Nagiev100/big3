@@ -222,6 +222,8 @@ const WrapperSearch = styled.div`
 `;
 const InputSearch = styled.input`
   border-color: #d1d1d1;
+  border-width: 1px;
+  border-style: solid;
   width: 364px;
   height: 40px;
   font-size: 14px;

@@ -7,7 +7,7 @@ interface IColorIcon {
 interface IconComponentProps {
   iconSvg: Record<string, JSX.Element>;
   text: string;
-  onClick: (iconType: string) => void;
+  onClick?: (iconType: string) => void;
   iconType: string;
   isActive: boolean;
 }
@@ -20,7 +20,7 @@ export const IconComponent: FC<IconComponentProps> = ({
   isActive,
 }) => {
   const handleClick = () => {
-    onClick(iconType);
+    onClick?.(iconType);
   };
   const selectedIcon = isActive ? "active" : "default";
   return (
@@ -60,6 +60,7 @@ const TextIcons = styled.p<IColorIcon>`
   font-weight: 500;
   line-height: 150%;
   margin-left: 25px;
+  text-decoration: none;
   color: ${(props) => (props.isActive ? "red" : "#9C9C9C")};
   width: 38px;
   @media ${(props) => props.theme.mobile} {

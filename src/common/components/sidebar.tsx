@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { FC } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import OutIcons from "../../assests/icons/outIcons.png";
 import styled from "styled-components";
 import { IconComponent } from "../../common/components/shared/Icon";
@@ -10,7 +10,9 @@ import { TeamActive } from "../../assests/icons/teamActive";
 
 export const Sidebar: FC<{ showMenu?: boolean }> = ({ showMenu }) => {
   const navigate = useNavigate();
-  const [activeLink, setActiveLink] = useState("");
+  const location = useLocation();
+  const pathName = location.pathname;
+  const isTeamsActive = pathName.includes("teamsCard");
   const name = localStorage.getItem("name");
 
   const out = () => {
@@ -71,12 +73,6 @@ export const Sidebar: FC<{ showMenu?: boolean }> = ({ showMenu }) => {
       </svg>
     ),
   };
-  const handleIconClick = (iconType: any) => {
-    setActiveLink(iconType === "player" ? "playersCard" : "teamsCard");
-  };
-  const handleLinkClick = (linkType: any) => {
-    setActiveLink(linkType);
-  };
 
   return (
     <SidebarPanel showMenu={showMenu}>
@@ -94,30 +90,22 @@ export const Sidebar: FC<{ showMenu?: boolean }> = ({ showMenu }) => {
           </UserSidebar>
 
           <NavBar>
-            <NavLink
-              to="teamsCard"
-              onClick={() => handleLinkClick("teamsCard")}
-            >
+            <CustomNavLink to="teamsCard">
               <IconComponent
                 iconSvg={iconTeam}
                 text={"Teams"}
-                onClick={() => handleIconClick("teamsCard")}
-                isActive={activeLink === "teamsCard"}
+                isActive={isTeamsActive}
                 iconType={"teamsCard"}
               />
-            </NavLink>
-            <NavLink
-              to="playersCard"
-              onClick={() => handleLinkClick("playersCard")}
-            >
+            </CustomNavLink>
+            <CustomNavLink to="playersCard">
               <IconComponent
                 iconSvg={iconPlayerSvg}
                 text={"Players"}
-                onClick={() => handleIconClick("playersCarders")}
-                isActive={activeLink === "playersCard"}
+                isActive={!isTeamsActive}
                 iconType={"playersCard"}
               />
-            </NavLink>
+            </CustomNavLink>
           </NavBar>
         </div>
 
@@ -132,17 +120,20 @@ export const Sidebar: FC<{ showMenu?: boolean }> = ({ showMenu }) => {
 const MySideBarLayout = styled.section`
   max-width: 140px;
   position: fixed;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 100px);
   width: 140px;
   display: flex;
   flex-direction: column;
   background: white;
   bottom: 0;
+  @media ${(props) => props.theme.mobile} {
+    height: calc(100vh - 80px);
+  }
 `;
 const SidebarPanel = styled(MySideBarLayout)<{ showMenu: boolean | undefined }>`
   position: fixed;
   display: block;
-  top: 90px;
+  top: 80px;
   @media ${(props) => props.theme.mobile} {
     display: block;
     left: ${({ showMenu }) => (showMenu ? "0" : "-250px")};
@@ -195,4 +186,8 @@ const ButtonText = styled.p`
 const ImgButton = styled.img``;
 const NavBar = styled.nav`
   padding-right: 10px;
+`;
+
+const CustomNavLink = styled(NavLink)`
+  text-decoration: none;
 `;
