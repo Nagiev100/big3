@@ -4,7 +4,6 @@ import { get, remove } from "../../../api/baseFetch";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../core/redux/store";
 import { fetchTeam } from "../../../core/redux/reducer/teamThunk";
-import { handleNotifyError } from "../../../common/components/shared/toastifyService";
 import { AddTextLogo } from "../../../common/components/shared/AddTextLogo";
 import Create from "../../../assests/icons/create.png";
 import Delete from "../../../assests/icons/delete.png";
@@ -56,9 +55,6 @@ export const TeamDetailing: FC = () => {
         navigate("/layout/teamsCard");
       }
     } else {
-      handleNotifyError(
-        "Ошибка! Нельзя удалить команду у которой есть игроки",
-      )();
     }
   };
   const upDateTeam = () => {
@@ -129,53 +125,6 @@ export const TeamDetailing: FC = () => {
         </div>
       )}
     </ContainerDetail>
-    /* <div>
-      {teamDetail && (
-        <ContainerTeamDetail>
-          <ContainerNameTeam>
-            <ContainerLogo>
-              <AddTextLogo beforePaddingLeft="40px">
-                Teams {teamDetail.name}
-              </AddTextLogo>
-            </ContainerLogo>
-            <ContainerImg>
-              <Img src={Create} onClick={upDateTeam} />
-              <Img src={Delete} onClick={deleteTeam} />
-            </ContainerImg>
-          </ContainerNameTeam>
-
-          <ContainerInformation>
-            <ImgTeam
-              src={"http://dev.trainee.dex-it.ru" + teamDetail.imageUrl}
-            />
-            <ContainerData>
-              <Name>{teamDetail.name}</Name>
-              <TeamDetails>
-                <li>
-                  <Text>Year of foundation</Text>
-                  <TextConference>{teamDetail.foundationYear}</TextConference>
-                </li>
-                <li>
-                  <Text>Conference</Text>
-                  <TextConference>{teamDetail.conference}</TextConference>
-                </li>
-                <ContainerDivision>
-                  <li>
-                    <LabelDivision>Division</LabelDivision>
-                    <TextConference>{teamDetail.conference}</TextConference>
-                  </li>
-                </ContainerDivision>
-              </TeamDetails>
-            </ContainerData>
-          </ContainerInformation>
-        </ContainerTeamDetail>
-      )}
-      {!!playersInTeam && (
-        <div>
-          <TableTeamDetail playersInTeam={playersInTeam} />
-        </div>
-      )}
-    </div>*/
   );
 };
 const ContainerDetail = styled.div`

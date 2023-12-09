@@ -36,15 +36,8 @@ export const PlayersCard: FC = () => {
   const [teams, setTeams] = useState<IOptions[]>([]);
   const [selectedTeams, setSelectedTeams] = useState<IOptions[]>([]);
 
-  useEffect(() => {
-    const selectedTeamString = selectedTeams.reduce(
-      (acc, carrentValue) => acc + `&teamIds=${carrentValue.value}`,
-      "",
-    );
-    dispatch(fetchPlayers({ page, pageSize, name, teams: selectedTeamString }));
-  }, [page, pageSize, name, selectedTeams]);
   const updatePageSize = (params: any) => {
-    setPageSize(params.target);
+    setPageSize(params);
   };
   const options: IOptions[] = [
     {
@@ -78,6 +71,21 @@ export const PlayersCard: FC = () => {
     };
     getTeam();
   }, []);
+
+  useEffect(() => {
+    const selectedTeamString = selectedTeams.reduce(
+      (acc, carrentValue) => acc + `&teamIds=${carrentValue.value}`,
+      "",
+    );
+    dispatch(
+      fetchPlayers({
+        page: page + 1,
+        pageSize,
+        name,
+        teams: selectedTeamString,
+      }),
+    );
+  }, [page, pageSize, name, selectedTeams]);
 
   const colourStyles = {
     control: (base: {}) => ({
@@ -172,13 +180,12 @@ export const PlayersCard: FC = () => {
               nextLabel={<img src={NextIcon} width="19px" height="19px" />}
               previousLabel={<img src={PrevIcon} width="19px" height="19px" />}
               onPageChange={({ selected }) => {
-                setPage(selected + 1);
+                setPage(selected);
               }}
               initialPage={page}
               pageRangeDisplayed={pageSize}
               pageCount={Math.ceil(selector.data.count / pageSize)}
               previousAriaLabel={"<"}
-              renderOnZeroPageCount={null}
               activeClassName={"active"}
             />
           </PaginateContainer>

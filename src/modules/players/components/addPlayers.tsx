@@ -8,14 +8,10 @@ import { Image } from "../../../common/components/shared/ImageCompanent";
 import { Input } from "../../../common/components/shared/InputComponent";
 import { AddTextLogo } from "../../../common/components/shared/AddTextLogo";
 import { ITypeTeam } from "../../../core/redux/reducer/teamSlice";
-import { Form, Label } from "../../ authorization/signIn";
+import { Form, Label } from "../../authorization/signIn";
 import { ContainerClickedImg } from "../../../common/components/shared/ContainerClickedImg";
 import { ButtonCansel, ButtonSave } from "../../teams/components/addTeam";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { toast } from "react-toastify";
-import { getAddPlayerErrorAlert } from "../helpers/getAddPlayerErrorAlert";
 import { useAppSelector } from "../../../core/redux/store";
 import styled from "styled-components";
 
@@ -45,9 +41,6 @@ export const AddPlayer: FC = () => {
   const [position, setPosition] = useState<string>("");
   const [teams, setTeams] = useState<IOptions[]>([]);
   const [team, setTeam] = useState<string>("");
-
-  const [birthday, setBirthday] = useState<Date>();
-
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const {
@@ -158,7 +151,6 @@ export const AddPlayer: FC = () => {
       avatarUrl: previewImage,
       position: position,
       team: team,
-      birthday: birthday?.toISOString(),
     };
     try {
       if (previewImage) {
@@ -183,14 +175,7 @@ export const AddPlayer: FC = () => {
           navigate("/layout/playersCard");
         }
       }
-    } catch (e: any) {
-      const notify = () =>
-        toast(getAddPlayerErrorAlert(e?.status), {
-          type: "error",
-          bodyStyle: { color: "green" },
-        });
-      notify();
-    }
+    } catch (e: any) {}
   };
 
   // @ts-ignore
@@ -260,13 +245,18 @@ export const AddPlayer: FC = () => {
                     />
                   </Container>
                   <Container>
-                    <Label>Birthday</Label>
-                    <DatePicker
-                      onChange={(t) => setBirthday(t ?? new Date())}
-                      selected={birthday}
-                      customInput={<CustomDatePickerInput />}
+                    <Label htmlFor="birthday">Birthday</Label>
+                    <Input
+                      id={"birthday"}
+                      type={"Date"}
+                      widthProps={"171px"}
+                      heightProps={"40px"}
+                      background={"#f6f6f6"}
+                      borderColor={"#f6f6f6"}
+                      {...register("birthday", { required: true })}
                     />
                   </Container>
+
                   <Container marginTop="16px">
                     <Label htmlFor="weight">Weight (kg)</Label>
                     <Input

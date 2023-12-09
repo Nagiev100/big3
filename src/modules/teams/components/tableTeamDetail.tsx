@@ -8,6 +8,16 @@ interface IProps {
 }
 
 export const TableTeamDetail = ({ playersInTeam }: IProps) => {
+  const getAge = (birthdateProps: string) => {
+    const birthdate = new Date(birthdateProps);
+    const year = birthdate?.getFullYear();
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    if (year) {
+      let age = currentYear - year;
+      return age;
+    }
+  };
   return (
     <>
       <Table>
@@ -52,7 +62,7 @@ export const TableTeamDetail = ({ playersInTeam }: IProps) => {
                 {player.weight}
                 <Span>kg</Span>
               </Td>
-              <Td>{player.birthday}</Td>
+              <Td>{getAge(player.birthday)}</Td>
             </Tr>
           ))}
       </Table>
