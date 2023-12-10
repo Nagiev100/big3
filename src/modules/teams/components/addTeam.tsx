@@ -11,6 +11,7 @@ import { Image } from "../../../common/components/shared/ImageCompanent";
 import { ContainerClickedImg } from "../../../common/components/shared/ContainerClickedImg";
 import { Input } from "../../../common/components/shared/InputComponent";
 import { Form, Label } from "../../authorization/signIn";
+import { useNotifyAlert } from "../../../common/hooks/useNotifyAlert";
 
 interface addTeamFormData {
   name: string;
@@ -26,6 +27,7 @@ export const AddTeam: FC = () => {
   const isEdit = params.get("edit");
   const filePicker = useRef<HTMLInputElement>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const { triggerNotifyComponent, notifyComponent } = useNotifyAlert();
   const teamData = useAppSelector((state) => state.team.currentTeam);
   const {
     handleSubmit,
@@ -90,7 +92,11 @@ export const AddTeam: FC = () => {
           navigate("/layout/teamsCard");
         }
       }
-    } catch (e: any) {}
+    } catch {
+      triggerNotifyComponent({
+        text: "A team with the same name already exists.",
+      });
+    }
   };
 
   const handlePick = () => {
@@ -179,6 +185,7 @@ export const AddTeam: FC = () => {
         </Container>
         <InputFile type="file" ref={filePicker} onInputCapture={addImg} />
       </ContainerAddTeam>
+      {notifyComponent}
     </>
   );
 };

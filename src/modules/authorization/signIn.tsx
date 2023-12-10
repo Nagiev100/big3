@@ -6,8 +6,6 @@ import closeEye from "../../assests/icons/close_eye.svg";
 import openEye from "../../assests/icons/eye_rounded.svg";
 import signInImages from "../../../src/assests/images/signInImages.png";
 import { post } from "../../api/baseFetch";
-import { useAppDispatch } from "../../core/redux/store";
-import { addName } from "../../core/redux/reducer/userNameSlice";
 import { Container } from "../../common/components/shared/CenterImage";
 import { Image } from "../../common/components/shared/ImageCompanent";
 import { Input } from "../../common/components/shared/InputComponent";
@@ -20,13 +18,13 @@ interface SignInFormData {
 }
 
 export const SignIn: FC = () => {
-  const dispatch = useAppDispatch();
   const {
     handleSubmit,
     register,
     formState: { errors, isValid },
-    setError,
-  } = useForm<SignInFormData>();
+  } = useForm<SignInFormData>({
+    mode: "onBlur",
+  });
   const [typePassword, setTypePassword] = useState("password");
   const [textError, setTextError] = useState(false);
   const { triggerNotifyComponent, notifyComponent } = useNotifyAlert();
@@ -35,13 +33,14 @@ export const SignIn: FC = () => {
   const onSubmit = async (data: SignInFormData) => {
     try {
       const response = await post("Auth/SignIn", JSON.stringify(data));
-      dispatch(addName(data.login));
       localStorage.setItem("name", response?.name);
       localStorage.setItem("token", response?.token);
       navigate("/layout/teamsCard");
     } catch {
       setTextError(true);
-      triggerNotifyComponent({ text: "hi" });
+      triggerNotifyComponent({
+        text: "User with the specified username / password was not found.",
+      });
     }
   };
   return (
@@ -60,19 +59,17 @@ export const SignIn: FC = () => {
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Label htmlFor="name">Name</Label>
               <Input
-                borderColor={errors?.login ? "red" : "#F6F6F6"}
+                borderColor={errors?.login ? "#FF768E" : "#F6F6F6"}
                 widthProps="366px"
                 heightProps="40px"
                 id="name"
                 background="#F6F6F6"
                 {...register("login", { required: true })}
               />
-              <div>
-                {errors?.login && <p>{errors?.login.message || "Required"}</p>}
-              </div>
               <ContainerInput>
                 <Label htmlFor="password">Password</Label>
                 <Input
+                  borderColor={errors?.password ? "#FF768E" : "#F6F6F6"}
                   widthProps="366px"
                   heightProps="40px"
                   id="password"

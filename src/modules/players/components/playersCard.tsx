@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../core/redux/store";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import ReactPaginate from "react-paginate";
 import { fetchPlayers } from "../../../core/redux/reducer/player/playerThunk";
@@ -159,13 +159,13 @@ export const PlayersCard: FC = () => {
         <ContainerGrid gridTemplateColumn="repeat(3,1fr)" gap="24px">
           {selector?.data?.count !== 0 ? (
             selector.data?.data.map((data, id) => (
-              <Link to={`${data.id}`}>
+              <CustomNavLink to={`${data.id}`}>
                 <Card
                   contentName={data.name}
                   contentYear={data.team}
                   imageUrl={"http://dev.trainee.dex-it.ru" + data.avatarUrl}
                 />
-              </Link>
+              </CustomNavLink>
             ))
           ) : (
             <CenterImage imageUrl={PlayersCardImg} />
@@ -200,6 +200,9 @@ export const PlayersCard: FC = () => {
     </ContainerPlayersCard>
   );
 };
+const CustomNavLink = styled(NavLink)`
+  text-decoration: none;
+`;
 const ContainerPlayersCard = styled.div`
   width: 1140px;
   margin: 0 auto;

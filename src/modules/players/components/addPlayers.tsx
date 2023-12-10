@@ -14,6 +14,7 @@ import { ButtonCansel, ButtonSave } from "../../teams/components/addTeam";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAppSelector } from "../../../core/redux/store";
 import styled from "styled-components";
+import { useNotifyAlert } from "../../../common/hooks/useNotifyAlert";
 
 interface addPlayersFromData {
   name: string;
@@ -42,7 +43,7 @@ export const AddPlayer: FC = () => {
   const [teams, setTeams] = useState<IOptions[]>([]);
   const [team, setTeam] = useState<string>("");
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-
+  const { triggerNotifyComponent, notifyComponent } = useNotifyAlert();
   const {
     handleSubmit,
     register,
@@ -89,7 +90,9 @@ export const AddPlayer: FC = () => {
           })),
         );
       } catch {
-        console.log("error");
+        triggerNotifyComponent({
+          text: "Failed to load image",
+        });
       }
     };
     getTeam();
@@ -175,7 +178,11 @@ export const AddPlayer: FC = () => {
           navigate("/layout/playersCard");
         }
       }
-    } catch (e: any) {}
+    } catch {
+      triggerNotifyComponent({
+        text: "A player with the same name already exists.",
+      });
+    }
   };
 
   // @ts-ignore
@@ -307,16 +314,10 @@ export const AddPlayer: FC = () => {
           </ButtonSave>
         </Container>
       </ContainerAddPlayer>
+      {notifyComponent}
     </>
   );
 };
-
-const CustomDatePickerInput = styled(Input)`
-  width: 171px;
-  height: 40px;
-  bordercolor: #f6f6f6;
-  background: #f6f6f6;
-`;
 
 const ContainerAddPlayer = styled.div`
   width: 1140px;

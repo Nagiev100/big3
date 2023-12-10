@@ -15,7 +15,7 @@ export const useNotifyAlert = () => {
       valueRef.current = text;
       setTimeout(() => {
         setVisible(false);
-      }, 2000);
+      }, 3000);
     },
     [],
   );
@@ -38,6 +38,12 @@ const Container = styled.div`
   position: fixed;
   right: 24px;
   top: 24px;
-  padding: 16px;
-  background: red;
+  padding-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: #ff5761;
+  color: #fff;
+  width: fit-content;
+  height: 40px;
+  z-index: 999;
 `;

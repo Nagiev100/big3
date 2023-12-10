@@ -38,9 +38,7 @@ export const TeamDetailing: FC = () => {
     const fetchDetailing = async () => {
       try {
         dispatch(fetchTeam({ id: id! }));
-      } catch {
-        console.log("error");
-      }
+      } catch {}
     };
     if (id) {
       fetchDetailing();
@@ -66,11 +64,8 @@ export const TeamDetailing: FC = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await get(`Player/GetPlayers?TeamIds=${id}`, token!);
-        console.log(response);
         setPlayersInTeam(response.data);
-      } catch {
-        console.log("error");
-      }
+      } catch {}
     };
     if (id) {
       fetchPlayerInTeam();

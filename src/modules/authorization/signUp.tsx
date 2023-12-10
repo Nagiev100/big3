@@ -18,6 +18,7 @@ import {
 } from "./signIn";
 import { Input } from "../../common/components/shared/InputComponent";
 import { Button } from "../../common/components/shared/ButtonCompanent";
+import { useNotifyAlert } from "../../common/hooks/useNotifyAlert";
 
 interface SignUpFormData {
   userName: string;
@@ -28,6 +29,10 @@ interface SignUpFormData {
 }
 
 export const SignUp: FC = () => {
+  const navigator = useNavigate();
+  const [typePassword, setTypePassword] = useState("password");
+  const [typeReturnPassword, setTypeReturnPassword] = useState("password");
+  const { triggerNotifyComponent, notifyComponent } = useNotifyAlert();
   const {
     handleSubmit,
     register,
@@ -36,10 +41,6 @@ export const SignUp: FC = () => {
   } = useForm<SignUpFormData>({
     mode: "onBlur",
   });
-
-  const navigator = useNavigate();
-  const [typePassword, setTypePassword] = useState("password");
-  const [typeReturnPassword, setTypeReturnPassword] = useState("password");
 
   const onSubmit = async (data: SignUpFormData) => {
     const resultData = {
@@ -61,10 +62,9 @@ export const SignUp: FC = () => {
       }
       navigator("/");
     } catch {
-      if (data.password !== data.returnPassword) {
-        console.log("error");
-      } else {
-      }
+      triggerNotifyComponent({
+        text: "A user with the same name already exists",
+      });
     }
   };
   return (
@@ -83,7 +83,7 @@ export const SignUp: FC = () => {
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Label htmlFor="name">Name</Label>
               <Input
-                borderColor={errors?.userName ? "red" : "#F6F6F6"}
+                borderColor={errors?.userName ? "#FF768E" : "#F6F6F6"}
                 widthProps="366px"
                 heightProps="40px"
                 id="name"
@@ -97,7 +97,7 @@ export const SignUp: FC = () => {
               </div>
               <Label htmlFor="login">Login</Label>
               <Input
-                borderColor={errors?.login ? "red" : "#F6F6F6"}
+                borderColor={errors?.login ? "#FF768E" : "#F6F6F6"}
                 widthProps="366px"
                 heightProps="40px"
                 id="login"
@@ -112,7 +112,7 @@ export const SignUp: FC = () => {
               <ContainerInput>
                 <Label htmlFor="password">Password</Label>
                 <Input
-                  borderColor={errors?.password ? "red" : "#F6F6F6"}
+                  borderColor={errors?.password ? "#FF768E" : "#F6F6F6"}
                   widthProps="366px"
                   heightProps="40px"
                   id="password"
@@ -140,7 +140,7 @@ export const SignUp: FC = () => {
                   Enter your password again
                 </Label>
                 <Input
-                  borderColor={errors?.returnPassword ? "red" : "#F6F6F6"}
+                  borderColor={errors?.returnPassword ? "#FF768E" : "#F6F6F6"}
                   widthProps="366px"
                   heightProps="40px"
                   id="returnPassword"
@@ -220,6 +220,7 @@ export const SignUp: FC = () => {
           </ContainerMedia>
         </Wrapper>
       </Container>
+      {notifyComponent}
     </>
   );
 };
@@ -272,10 +273,5 @@ const CheckBoxText = styled.span`
 const ContainerMedia = styled.div`
   @media ${(props) => props.theme.mobile} {
     display: none;
-  }
-`;
-const ContainerFormSignUp = styled.div`
-  @media ${(props) => props.theme.mobile} {
-    margin: 0 auto;
   }
 `;

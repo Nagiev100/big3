@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { fetchTeams } from "../../../core/redux/reducer/teamThunk";
 import { useAppDispatch, useAppSelector } from "../../../core/redux/store";
 import TeamsCardImg from "../../../assests/images/TeamsCardImg.png";
@@ -86,13 +86,13 @@ export const TeamsCard: FC = () => {
         <ContainerGrid gridTemplateColumn="repeat(3,1fr)" gap="24px">
           {selector?.data?.count !== 0 ? (
             selector.data?.data.map((data, id) => (
-              <Link to={`${data.id}`}>
+              <CustomNavLink to={`${data.id}`}>
                 <Card
                   contentName={data.name}
                   contentYear={data.foundationYear}
                   imageUrl={"http://dev.trainee.dex-it.ru" + data.imageUrl}
                 />
-              </Link>
+              </CustomNavLink>
             ))
           ) : (
             <CenterImage imageUrl={TeamsCardImg} />
@@ -262,4 +262,7 @@ export const PaginateContainer = styled.div`
   @media ${(props) => props.theme.mobile} {
     height: auto;
   }
+`;
+const CustomNavLink = styled(NavLink)`
+  text-decoration: none;
 `;
