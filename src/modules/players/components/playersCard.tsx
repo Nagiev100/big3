@@ -39,7 +39,7 @@ export const PlayersCard: FC = () => {
   const updatePageSize = (params: any) => {
     setPageSize(params);
   };
-  const options: IOptions[] = [
+  const options = [
     {
       value: 6,
       label: 6,
@@ -93,7 +93,6 @@ export const PlayersCard: FC = () => {
       boxShadow: "none",
       background: "#FFF",
       border: "solid 1px #D1D1D1",
-      marginTop: "30px",
     }),
     option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => {
       return {
@@ -155,51 +154,49 @@ export const PlayersCard: FC = () => {
           </ButtonPlayerCard>
         </Link>
       </WrapperSearch>
-      {
+      {(selector?.data?.count ?? 0) > 0 ? (
         <ContainerGrid gridTemplateColumn="repeat(3,1fr)" gap="24px">
-          {selector?.data?.count !== 0 ? (
-            selector.data?.data.map((data, id) => (
-              <CustomNavLink to={`${data.id}`}>
-                <Card
-                  contentName={data.name}
-                  contentYear={data.team}
-                  imageUrl={"http://dev.trainee.dex-it.ru" + data.avatarUrl}
-                />
-              </CustomNavLink>
-            ))
-          ) : (
-            <CenterImage imageUrl={PlayersCardImg} />
-          )}
+          {selector.data?.data.map((data, id) => (
+            <CustomNavLink to={`${data.id}`}>
+              <Card
+                contentName={data.name}
+                contentYear={data.team}
+                imageUrl={"http://dev.trainee.dex-it.ru" + data.avatarUrl}
+              />
+            </CustomNavLink>
+          ))}
         </ContainerGrid>
-      }
+      ) : (
+        <CenterImage imageUrl={PlayersCardImg} />
+      )}
       <SectionPaginate>
-        {selector.data?.count && (
-          <PaginateContainer>
-            <ReactPaginate
-              breakLabel={"..."}
-              nextLabel={<img src={NextIcon} width="19px" height="19px" />}
-              previousLabel={<img src={PrevIcon} width="19px" height="19px" />}
-              onPageChange={({ selected }) => {
-                setPage(selected);
-              }}
-              initialPage={page}
-              pageRangeDisplayed={pageSize}
-              pageCount={Math.ceil(selector.data.count / pageSize)}
-              previousAriaLabel={"<"}
-              activeClassName={"active"}
-            />
-          </PaginateContainer>
-        )}
-
+        <PaginateContainer>
+          <ReactPaginate
+            breakLabel={"..."}
+            nextLabel={<img src={NextIcon} width="19px" height="19px" />}
+            previousLabel={<img src={PrevIcon} width="19px" height="19px" />}
+            onPageChange={({ selected }) => {
+              setPage(selected);
+            }}
+            initialPage={page}
+            pageRangeDisplayed={pageSize}
+            pageCount={Math.ceil((selector?.data?.count ?? 0) / pageSize) || 1}
+            previousAriaLabel={"<"}
+            activeClassName={"active"}
+          />
+        </PaginateContainer>
         <Select
           options={options}
           onChange={updatePageSize}
+          defaultValue={options[0]}
           styles={colourStyles}
+          menuPlacement={"top"}
         />
       </SectionPaginate>
     </ContainerPlayersCard>
   );
 };
+
 const CustomNavLink = styled(NavLink)`
   text-decoration: none;
 `;

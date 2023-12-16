@@ -142,6 +142,14 @@ export const SignIn: FC = () => {
 };
 
 const Wrapper = styled(Container)`
+  @media ${(props) => props.theme.tablet} {
+    display: grid;
+    margin: auto;
+    grid-template-columns: 1fr;
+    padding: 0 100px;
+    max-width: 600px;
+  }
+
   @media ${(props) => props.theme.mobile} {
     display: grid;
     grid-template-columns: 1fr;
@@ -150,7 +158,7 @@ const Wrapper = styled(Container)`
 `;
 
 const ContainerMedia = styled.div`
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.tablet} {
     display: none;
   }
 `;
@@ -163,6 +171,9 @@ export const SloganAuthorization = styled.h2`
   font-weight: 400;
   margin-right: 240px;
   @media ${(props) => props.theme.mobile} {
+    margin-right: 0px;
+  }
+  @media ${(props) => props.theme.tablet} {
     margin-right: 0px;
   }
 `;
@@ -182,6 +193,12 @@ export const ContainerIcon = styled.span`
     bottom: 6px;
     right: 8px;
   }
+  @media ${(props) => props.theme.tablet} {
+    left: auto;
+    top: auto;
+    bottom: 6px;
+    right: 8px;
+  }
 `;
 export const Label = styled.label`
   font-size: 14px;
@@ -195,6 +212,9 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   @media ${(props) => props.theme.mobile} {
+    width: 100%;
+  }
+  @media ${(props) => props.theme.tablet} {
     width: 100%;
   }
 `;

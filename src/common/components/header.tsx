@@ -4,6 +4,7 @@ import UserImg from "../../assests/icons/user.png";
 import styled from "styled-components";
 import MenuMobile from "../../assests/icons/menu_24px.png";
 import { Sidebar } from "./sidebar";
+import { Link } from "react-router-dom";
 
 export const Header: FC = () => {
   const name = localStorage.getItem("name");
@@ -17,7 +18,9 @@ export const Header: FC = () => {
         <HumburgerIcon onClick={toggleMenu}>
           <ImgMenu src={MenuMobile} />
         </HumburgerIcon>
-        <LogoHeader src={HeaderLogo} />
+        <Link to={"/layout/teamsCard"}>
+          <LogoHeader src={HeaderLogo} />
+        </Link>
         <UserHeader>
           <UserName>{name}</UserName>
           <Img src={UserImg} />
@@ -33,6 +36,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  z-index: 99;
 `;
 const LogoHeader = styled.img`
   width: 191px;

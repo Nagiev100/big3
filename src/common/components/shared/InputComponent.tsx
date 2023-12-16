@@ -31,4 +31,8 @@ export const Input = styled.input<InputComponent>`
     width: 100%;
     height: 40px;
   }
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: 40px;
+  }
 `;

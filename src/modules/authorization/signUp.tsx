@@ -54,17 +54,18 @@ export const SignUp: FC = () => {
         type: "manual",
         message: "Пароли не совпадают",
       });
-    }
-    try {
-      const response = await post("Auth/SignUp", JSON.stringify(resultData));
-      if (response) {
-        localStorage.setItem("token", response.token);
+    } else {
+      try {
+        const response = await post("Auth/SignUp", JSON.stringify(resultData));
+        if (response) {
+          localStorage.setItem("token", response.token);
+        }
+        navigator("/layout/teamsCard");
+      } catch {
+        triggerNotifyComponent({
+          text: "A user with the same name already exists",
+        });
       }
-      navigator("/");
-    } catch {
-      triggerNotifyComponent({
-        text: "A user with the same name already exists",
-      });
     }
   };
   return (
@@ -167,13 +168,17 @@ export const SignUp: FC = () => {
                   )}
                 </div>
               </ContainerInput>
+
               <ContainerCheckBox>
-                <InputCheckBox
+                <RedInput
+                  id="checkBox"
                   type="checkbox"
                   {...register("checkBox", { required: true })}
                 />
-                <CheckBoxText>I accept the agreement</CheckBoxText>
+
+                <label htmlFor="checkBox">I accept the agreement</label>
               </ContainerCheckBox>
+
               <Container
                 display="flex"
                 flexDirection="column"
@@ -232,43 +237,94 @@ const Wrapper = styled(Container)`
     padding: 0 24px
 `;
 
+const RedInput = styled.input`
+  accent-color: #e4163a;
+  margin-right: 8px;
+`;
+
 const ContainerCheckBox = styled.div`
   display: flex;
-  flexdirection: row;
-  widthprops: 366px;
   align-items: center;
   margin-top: 26px;
   @media ${(props) => props.theme.mobile} {
-    magrin-top: 5px;
+    margin-top: 26px;
   }
+  //input {
+  //  opacity: 0;
+  //  position: absolute;
+  //}
+  //input:checked {
+  //  & + label::before {
+  //    content: "\\002714";
+  //    color: #ffffff;
+  //    background-color: #e4163a;
+  //    border-color: #e4163a;
+  //  }
+  //}
+  //label {
+  //  display: flex;
+  //  align-items: center;
+  //  color: #707070;
+  //  font-size: 14px;
+  //  font-weight: 500;
+  //  line-height: 24px;
+  //  &::before {
+  //    content: "";
+  //    border: 1px solid #9c9c9c;
+  //    border-radius: 2px;
+  //    width: 12px;
+  //    height: 12px;
+  //    margin-right: 8px;
+  //  }
+  //}
 `;
+/*
 const InputCheckBox = styled.input`
+  opacity: 0;
+  position: absolute;
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
   text-align: left;
   pading-left: 12px;
   border-radius: 4px;
+  border-color: red;
   width: 16px;
   height: 16px;
+  &:checked {
+    &+CheckBoxText::before {
+      content: "\\002714";
+    }
+  }
   @media ${(props) => props.theme.mobile} {
     padding-top: 0px;
   }
 `;
-
-const ErrorsP = styled.p`
-  color: #ff768e;
-  font-family: Avenir;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 18px;
-`;
-const CheckBoxText = styled.span`
-  padding-left: 8px;
+const CheckBoxText = styled.label`
+  display: flex;
   color: #707070;
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
+  &::before {
+    content: "";
+    border: 1px solid #9c9c9c;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+  }
+  &:hover {
+    &::before {
+      background-color: red;
+    }
+  }
+`;
+*/
+const ErrorsP = styled.p`
+  color: #ff768e;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
 `;
 const ContainerMedia = styled.div`
   @media ${(props) => props.theme.mobile} {

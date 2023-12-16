@@ -45,6 +45,7 @@ export const AddTeam: FC = () => {
         }
       : undefined,
   });
+  console.log("errors", errors);
   const goBack = () => {
     navigate(-1);
   };
@@ -161,8 +162,20 @@ export const AddTeam: FC = () => {
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"
-                {...register("foundationYear", { required: true })}
+                {...register("foundationYear", {
+                  required: {
+                    value: true,
+                    message: "This is required value",
+                  },
+                  pattern: {
+                    value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                    message: "invalid year",
+                  },
+                })}
               />
+              {/*{errors.foundationYear?.message*/}
+              {/*  ? errors.foundationYear?.message*/}
+              {/*  : null}*/}
             </Form>
           </ContainerInputAddTeam>
         </ContainerAddTeamGrid>

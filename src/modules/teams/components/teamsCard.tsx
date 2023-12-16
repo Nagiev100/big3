@@ -50,7 +50,6 @@ export const TeamsCard: FC = () => {
       height: "40px",
       background: "#FFF",
       border: "solid 1px #D1D1D1",
-      marginTop: "30px",
     }),
     option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => {
       return {
@@ -82,49 +81,47 @@ export const TeamsCard: FC = () => {
           </ButtonTeamsCard>
         </Link>
       </WrapperSearch>
-      {
+      {(selector?.data?.count ?? 0) > 0 ? (
         <ContainerGrid gridTemplateColumn="repeat(3,1fr)" gap="24px">
-          {selector?.data?.count !== 0 ? (
-            selector.data?.data.map((data, id) => (
-              <CustomNavLink to={`${data.id}`}>
-                <Card
-                  contentName={data.name}
-                  contentYear={data.foundationYear}
-                  imageUrl={"http://dev.trainee.dex-it.ru" + data.imageUrl}
-                />
-              </CustomNavLink>
-            ))
-          ) : (
-            <CenterImage imageUrl={TeamsCardImg} />
-          )}
+          {selector.data?.data.map((data, id) => (
+            <CustomNavLink to={`${data.id}`}>
+              <Card
+                contentName={data.name}
+                contentYear={data.foundationYear}
+                imageUrl={"http://dev.trainee.dex-it.ru" + data.imageUrl}
+              />
+            </CustomNavLink>
+          ))}
         </ContainerGrid>
-      }
-
+      ) : (
+        <CenterImage imageUrl={TeamsCardImg} />
+      )}
       <SectionPaginate>
-        {selector.data?.count && (
-          <PaginateContainer>
-            <ReactPaginate
-              breakLabel={"..."}
-              nextLabel={<img src={NextIcon} width="19px" height="19px" />}
-              previousLabel={<img src={PrevIcon} width="19px" height="19px" />}
-              onPageChange={({ selected }) => {
-                console.log("selected", selected);
-                setPage(selected);
-              }}
-              initialPage={page}
-              pageRangeDisplayed={pageSize}
-              pageCount={Math.ceil(selector.data.count / pageSize)}
-              previousAriaLabel={"<"}
-              activeClassName={"active"}
-            />
-          </PaginateContainer>
-        )}
-
-        <Select
-          options={options}
-          onChange={updatePageSize}
-          styles={colourStyles}
-        />
+        <PaginateContainer>
+          <ReactPaginate
+            breakLabel={"..."}
+            nextLabel={<img src={NextIcon} width="19px" height="19px" />}
+            previousLabel={<img src={PrevIcon} width="19px" height="19px" />}
+            onPageChange={({ selected }) => {
+              console.log("selected", selected);
+              setPage(selected);
+            }}
+            initialPage={page}
+            pageRangeDisplayed={pageSize}
+            pageCount={Math.ceil((selector?.data?.count ?? 0) / pageSize) || 1}
+            previousAriaLabel={"<"}
+            activeClassName={"active"}
+          />
+        </PaginateContainer>
+        <div style={{ marginTop: 30 }}>
+          <Select
+            options={options}
+            onChange={updatePageSize}
+            styles={colourStyles}
+            defaultValue={options[0]}
+            menuPlacement={"top"}
+          />
+        </div>
       </SectionPaginate>
     </ContainerTeamsCard>
   );
@@ -222,8 +219,10 @@ export const ButtonText = styled.span`
 export const SectionPaginate = styled.section`
   display: flex;
   flex-direction: row;
+  margin-top: 32px;
   justify-content: space-between;
   align-items: center;
+  margin-top: 32px;
   margin-bottom: 0;
   @media ${(props) => props.theme.mobile} {
     width: 100%;
@@ -231,7 +230,6 @@ export const SectionPaginate = styled.section`
 `;
 export const PaginateContainer = styled.div`
   ul {
-    margin-top: 32px;
     list-style: none;
     display: flex;
     justify-content: flex-start;

@@ -20,12 +20,7 @@ interface ContainerProps {
 
 export const CenterImage = ({ imageUrl }: IImageUrl) => {
   return (
-    <Container
-      widthProps="1300px"
-      backgroundProps="#F6F6F6"
-      justifyContent="center"
-      display="flex"
-    >
+    <Container backgroundProps="#F6F6F6" justifyContent="center" display="flex">
       <Container
         widthProps="556px"
         backgroundProps="#FFF"
