@@ -45,7 +45,6 @@ export const AddTeam: FC = () => {
         }
       : undefined,
   });
-  console.log("errors", errors);
   const goBack = () => {
     navigate(-1);
   };
@@ -53,21 +52,28 @@ export const AddTeam: FC = () => {
   const addImg = async () => {
     const image = filePicker.current?.files;
     const selectedImage = image?.[0] as Blob;
-    const token = localStorage.getItem("token");
-    const formData = new FormData();
-    formData.append("file", selectedImage, image?.[0]?.name);
-    const imagePath = await fetch(
-      "http://dev.trainee.dex-it.ru/api/Image/SaveImage",
-      {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
+    const isPng = selectedImage?.type == "image/png";
+    if (isPng) {
+      const token = localStorage.getItem("token");
+      const formData = new FormData();
+      formData.append("file", selectedImage, image?.[0]?.name);
+      const imagePath = await fetch(
+        "http://dev.trainee.dex-it.ru/api/Image/SaveImage",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+          body: formData,
         },
-        body: formData,
-      },
-    );
-    const resultString = await imagePath?.json();
-    setPreviewImage(resultString);
+      );
+      const resultString = await imagePath?.json();
+      setPreviewImage(resultString);
+    } else {
+      triggerNotifyComponent({
+        text: "only png",
+      });
+    }
   };
 
   const onSubmit = async (propData: addTeamFormData) => {

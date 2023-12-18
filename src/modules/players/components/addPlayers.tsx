@@ -148,7 +148,9 @@ export const AddPlayer: FC = () => {
       const resultString = await imagePath?.json();
       setPreviewImage(resultString);
     } else {
-      //todo notify "only png!"
+      triggerNotifyComponent({
+        text: "only png",
+      });
     }
   };
 
