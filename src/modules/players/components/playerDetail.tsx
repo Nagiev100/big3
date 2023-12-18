@@ -201,7 +201,6 @@ const ContainerImg = styled.div`
   flex-direction: row;
   align-items: center;
   margin-right: 32px;
-  padding-bottom: 20px;
   @media ${(props) => props.theme.tablet} {
     width: 100%;
     padding-top: 16px;
