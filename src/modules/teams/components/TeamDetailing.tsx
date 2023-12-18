@@ -127,6 +127,11 @@ const ContainerDetail = styled.div`
   height: 525px;
   margin-left: 80px;
   margin-top: 32px;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     height: 100%;
@@ -136,6 +141,10 @@ const ContainerDetail = styled.div`
 const ContainerDitailTeam = styled.div`
   width: 100%;
   background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
+  @media ${(props) => props.theme.tablet} {
+    height: 100%;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     height: 100%;
     margin: 0 auto;
@@ -148,6 +157,10 @@ const ContainerNameTeam = styled.div`
   width: 1140px;
   height: 69px;
   background-color: #fff;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: 48px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     height: 48px;
@@ -159,6 +172,9 @@ const ContainerLogo = styled.div`
   width: 100%;
   height: 100%;
   margin-left: 32px;
+  @media ${(props) => props.theme.tablet} {
+    margin-left: 16px;
+  }
   @media ${(props) => props.theme.mobile} {
     margin-left: 16px;
   }
@@ -167,17 +183,14 @@ const ContainerGridAddTeam = styled.div`
   display: grid;
   grid-template-columns: 3fr 4fr;
   max-width: 1140px;
-
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.tablet} {
     grid-template-columns: 1fr;
     width: 100%;
     margin: 0 auto;
   }
-`;
-const ContainerTeamName = styled.div`
   @media ${(props) => props.theme.mobile} {
+    grid-template-columns: 1fr;
     width: 100%;
-    height: 100%;
     margin: 0 auto;
   }
 `;
@@ -186,17 +199,25 @@ const Img = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 16px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0;
+    margin-right: 10px;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0;
     margin-right: 10px;
   }
-\` ;
 `;
 const ImgTeamDitail = styled.img`
   width: 210px;
   height: 210px;
   margin-left: 146px;
   margin-top: 97px;
+  @media ${(props) => props.theme.tablet} {
+    width: 89px;
+    height: 90px;
+    margin-top: 48px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 89px;
     height: 90px;
@@ -211,6 +232,11 @@ const ContainerImg = styled.div`
   margin-top: 23px;
   padding-bottom: 20px;
   align-items: center;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin-top: 30px;
+    justify-content: flex-end;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     margin-top: 30px;
@@ -224,6 +250,14 @@ export const Name = styled.h1`
   line-height: normal;
   color: #ffffff;
   margin-top: 65px;
+
+  @media ${(props) => props.theme.tablet} {
+    margin-left: 300px;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px;
+    margin-top: 0;
+  }
   @media ${(props) => props.theme.mobile} {
     margin-left: 160px;
     font-size: 17px;
@@ -236,6 +270,11 @@ const TeamDetails = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;
+  @media ${(props) => props.theme.tablet} {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
     width: 100%;
@@ -244,6 +283,12 @@ const TeamDetails = styled.div`
 `;
 
 const ItemContainer = styled.div`
+  @media ${(props) => props.theme.tablet} {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
   @media ${(props) => props.theme.mobile} {
     justify-content: center;
     align-items: center;
@@ -258,6 +303,15 @@ const LabelTeam = styled.p`
   font-weight: 800;
   line-height: normal;
   color: #fff;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: fit-content;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px;
+    text-align: center;
+    padding-top: 24px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     height: fit-content;
@@ -276,6 +330,14 @@ const InformationTeam = styled.p`
   line-height: normal;
   color: #ffffff;
   padding-top: 38px;
+  @media ${(props) => props.theme.tablet} {
+    font-size: 15px;
+    width: auto;
+    height: fit-content;
+    font-weight: 500;
+    line-height: 24px;
+    padding-top: 30px;
+  }
   @media ${(props) => props.theme.mobile} {
     font-size: 15px;
     width: auto;
@@ -287,6 +349,9 @@ const InformationTeam = styled.p`
 `;
 const ContainerDivision = styled.div`
   margin-top: 115px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0;
   }

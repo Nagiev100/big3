@@ -42,6 +42,12 @@ const LogoHeader = styled.img`
   width: 191px;
   height: 48px;
   margin-left: 120px;
+  @media ${(props) => props.theme.tablet} {
+    width: 137px;
+    height: 34px;
+    margin-top: 19px;
+    margin-left: 200px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 137px;
     height: 34px;
@@ -52,6 +58,9 @@ export const UserHeader = styled.div`
   display: flex;
   align-items: center;
   margin-right: 51px;
+  @media ${(props) => props.theme.tablet} {
+    display: none;
+  }
   @media ${(props) => props.theme.mobile} {
     display: none;
   }
@@ -70,6 +79,11 @@ export const UserName = styled.p`
 const HumburgerIcon = styled.div`
   position: fixed;
   display: none;
+  @media ${(props) => props.theme.tablet} {
+    display: block;
+    cursor: pointer;
+    z-index: 999;
+  }
   @media ${(props) => props.theme.mobile} {
     display: block;
     cursor: pointer;

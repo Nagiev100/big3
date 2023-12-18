@@ -27,6 +27,10 @@ const ContainerCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    heigth: auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     heigth: auto;
@@ -37,6 +41,9 @@ const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
   }
@@ -51,6 +58,10 @@ export const CardContent = styled.div`
   align-self: flex-end;
   text-align: center;
   padding: 24px 0;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: 94px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     height: 94px;
@@ -65,6 +76,9 @@ const Text = styled.p`
 `;
 
 const Title = styled.p`
+  @media ${(props) => props.theme.tablet} {
+    max-width: calc((100vw - 60px) / 2);
+  }
   @media ${(props) => props.theme.mobile} {
     max-width: calc((100vw - 60px) / 2);
   }

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import ClickedImg from "../../../assests/images/cllickerPhoto.svg";
 import { post, put } from "../../../api/baseFetch";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useAppSelector } from "../../../core/redux/store";
 import { Container } from "../../../common/components/shared/CenterImage";
 import { AddTextLogo } from "../../../common/components/shared/AddTextLogo";
@@ -114,7 +114,11 @@ export const AddTeam: FC = () => {
           backgroundProps="#FFFFFF"
           widthProps={"100%"}
         >
-          <AddTextLogo beforePaddingLeft="40px">Teams Add new team</AddTextLogo>
+          <CustomNavLink to={"/layout/teamsCard"}>
+            <AddTextLogo beforePaddingLeft="40px">
+              Teams Add new team
+            </AddTextLogo>
+          </CustomNavLink>
         </Container>
         <ContainerAddTeamGrid>
           <ContainerClickedImg
@@ -210,9 +214,15 @@ export const ButtonCansel = styled.button`
   color: #9c9c9c;
   &:hover {
     background-color: #9c9c9c;
+    color: white;
   }
   &:active {
     background-color: #707070;
+  }
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 26px;
   }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
@@ -232,9 +242,13 @@ export const ButtonSave = styled.button`
   &:active {
     background-color: #c60e2e;
   }
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin-top: 26px;
+    max-width: 300px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
-
     margin-top: 26px;
   }
 `;
@@ -244,6 +258,12 @@ const ContainerAddTeam = styled.div`
   background-color: #ffffff;
   margin-left: 80px;
   margin-top: 32px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 24px;
+    height: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;
     width: 100%;
@@ -254,12 +274,20 @@ const ContainerAddTeam = styled.div`
 const ContainerAddTeamGrid = styled.div`
   display: grid;
   grid-template-columns: 3fr 4fr;
+  @media ${(props) => props.theme.tablet} {
+    grid-template-columns: 1fr;
+  }
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
   }
 `;
 const ContainerInputAddTeam = styled.div`
   margin-left: 136px;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 600px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     margin: 0 auto;
@@ -273,4 +301,7 @@ export const InputFile = styled.input`
   overflow: hidden;
   padding: 0;
   margin: 0;
+`;
+const CustomNavLink = styled(NavLink)`
+  text-decoration: none;
 `;

@@ -32,6 +32,9 @@ export const MySideBarLayout = styled.section`
   flex-direction: column;
   background: white;
   bottom: 0;
+  @media ${(props) => props.theme.tablet} {
+    display: none;
+  }
   @media ${(props) => props.theme.mobile} {
     display: none;
   }
@@ -48,6 +51,9 @@ const HeaderLayout = styled.header`
   height: 80px;
   background: white;
   box-shadow: 0 1px 10px 0 rgba(209, 209, 209, 0.5);
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
   }
@@ -57,6 +63,10 @@ const Main = styled.main`
   grid-template-columns: 140px 1fr;
   min-height: calc(100vh - 80px);
   flex: 1;
+  @media ${(props) => props.theme.tablet} {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
     width: 100%;
@@ -69,6 +79,10 @@ const Section = styled.section`
   width: calc(100vw - 140px);
   min-height: 100%;
   margin-left: 140px;
+  @media ${(props) => props.theme.tablet} {
+    margin-left: 0;
+    width: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     margin-left: 0;
     width: 100%;

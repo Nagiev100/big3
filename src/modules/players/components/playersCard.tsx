@@ -203,6 +203,11 @@ const CustomNavLink = styled(NavLink)`
 const ContainerPlayersCard = styled.div`
   width: 1140px;
   margin: 0 auto;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 24px;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;
     width: 100%;
@@ -213,7 +218,11 @@ const WrapperSearch = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    flex-direction: column;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     flex-direction: column;
@@ -232,6 +241,11 @@ const InputSearch = styled.input`
   text-align: left;
   padding-left: 12px;
   border-radius: 4px;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 16px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     margin-left: 0;
@@ -254,6 +268,12 @@ const ButtonPlayerCard = styled.button`
   &:active {
     background-color: #c60e2e;
   }
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 16px;
+    height: auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     margin-left: 0;
@@ -265,6 +285,9 @@ const ButtonPlayerCard = styled.button`
 const InputsContainer = styled.div`
   display: flex;
   align-items: center;
+  @media ${(props) => props.theme.tablet} {
+    flex-direction: column;
+  }
   @media ${(props) => props.theme.mobile} {
     flex-direction: column;
   }
@@ -288,7 +311,11 @@ const ContainerSelect = styled.div`
     min-width: 30% !important;
     margin-right: 8px;
   }
-
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin: 16px 0 0 0;
+    height: auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     margin: 16px 0 0 0;

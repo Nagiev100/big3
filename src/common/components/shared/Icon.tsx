@@ -35,6 +35,12 @@ export const IconComponent: FC<IconComponentProps> = ({
   );
 };
 const ContainerIconSidebar = styled.div`
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 24px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     display: flex;
@@ -50,6 +56,9 @@ const ColoredIcon = styled.svg<IColorIcon>`
   path {
     fill: ${(props) => (props.isActive ? "red" : "")};
   }
+  @media ${(props) => props.theme.tablet} {
+    margin: 0;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0;
   }
@@ -63,6 +72,11 @@ const TextIcons = styled.p<IColorIcon>`
   text-decoration: none;
   color: ${(props) => (props.isActive ? "red" : "#9C9C9C")};
   width: 38px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0;
+    padding-left: 8px;
+    padding-top: 4px;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0;
     padding-left: 8px;

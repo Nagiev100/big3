@@ -80,8 +80,12 @@ const Table = styled.table`
   width: 1140px;
   background-color: #ffffff;
   margin-top: 24px;
-
   border: 0.5px solid var(--ui-light-grey, #9c9c9c);
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     height: 100%;

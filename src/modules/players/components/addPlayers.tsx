@@ -11,7 +11,7 @@ import { ITypeTeam } from "../../../core/redux/reducer/teamSlice";
 import { Form, Label } from "../../authorization/signIn";
 import { ContainerClickedImg } from "../../../common/components/shared/ContainerClickedImg";
 import { ButtonCansel, ButtonSave } from "../../teams/components/addTeam";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useAppSelector } from "../../../core/redux/store";
 import styled from "styled-components";
 import { useNotifyAlert } from "../../../common/hooks/useNotifyAlert";
@@ -195,9 +195,11 @@ export const AddPlayer: FC = () => {
     <>
       <ContainerAddPlayer>
         <Container heightProps="69px" backgroundProps="#FFFFFF">
-          <AddTextLogo beforePaddingLeft="45px">
-            Players Add new player
-          </AddTextLogo>
+          <CustomNavLink to={"/layout/playersCard"}>
+            <AddTextLogo beforePaddingLeft="45px">
+              Players Add new player
+            </AddTextLogo>
+          </CustomNavLink>
         </Container>
         <ContainerAddPlayerGrid>
           <ContainerClickedImg
@@ -330,6 +332,12 @@ const ContainerAddPlayer = styled.div`
   background-color: #ffffff;
   margin-left: 80px;
   margin-top: 32px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 0 24px;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;
     width: 100%;
@@ -341,12 +349,19 @@ const ContainerAddPlayerGrid = styled.div`
   max-width: 1140px;
   display: grid;
   grid-template-columns: 3fr 4fr;
+  @media ${(props) => props.theme.tablet} {
+    grid-template-columns: 1fr;
+  }
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
   }
 `;
 const ContainerInputAddPlayer = styled.div`
   margin-left: 136px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0 auto;
+    width: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;
     width: 100%;
@@ -358,6 +373,10 @@ const ContainerGridInput = styled.div`
   margin-top: 26px;
   max-width: 1140px;
   display: grid;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0 auto;
+    width: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;
     width: 100%;
@@ -371,4 +390,7 @@ const InputFilePlayer = styled.input`
   overflow: hidden;
   padding: 0;
   margin: 0;
+`;
+const CustomNavLink = styled(NavLink)`
+  text-decoration: none;
 `;

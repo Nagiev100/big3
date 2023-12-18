@@ -161,6 +161,9 @@ const ContainerMedia = styled.div`
   @media ${(props) => props.theme.tablet} {
     display: none;
   }
+  @media ${(props) => props.theme.mobile} {
+    display: none;
+  }
 `;
 
 export const SloganAuthorization = styled.h2`
@@ -170,10 +173,10 @@ export const SloganAuthorization = styled.h2`
   font-size: 36px;
   font-weight: 400;
   margin-right: 240px;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.tablet} {
     margin-right: 0px;
   }
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props) => props.theme.mobile} {
     margin-right: 0px;
   }
 `;
@@ -187,13 +190,13 @@ export const ContainerIcon = styled.span`
   content: "";
   top: 62px;
   left: 340px;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.tablet} {
     left: auto;
     top: auto;
     bottom: 6px;
     right: 8px;
   }
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props) => props.theme.mobile} {
     left: auto;
     top: auto;
     bottom: 6px;
@@ -211,10 +214,10 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.tablet} {
     width: 100%;
   }
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props) => props.theme.mobile} {
     width: 100%;
   }
 `;

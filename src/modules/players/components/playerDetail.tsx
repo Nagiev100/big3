@@ -116,12 +116,21 @@ export const PlayerDetail: FC = () => {
 };
 
 const InfoSection = styled(Container)`
+  @media ${(props) => props.theme.tablet} {
+    order: 2;
+  }
   @media ${(props) => props.theme.mobile} {
     order: 2;
   }
 `;
 
 const ItemContainer = styled.div`
+  @media ${(props) => props.theme.tablet} {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
   @media ${(props) => props.theme.mobile} {
     justify-content: center;
     align-items: center;
@@ -136,6 +145,11 @@ const ContainerDetail = styled.div`
   background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
   margin-left: 80px;
   margin-top: 32px;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     height: 100%;
@@ -144,6 +158,10 @@ const ContainerDetail = styled.div`
 `;
 const ContainerDitailPlayer = styled.div`
   width: 100%;
+  @media ${(props) => props.theme.tablet} {
+    height: 100%;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     height: 100%;
     margin: 0 auto;
@@ -156,6 +174,10 @@ const ContainerNamePlayer = styled.div`
   width: 1140px;
   height: 69px;
   background-color: #fff;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: 48px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     height: 48px;
@@ -167,6 +189,9 @@ const ContainerLogo = styled.div`
   width: 100%;
   height: 100%;
   margin-left: 32px;
+  @media ${(props) => props.theme.tablet} {
+    margin-left: 16px;
+  }
   @media ${(props) => props.theme.mobile} {
     margin-left: 16px;
   }
@@ -177,7 +202,12 @@ const ContainerImg = styled.div`
   align-items: center;
   margin-right: 32px;
   padding-bottom: 20px;
-
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    padding-top: 16px;
+    margin: 0;
+    justify-content: flex-end;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     padding-top: 16px;
@@ -189,6 +219,10 @@ const ContainerNumber = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0 auto;
+    width: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;
     width: 100%;
@@ -198,6 +232,10 @@ const Img = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 16px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0;
+    margin-right: 10px;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0;
     margin-right: 10px;
@@ -206,6 +244,11 @@ const Img = styled.img`
 const ImgPlayer = styled.img`
   width: 450px;
   height: 450px;
+  @media ${(props) => props.theme.tablet} {
+    width: 143px;
+    height: 112px;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 143px;
     height: 112px;
@@ -217,6 +260,11 @@ const ContainerGridAddPlayer = styled.div`
   display: grid;
   grid-template-columns: 3fr 4fr;
   max-width: 1140px;
+  @media ${(props) => props.theme.tablet} {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin: 0 auto;
+  }
 
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
@@ -224,7 +272,6 @@ const ContainerGridAddPlayer = styled.div`
     margin: 0 auto;
   }
 `;
-const ContainerInformation = styled.div``;
 
 const Number = styled.p`
   color: #ff5761;
@@ -232,6 +279,12 @@ const Number = styled.p`
   font-weight: 800;
   padding-top: 65px;
   padding-left: 10px;
+  @media ${(props) => props.theme.tablet} {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px;
+    padding-top: 0;
+  }
   @media ${(props) => props.theme.mobile} {
     font-size: 17px;
     font-weight: 800;
@@ -244,6 +297,11 @@ const TeamDetails = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;
+  @media ${(props) => props.theme.tablet} {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
     width: 100%;
@@ -258,6 +316,15 @@ const LabelPlayer = styled.p`
   font-weight: 800;
   line-height: normal;
   color: #fff;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: fit-content;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px;
+    text-align: center;
+    padding-top: 24px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     height: fit-content;
@@ -276,6 +343,13 @@ const InformationPlayer = styled.p`
   line-height: normal;
   color: #ffffff;
   padding-top: 38px;
+  @media ${(props) => props.theme.tablet} {
+    font-size: 15px;
+    width: auto;
+    height: fit-content;
+    font-weight: 500;
+    line-height: 24px;
+    padding-top:12px;
   @media ${(props) => props.theme.mobile} {
     font-size: 15px;
     width: auto;

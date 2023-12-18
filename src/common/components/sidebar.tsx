@@ -126,6 +126,9 @@ const MySideBarLayout = styled.section`
   flex-direction: column;
   background: white;
   bottom: 0;
+  @media ${(props) => props.theme.tablet} {
+    height: calc(100vh - 80px);
+  }
   @media ${(props) => props.theme.mobile} {
     height: calc(100vh - 80px);
   }
@@ -134,6 +137,14 @@ const SidebarPanel = styled(MySideBarLayout)<{ showMenu: boolean | undefined }>`
   position: fixed;
   display: block;
   top: 86px;
+  @media ${(props) => props.theme.tablet} {
+    display: block;
+    left: ${({ showMenu }) => (showMenu ? "0" : "-250px")};
+    top: 85px;
+    width: 250px;
+    transition: left 0.3s ease-in-out;
+    hight: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     display: block;
     left: ${({ showMenu }) => (showMenu ? "0" : "-250px")};
@@ -145,7 +156,12 @@ const SidebarPanel = styled(MySideBarLayout)<{ showMenu: boolean | undefined }>`
 `;
 const UserSidebar = styled.div`
   display: none;
-
+  @media ${(props) => props.theme.tablet} {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 16px auto;
+  }
   @media ${(props) => props.theme.mobile} {
     display: flex;
     flex-direction: row;
@@ -165,6 +181,11 @@ const ContainerImgButton = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media ${(props) => props.theme.tablet} {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 27px;
+  }
 
   @media ${(props) => props.theme.mobile} {
     flex-direction: row;

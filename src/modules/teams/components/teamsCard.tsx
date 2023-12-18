@@ -103,7 +103,6 @@ export const TeamsCard: FC = () => {
             nextLabel={<img src={NextIcon} width="19px" height="19px" />}
             previousLabel={<img src={PrevIcon} width="19px" height="19px" />}
             onPageChange={({ selected }) => {
-              console.log("selected", selected);
               setPage(selected);
             }}
             initialPage={page}
@@ -113,7 +112,7 @@ export const TeamsCard: FC = () => {
             activeClassName={"active"}
           />
         </PaginateContainer>
-        <div style={{ marginTop: 30 }}>
+        <ContainerSelect>
           <Select
             options={options}
             onChange={updatePageSize}
@@ -121,7 +120,7 @@ export const TeamsCard: FC = () => {
             defaultValue={options[0]}
             menuPlacement={"top"}
           />
-        </div>
+        </ContainerSelect>
       </SectionPaginate>
     </ContainerTeamsCard>
   );
@@ -130,6 +129,11 @@ export const TeamsCard: FC = () => {
 const ContainerTeamsCard = styled.div`
   width: 1140px;
   margin: 0 auto;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 24px;
+  }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;
     width: 100%;
@@ -140,6 +144,11 @@ const WrapperSearch = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    flex-direction: column;
+    margin: 0 auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     flex-direction: column;
@@ -150,6 +159,11 @@ export const ContainerSearch = styled.div`
   position: relative;
   height: 40px;
   margin: 32px 0;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin: 0;
+    height: auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     margin: 0;
@@ -168,6 +182,11 @@ const InputSearch = styled.input`
   text-align: left;
   padding-left: 12px;
   border-radius: 4px;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 16px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     margin-left: 0;
@@ -182,6 +201,13 @@ export const ImgSearch = styled.img`
   color: Grey;
   top: 12px;
   left: 340px;
+  @media ${(props) => props.theme.tablet} {
+    right: 8px;
+    bottom: 11px;
+    left: auto;
+    top: auto;
+    margin-top: 16px;
+  }
   @media ${(props) => props.theme.mobile} {
     right: 8px;
     bottom: 11px;
@@ -207,6 +233,11 @@ const ButtonTeamsCard = styled.button`
   &:active {
     background-color: #c60e2e;
   }
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin-left: 0;
+    height: auto;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     margin-left: 0;
@@ -224,6 +255,9 @@ export const SectionPaginate = styled.section`
   align-items: center;
   margin-top: 32px;
   margin-bottom: 0;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 100%;
   }
@@ -257,10 +291,22 @@ export const PaginateContainer = styled.div`
     text-decoration: none;
     color: inherit;
   }
+  @media ${(props) => props.theme.tablet} {
+    height: auto;
+  }
   @media ${(props) => props.theme.mobile} {
     height: auto;
   }
 `;
 const CustomNavLink = styled(NavLink)`
   text-decoration: none;
+`;
+const ContainerSelect = styled.div`
+  margin-top: 30px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0;
+  }
+  @media ${(props) => props.theme.mobile} {
+    margin: 0;
+  }
 `;

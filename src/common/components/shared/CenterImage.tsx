@@ -63,7 +63,12 @@ export const Container = styled.div<ContainerProps>`
   margin: ${(props) => props.margin};
   grid-template-columns: ${(props) => props.gridTemplateColumn};
   grid-template-rows:${(props) => props.gridTemplateRows};
-  
+  @media ${(props) => props.theme.tablet}{
+    padding:0px;
+    margin:0 auto;
+    heigth:667px;
+    width:100%;
+  }
   @media ${(props) => props.theme.mobile}{
     padding:0px;
     margin:0 auto;
