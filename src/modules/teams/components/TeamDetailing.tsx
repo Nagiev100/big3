@@ -217,6 +217,7 @@ const ImgTeamDitail = styled.img`
     width: 89px;
     height: 90px;
     margin-top: 48px;
+    margin-left: 270px;
   }
   @media ${(props) => props.theme.mobile} {
     width: 89px;
