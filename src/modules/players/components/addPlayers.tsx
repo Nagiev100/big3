@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import ClickedImg from "../../../assests/images/cllickerPhoto.svg";
@@ -227,8 +227,19 @@ export const AddPlayer: FC = () => {
                 widthProps="366px"
                 heightProps="40px"
                 id="name"
-                {...register("name", { required: true })}
+                {...register("name", {
+                  required: "Required",
+                  pattern: {
+                    value: /[A-Z]/,
+                    message: "Only letters can be used",
+                  },
+                })}
               />
+              <ContainerErrors>
+                {errors?.name && (
+                  <ErrorsText>{errors?.name?.message}</ErrorsText>
+                )}
+              </ContainerErrors>
               <Container widthProps={"366px"} marginTop="26px">
                 <Label htmlFor="position">Position</Label>
                 <Select
@@ -257,8 +268,19 @@ export const AddPlayer: FC = () => {
                       borderColor={errors?.height ? "#FF768E" : "#F6F6F6"}
                       background="#F6F6F6"
                       id="height"
-                      {...register("height", { required: true })}
+                      {...register("height", {
+                        required: "Required",
+                        pattern: {
+                          value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                          message: "Only numbers can be used",
+                        },
+                      })}
                     />
+                    <ContainerErrors>
+                      {errors?.height && (
+                        <ErrorsText>{errors?.height?.message}</ErrorsText>
+                      )}
+                    </ContainerErrors>
                   </Container>
                   <Container>
                     <Label htmlFor="birthday">Birthday</Label>
@@ -268,9 +290,14 @@ export const AddPlayer: FC = () => {
                       widthProps={"171px"}
                       heightProps={"40px"}
                       background={"#f6f6f6"}
-                      borderColor={"#f6f6f6"}
-                      {...register("birthday", { required: true })}
+                      borderColor={errors?.birthday ? "#FF768E" : "#F6F6F6"}
+                      {...register("birthday", { required: "Required" })}
                     />
+                    <ContainerErrors>
+                      {errors?.birthday && (
+                        <ErrorsText>{errors?.birthday?.message}</ErrorsText>
+                      )}
+                    </ContainerErrors>
                   </Container>
 
                   <Container marginTop="16px">
@@ -278,11 +305,22 @@ export const AddPlayer: FC = () => {
                     <Input
                       widthProps="171px"
                       heightProps="40px"
+                      background="#F6F6F6"
                       borderColor={errors?.weight ? "#FF768E" : "#F6F6F6"}
                       id="weight"
-                      {...register("weight", { required: true })}
-                      background="#F6F6F6"
+                      {...register("weight", {
+                        required: "Required",
+                        pattern: {
+                          value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                          message: "Only numbers can be used",
+                        },
+                      })}
                     />
+                    <ContainerErrors>
+                      {errors?.weight && (
+                        <ErrorsText>{errors?.weight?.message}</ErrorsText>
+                      )}
+                    </ContainerErrors>
                   </Container>
                   <Container marginTop="16px">
                     <Label htmlFor="number">Number</Label>
@@ -292,8 +330,19 @@ export const AddPlayer: FC = () => {
                       borderColor={errors?.number ? "#FF768E" : "#F6F6F6"}
                       background="#F6F6F6"
                       id="number"
-                      {...register("number", { required: true })}
+                      {...register("number", {
+                        required: "Required",
+                        pattern: {
+                          value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                          message: "Only numbers can be used",
+                        },
+                      })}
                     />
+                    <ContainerErrors>
+                      {errors?.number && (
+                        <ErrorsText>{errors?.number?.message}</ErrorsText>
+                      )}
+                    </ContainerErrors>
                   </Container>
                 </ContainerGridInput>
               </Container>
@@ -395,4 +444,13 @@ const InputFilePlayer = styled.input`
 `;
 const CustomNavLink = styled(NavLink)`
   text-decoration: none;
+`;
+const ContainerErrors = styled.div`
+  height: 2px;
+`;
+const ErrorsText = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 150%;
+  color: #ff768e;
 `;

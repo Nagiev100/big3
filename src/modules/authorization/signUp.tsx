@@ -91,11 +91,11 @@ export const SignUp: FC = () => {
                 background="#F6F6F6"
                 {...register("userName", { required: true })}
               />
-              <div>
+              <ContainerErrors>
                 {errors?.userName && (
                   <ErrorsP>{errors?.userName.message || "Required"}</ErrorsP>
                 )}
-              </div>
+              </ContainerErrors>
               <Label htmlFor="login">Login</Label>
               <Input
                 borderColor={errors?.login ? "#FF768E" : "#F6F6F6"}
@@ -105,11 +105,11 @@ export const SignUp: FC = () => {
                 background="#F6F6F6"
                 {...register("login", { required: true })}
               />
-              <div>
+              <ContainerErrors>
                 {errors?.login && (
                   <ErrorsP>{errors?.login.message || "Required"}</ErrorsP>
                 )}
-              </div>
+              </ContainerErrors>
               <ContainerInput>
                 <Label htmlFor="password">Password</Label>
                 <Input
@@ -130,11 +130,11 @@ export const SignUp: FC = () => {
                     <img src={openEye} />
                   </ContainerIcon>
                 )}
-                <div>
+                <ContainerErrors>
                   {errors?.password && (
                     <ErrorsP>{errors?.password.message || "Required"}</ErrorsP>
                   )}
-                </div>
+                </ContainerErrors>
               </ContainerInput>
               <ContainerInput>
                 <Label htmlFor="returnPassword">
@@ -160,13 +160,13 @@ export const SignUp: FC = () => {
                     <img src={openEye} />
                   </ContainerIcon>
                 )}
-                <div>
+                <ContainerErrors>
                   {errors?.returnPassword && (
                     <ErrorsP>
                       {errors?.returnPassword.message || "Required"}
                     </ErrorsP>
                   )}
-                </div>
+                </ContainerErrors>
               </ContainerInput>
 
               <ContainerCheckBox>
@@ -175,7 +175,6 @@ export const SignUp: FC = () => {
                   type="checkbox"
                   {...register("checkBox", { required: true })}
                 />
-
                 <label htmlFor="checkBox">I accept the agreement</label>
               </ContainerCheckBox>
 
@@ -272,4 +271,7 @@ const ContainerMedia = styled.div`
   @media ${(props) => props.theme.mobile} {
     display: none;
   }
+`;
+const ContainerErrors = styled.div`
+  height: 2px;
 `;

@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import ClickedImg from "../../../assests/images/cllickerPhoto.svg";
@@ -148,24 +148,45 @@ export const AddTeam: FC = () => {
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"
-                {...register("name", { required: true })}
+                {...register("name", {
+                  required: "Required",
+                  pattern: {
+                    value: /[A-Z]/,
+                    message: "Only letters can be used",
+                  },
+                })}
               />
+              <ContainerErrors>
+                {errors?.name && (
+                  <ErrorsText>{errors?.name?.message}</ErrorsText>
+                )}
+              </ContainerErrors>
               <Label>Division</Label>
               <Input
                 borderColor={errors?.division ? "red" : "#F6F6F6"}
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"
-                {...register("division", { required: true })}
+                {...register("division", { required: "Required" })}
               />
+              <ContainerErrors>
+                {errors?.division && (
+                  <ErrorsText>{errors?.division?.message}</ErrorsText>
+                )}
+              </ContainerErrors>
               <Label>Conference</Label>
               <Input
                 borderColor={errors?.conference ? "red" : "#F6F6F6"}
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"
-                {...register("conference", { required: true })}
+                {...register("conference", { required: "Required" })}
               />
+              <ContainerErrors>
+                {errors?.conference && (
+                  <ErrorsText>{errors?.conference?.message}</ErrorsText>
+                )}
+              </ContainerErrors>
               <Label>Year of foundation</Label>
               <Input
                 borderColor={errors?.foundationYear ? "red" : "#F6F6F6"}
@@ -173,19 +194,18 @@ export const AddTeam: FC = () => {
                 widthProps="366px"
                 heightProps="40px"
                 {...register("foundationYear", {
-                  required: {
-                    value: true,
-                    message: "This is required value",
-                  },
+                  required: "Required",
                   pattern: {
                     value: /^(0|[1-9]\d*)(\.\d+)?$/,
-                    message: "invalid year",
+                    message: "Only numbers can be used",
                   },
                 })}
               />
-              {/*{errors.foundationYear?.message*/}
-              {/*  ? errors.foundationYear?.message*/}
-              {/*  : null}*/}
+              <ContainerErrors>
+                {errors?.foundationYear && (
+                  <ErrorsText>{errors?.foundationYear?.message}</ErrorsText>
+                )}
+              </ContainerErrors>
             </Form>
           </ContainerInputAddTeam>
         </ContainerAddTeamGrid>
@@ -310,4 +330,13 @@ export const InputFile = styled.input`
 `;
 const CustomNavLink = styled(NavLink)`
   text-decoration: none;
+`;
+const ContainerErrors = styled.div`
+  height: 2px;
+`;
+const ErrorsText = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 150%;
+  color: #ff768e;
 `;
