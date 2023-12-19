@@ -8,6 +8,7 @@ interface IButton {
   backgroundColor?: string;
   backgroundHover?: string;
   backgroundActive?: string;
+  backgroundDisabled?: string;
   border?: string;
   color?: string;
 }
@@ -21,12 +22,15 @@ export const Button = styled.button<IButton>`
   border: ${(props) => props.border};
   border-radius: 4px;
   margin-top: ${(props) => props.marginTop};
-  margin-left: /*40px;*/ ${(props) => props.marginLeft};
+  margin-left: ${(props) => props.marginLeft};
   &:hover {
     background-color: /*#FF5761*/ ${(props) => props.backgroundHover};
   }
   &:active {
     background-color: /*#C60E2E*/ ${(props) => props.backgroundActive};
+  }
+  &:disabled {
+    background-color:;
   }
 
   @media ${(props) => props.theme.mobile} {

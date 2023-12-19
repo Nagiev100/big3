@@ -17,7 +17,6 @@ import {
   SloganAuthorization,
 } from "./signIn";
 import { Input } from "../../common/components/shared/InputComponent";
-import { Button } from "../../common/components/shared/ButtonCompanent";
 import { useNotifyAlert } from "../../common/hooks/useNotifyAlert";
 
 interface SignUpFormData {
@@ -183,21 +182,13 @@ export const SignUp: FC = () => {
                 flexDirection="column"
                 widthProps={"100%"}
               >
-                <Button
-                  backgroundColor="#E4163A"
-                  backgroundHover="#FF5761"
-                  backgroundActive="#C60E2E"
-                  color="#FFFFFF"
-                  border="none"
+                <ButtonSignUp
                   type="submit"
                   onClick={handleSubmit(onSubmit)}
                   disabled={!isValid}
-                  padding="0"
-                  width="365px"
-                  marginTop="24px"
                 >
                   <span>Sign Up</span>
-                </Button>
+                </ButtonSignUp>
                 <AuthorizationText>
                   Not a member yet?{" "}
                   <Link to="/" style={{ color: "red" }}>
@@ -274,4 +265,32 @@ const ContainerMedia = styled.div`
 `;
 const ContainerErrors = styled.div`
   height: 2px;
+`;
+export const ButtonSignUp = styled.button`
+  background-color: #e4163a;
+  color: #ffffff;
+  border: none;
+  padding: 0;
+  width: 365px;
+  margin-top: 24px;
+  height: 40px;
+  &:hover {
+    background-color: #ff5761;
+  }
+  &:active {
+    background-color: #c60e2e;
+  }
+  &:disabled {
+    background-color: #f6f6f6;
+    color: #d1d1d1;
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    margin-right: 0;
+  }
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin-right: 0;
+  }
 `;

@@ -9,7 +9,6 @@ import { post } from "../../api/baseFetch";
 import { Container } from "../../common/components/shared/CenterImage";
 import { Image } from "../../common/components/shared/ImageCompanent";
 import { Input } from "../../common/components/shared/InputComponent";
-import { Button } from "../../common/components/shared/ButtonCompanent";
 import { useNotifyAlert } from "../../common/hooks/useNotifyAlert";
 
 interface SignInFormData {
@@ -96,21 +95,13 @@ export const SignIn: FC = () => {
               widthProps={"100%"}
               flexDirection="column"
             >
-              <Button
-                backgroundColor="#E4163A"
-                backgroundHover="#FF5761"
-                backgroundActive="#C60E2E"
-                border="none"
-                color="#FFFFFF"
+              <ButtonSignIn
                 type="submit"
                 onClick={handleSubmit(onSubmit)}
                 disabled={!isValid}
-                padding="0"
-                width="366px"
-                marginTop="26px"
               >
                 <span>Sign In</span>
-              </Button>
+              </ButtonSignIn>
               <AuthorizationText>
                 Not a member yet?{" "}
                 <Link to="signUp" style={{ color: "red" }}>
@@ -234,4 +225,32 @@ const TextError = styled.p`
   font-size: 12px;
   font-weight: 500;
   line-height: 24px;
+`;
+export const ButtonSignIn = styled.button`
+  background-color: #e4163a;
+  color: #ffffff;
+  border: none;
+  padding: 0;
+  width: 365px;
+  margin-top: 24px;
+  height: 40px;
+  &:hover {
+    background-color: #ff5761;
+  }
+  &:active {
+    background-color: #c60e2e;
+  }
+  &:disabled {
+    background-color: #f6f6f6;
+    color: #d1d1d1;
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    margin-right: 0;
+  }
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    margin-right: 0;
+  }
 `;
