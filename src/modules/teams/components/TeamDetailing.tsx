@@ -91,7 +91,6 @@ export const TeamDetailing: FC = () => {
             <ImgTeamDitail
               src={"http://dev.trainee.dex-it.ru" + teamDetail.imageUrl}
             />
-
             <TeamDetails>
               <div>
                 <Name>{teamDetail.name}</Name>
@@ -142,11 +141,11 @@ const ContainerDitailTeam = styled.div`
   width: 100%;
   background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
   @media ${(props) => props.theme.tablet} {
-    height: 100%;
+    padding-bottom: 24px;
+    height: fit-content;
     margin: 0 auto;
   }
   @media ${(props) => props.theme.mobile} {
-    height: 100%;
     margin: 0 auto;
   }
 `;
@@ -217,7 +216,8 @@ const ImgTeamDitail = styled.img`
     width: 89px;
     height: 90px;
     margin-top: 48px;
-    margin-left: 270px;
+    margin-left: auto;
+    margin-right: auto;
   }
   @media ${(props) => props.theme.mobile} {
     width: 89px;
@@ -253,7 +253,7 @@ export const Name = styled.h1`
   margin-top: 65px;
 
   @media ${(props) => props.theme.tablet} {
-    margin-left: 300px;
+    text-align: center;
     font-size: 17px;
     font-weight: 800;
     line-height: 25px;

@@ -10,7 +10,11 @@ import { AddTextLogo } from "../../../common/components/shared/AddTextLogo";
 import { ITypeTeam } from "../../../core/redux/reducer/teamSlice";
 import { Form, Label } from "../../authorization/signIn";
 import { ContainerClickedImg } from "../../../common/components/shared/ContainerClickedImg";
-import { ButtonCansel, ButtonSave } from "../../teams/components/addTeam";
+import {
+  ButtonCansel,
+  ButtonSave,
+  ContainerButton,
+} from "../../teams/components/addTeam";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useAppSelector } from "../../../core/redux/store";
 import styled from "styled-components";
@@ -34,15 +38,17 @@ export interface IOptions {
 
 export const AddPlayer: FC = () => {
   const navigate = useNavigate();
+  const playerData = useAppSelector((state) => state.player.currentPlayer);
   const [params] = useSearchParams();
   const isEdit = params.get("edit");
   const filePicker = useRef<HTMLInputElement>(null);
-  const playerData = useAppSelector((state) => state.player.currentPlayer);
   const [positions, setPositions] = useState<string[]>([]);
   const [position, setPosition] = useState<string>("");
   const [teams, setTeams] = useState<IOptions[]>([]);
   const [team, setTeam] = useState<string>("");
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(
+    isEdit && playerData?.avatarUrl ? playerData?.avatarUrl : null,
+  );
   const { triggerNotifyComponent, notifyComponent } = useNotifyAlert();
   const {
     handleSubmit,
@@ -53,13 +59,13 @@ export const AddPlayer: FC = () => {
     mode: "onBlur",
     defaultValues: isEdit
       ? {
-          name: playerData.name,
-          position: playerData.position,
-          team: playerData.team,
-          height: playerData.height,
-          weight: playerData.weight,
-          birthday: playerData.birthday,
-          number: playerData.number,
+          name: playerData?.name,
+          position: playerData?.position,
+          team: playerData?.team,
+          height: playerData?.height,
+          weight: playerData?.weight,
+          birthday: playerData?.birthday,
+          number: playerData?.number,
         }
       : undefined,
   });
@@ -354,7 +360,7 @@ export const AddPlayer: FC = () => {
             </Form>
           </ContainerInputAddPlayer>
         </ContainerAddPlayerGrid>
-        <Container
+        <ContainerButton
           display="flex"
           flexDirection="row"
           marginTop="26px"
@@ -370,7 +376,7 @@ export const AddPlayer: FC = () => {
           >
             <span>Save</span>
           </ButtonSave>
-        </Container>
+        </ContainerButton>
       </ContainerAddPlayer>
       {notifyComponent}
     </>
@@ -412,6 +418,7 @@ const ContainerInputAddPlayer = styled.div`
   @media ${(props) => props.theme.tablet} {
     margin: 0 auto;
     width: 100%;
+    max-width: 600px;
   }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;

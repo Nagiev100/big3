@@ -23,12 +23,14 @@ interface addTeamFormData {
 
 export const AddTeam: FC = () => {
   const navigate = useNavigate();
+  const teamData = useAppSelector((state) => state.team.currentTeam);
   const [params] = useSearchParams();
   const isEdit = params.get("edit");
   const filePicker = useRef<HTMLInputElement>(null);
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(
+    isEdit && teamData?.imageUrl ? teamData?.imageUrl : null,
+  );
   const { triggerNotifyComponent, notifyComponent } = useNotifyAlert();
-  const teamData = useAppSelector((state) => state.team.currentTeam);
   const {
     handleSubmit,
     register,
@@ -38,10 +40,10 @@ export const AddTeam: FC = () => {
     mode: "onBlur",
     defaultValues: isEdit
       ? {
-          name: teamData.name,
-          foundationYear: teamData.foundationYear,
-          division: teamData.division,
-          conference: teamData.conference,
+          name: teamData?.name,
+          foundationYear: teamData?.foundationYear,
+          division: teamData?.division,
+          conference: teamData?.conference,
         }
       : undefined,
   });
@@ -209,7 +211,8 @@ export const AddTeam: FC = () => {
             </Form>
           </ContainerInputAddTeam>
         </ContainerAddTeamGrid>
-        <Container
+
+        <ContainerButton
           display="flex"
           flexDirection="row"
           marginTop="26px"
@@ -225,7 +228,7 @@ export const AddTeam: FC = () => {
           >
             <span>Save</span>
           </ButtonSave>
-        </Container>
+        </ContainerButton>
         <InputFile type="file" ref={filePicker} onInputCapture={addImg} />
       </ContainerAddTeam>
       {notifyComponent}
@@ -339,4 +342,10 @@ const ErrorsText = styled.span`
   font-weight: 500;
   line-height: 150%;
   color: #ff768e;
+`;
+export const ContainerButton = styled(Container)`
+  @media ${(props) => props.theme.tablet} {
+    justify-content: space-between;
+    max-width: 600px;
+  }
 `;

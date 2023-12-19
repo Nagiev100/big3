@@ -50,10 +50,9 @@ const ImageContainer = styled.div`
 `;
 
 export const CardContent = styled.div`
-  max-width: 364px;
+  width: 100%;
   height: 100px;
   background-color: #303030;
-  width: 364px;
   color: #fff;
   align-self: flex-end;
   text-align: center;

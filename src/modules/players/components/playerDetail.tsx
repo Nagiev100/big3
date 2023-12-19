@@ -65,7 +65,6 @@ export const PlayerDetail: FC = () => {
               <Img src={Delete} onClick={deletePlayer} />
             </ContainerImg>
           </ContainerNamePlayer>
-
           <ContainerGridAddPlayer>
             <ImgPlayer
               src={"http://dev.trainee.dex-it.ru" + playerDetail.avatarUrl}
@@ -75,7 +74,7 @@ export const PlayerDetail: FC = () => {
                 <Name>{playerDetail.name}</Name>
                 <Number>#{playerDetail.number}</Number>
               </ContainerNumber>
-              <TeamDetails>
+              <PlayerDetails>
                 <InfoSection widthProps={"100%"}>
                   <ItemContainer>
                     <LabelPlayer>Position</LabelPlayer>
@@ -106,7 +105,7 @@ export const PlayerDetail: FC = () => {
                     <InformationPlayer>{playerDetail.weight}</InformationPlayer>
                   </ItemContainer>
                 </Container>
-              </TeamDetails>
+              </PlayerDetails>
             </div>
           </ContainerGridAddPlayer>
         </ContainerDitailPlayer>
@@ -159,8 +158,9 @@ const ContainerDetail = styled.div`
 const ContainerDitailPlayer = styled.div`
   width: 100%;
   @media ${(props) => props.theme.tablet} {
-    height: 100%;
+    padding-bottom: 24px;
     margin: 0 auto;
+    height: fit-content;
   }
   @media ${(props) => props.theme.mobile} {
     height: 100%;
@@ -169,7 +169,6 @@ const ContainerDitailPlayer = styled.div`
 `;
 const ContainerNamePlayer = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   width: 1140px;
   height: 69px;
@@ -216,7 +215,6 @@ const ContainerImg = styled.div`
 `;
 const ContainerNumber = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   @media ${(props) => props.theme.tablet} {
     margin: 0 auto;
@@ -292,7 +290,7 @@ const Number = styled.p`
   }
 `;
 
-const TeamDetails = styled.div`
+const PlayerDetails = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;

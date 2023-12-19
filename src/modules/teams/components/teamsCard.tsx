@@ -26,7 +26,7 @@ export const TeamsCard: FC = () => {
   const [name, setName] = useState("");
 
   const updatePageSize = (params: any) => {
-    setPageSize(params);
+    setPageSize(params.value);
   };
   const options: IOptions[] = [
     {

@@ -18,9 +18,11 @@ export const Header: FC = () => {
         <HumburgerIcon onClick={toggleMenu}>
           <ImgMenu src={MenuMobile} />
         </HumburgerIcon>
-        <Link to={"/layout/teamsCard"}>
-          <LogoHeader src={HeaderLogo} />
-        </Link>
+        <ContainerLogo>
+          <Link to={"/layout/teamsCard"}>
+            <LogoHeader src={HeaderLogo} />
+          </Link>
+        </ContainerLogo>
         <UserHeader>
           <UserName>{name}</UserName>
           <Img src={UserImg} />
@@ -30,6 +32,13 @@ export const Header: FC = () => {
     </>
   );
 };
+const ContainerLogo = styled.div`
+  @media ${(props) => props.theme.tablet} {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+`;
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -45,8 +54,8 @@ const LogoHeader = styled.img`
   @media ${(props) => props.theme.tablet} {
     width: 137px;
     height: 34px;
+    margin: auto;
     margin-top: 19px;
-    margin-left: 200px;
   }
   @media ${(props) => props.theme.mobile} {
     width: 137px;
