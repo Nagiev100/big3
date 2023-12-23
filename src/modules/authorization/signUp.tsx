@@ -249,7 +249,7 @@ const ContainerCheckBox = styled.div`
     margin-top: 26px;
   }
 `;
-const ErrorsP = styled.p`
+export const ErrorsP = styled.p`
   color: #ff768e;
   font-size: 12px;
   font-weight: 500;
@@ -263,7 +263,7 @@ const ContainerMedia = styled.div`
     display: none;
   }
 `;
-const ContainerErrors = styled.div`
+export const ContainerErrors = styled.div`
   height: 2px;
 `;
 export const ButtonSignUp = styled.button`

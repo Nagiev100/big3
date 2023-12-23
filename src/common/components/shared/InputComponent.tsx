@@ -18,7 +18,7 @@ export const Input = styled.input<InputComponent>`
   padding-left: 12px;
   border-radius: 4px;
   margin-top: ${(props) => props.marginTop};
-
+  outline: none;
   background-color: ${(props) => props.background};
   border: ${(props) => `1px solid ${props.borderColor || "#F6F6F6"}`};
   &:hover {
@@ -26,6 +26,7 @@ export const Input = styled.input<InputComponent>`
   }
   &:focus {
     background-color: #f6f6f6;
+    box-shadow: 0px 0px 5px 0px #d9d9d9;
   }
   @media ${(props) => props.theme.mobile} {
     width: 100%;

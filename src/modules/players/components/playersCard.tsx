@@ -155,7 +155,7 @@ export const PlayersCard: FC = () => {
         </Link>
       </WrapperSearch>
       {(selector?.data?.count ?? 0) > 0 ? (
-        <ContainerGrid gridTemplateColumn="repeat(3,1fr)" gap="24px">
+        <ContentWrapper gridTemplateColumn="repeat(3,1fr)" gap="24px">
           {selector.data?.data.map((data, id) => (
             <CustomNavLink to={`${data.id}`}>
               <Card
@@ -165,7 +165,7 @@ export const PlayersCard: FC = () => {
               />
             </CustomNavLink>
           ))}
-        </ContainerGrid>
+        </ContentWrapper>
       ) : (
         <CenterImage imageUrl={PlayersCardImg} />
       )}
@@ -197,12 +197,20 @@ export const PlayersCard: FC = () => {
   );
 };
 
+const ContentWrapper = styled(ContainerGrid)`
+  margin-bottom: 32px;
+`;
+
 const CustomNavLink = styled(NavLink)`
   text-decoration: none;
 `;
 const ContainerPlayersCard = styled.div`
-  width: 1140px;
+  max-width: 1212px;
   margin: 0 auto;
+  height: 100%;
+  padding: 0 32px;
+  flex-direction: column;
+  display: flex;
   @media ${(props) => props.theme.tablet} {
     margin: 0 auto;
     width: 100%;
@@ -310,6 +318,21 @@ const ContainerSelect = styled.div`
   .react-select__multi-value {
     min-width: 30% !important;
     margin-right: 8px;
+    background-color: #e4163a;
+    border-radius: 4px;
+    color: #fff;
+  }
+  .react-select__multi-value__remove {
+    margin-left: auto;
+    //& :hover {
+    //  background-color: gray;
+    //}
+  }
+  .react-select__multi-value__label {
+    color: #fff;
+  }
+  @media ${(props) => props.theme.laptop} {
+    width: 270px;
   }
   @media ${(props) => props.theme.tablet} {
     width: 100%;

@@ -136,6 +136,7 @@ const MySideBarLayout = styled.section`
 const SidebarPanel = styled(MySideBarLayout)<{ showMenu: boolean | undefined }>`
   position: fixed;
   display: block;
+  z-index: 11;
   top: 86px;
   @media ${(props) => props.theme.tablet} {
     display: block;
@@ -148,7 +149,7 @@ const SidebarPanel = styled(MySideBarLayout)<{ showMenu: boolean | undefined }>`
   @media ${(props) => props.theme.mobile} {
     display: block;
     left: ${({ showMenu }) => (showMenu ? "0" : "-250px")};
-    top: 85px;
+    top: 80px;
     width: 250px;
     transition: left 0.3s ease-in-out;
     hight: 100%;

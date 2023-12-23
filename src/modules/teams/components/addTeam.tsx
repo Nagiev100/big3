@@ -271,6 +271,10 @@ export const ButtonSave = styled.button`
   &:active {
     background-color: #c60e2e;
   }
+  &:disabled {
+    background-color: #f6f6f6;
+    color: #d1d1d1;
+  }
   @media ${(props) => props.theme.tablet} {
     width: 100%;
     margin-top: 26px;
@@ -331,7 +335,7 @@ export const InputFile = styled.input`
   padding: 0;
   margin: 0;
 `;
-const CustomNavLink = styled(NavLink)`
+export const CustomNavLink = styled(NavLink)`
   text-decoration: none;
 `;
 const ContainerErrors = styled.div`

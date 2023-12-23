@@ -8,6 +8,7 @@ import { AddTextLogo } from "../../../common/components/shared/AddTextLogo";
 import Create from "../../../assests/icons/create.png";
 import Delete from "../../../assests/icons/delete.png";
 import { TableTeamDetail } from "./tableTeamDetail";
+import { CustomNavLink } from "./addTeam";
 
 export interface ITeamsResponse {
   pageSize: number;
@@ -78,9 +79,11 @@ export const TeamDetailing: FC = () => {
         <ContainerDitailTeam>
           <ContainerNameTeam>
             <ContainerLogo>
-              <AddTextLogo beforePaddingLeft="34px">
-                Team {teamDetail.name}
-              </AddTextLogo>
+              <CustomNavLink to={"/layout/teamsCard"}>
+                <AddTextLogo beforePaddingLeft="34px">
+                  Team {teamDetail.name}
+                </AddTextLogo>
+              </CustomNavLink>
             </ContainerLogo>
             <ContainerImg>
               <Img src={Create} onClick={upDateTeam} />

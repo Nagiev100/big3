@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import HeaderLogo from "../../assests/images/logoHeader (1).png";
 import UserImg from "../../assests/icons/user.png";
 import styled from "styled-components";
@@ -12,8 +12,23 @@ export const Header: FC = () => {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+
+  useEffect(() => {
+    document.body.setAttribute(
+      "style",
+      `overflow:${showMenu ? "hidden" : "scroll"};`,
+    );
+  }, [showMenu]);
   return (
     <>
+      {showMenu && (
+        <BlackWrapper
+          onClick={(e) => {
+            setShowMenu(false);
+            e.stopPropagation(); //todo. Stop onClick on children under blackWrapper
+          }}
+        />
+      )}
       <Container>
         <HumburgerIcon onClick={toggleMenu}>
           <ImgMenu src={MenuMobile} />
@@ -32,7 +47,20 @@ export const Header: FC = () => {
     </>
   );
 };
+
+const BlackWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #414141;
+  opacity: 0.6;
+  z-index: 10;
+`;
+
 const ContainerLogo = styled.div`
+  z-index: 2;
   @media ${(props) => props.theme.tablet} {
     display: flex;
     justify-content: center;
@@ -43,6 +71,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #fff;
   width: 100%;
   height: 100%;
   z-index: 99;

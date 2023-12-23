@@ -69,7 +69,6 @@ export const TeamsCard: FC = () => {
       <WrapperSearch>
         <ContainerSearch>
           <InputSearch
-            type="search"
             placeholder="Search..."
             onChange={(val) => setName(val.target.value)}
           />
@@ -82,7 +81,7 @@ export const TeamsCard: FC = () => {
         </Link>
       </WrapperSearch>
       {(selector?.data?.count ?? 0) > 0 ? (
-        <ContainerGrid gridTemplateColumn="repeat(3,1fr)" gap="24px">
+        <ContentWrapper gridTemplateColumn="repeat(3,1fr)" gap="24px">
           {selector.data?.data.map((data, id) => (
             <CustomNavLink to={`${data.id}`}>
               <Card
@@ -92,7 +91,7 @@ export const TeamsCard: FC = () => {
               />
             </CustomNavLink>
           ))}
-        </ContainerGrid>
+        </ContentWrapper>
       ) : (
         <CenterImage imageUrl={TeamsCardImg} />
       )}
@@ -126,9 +125,17 @@ export const TeamsCard: FC = () => {
   );
 };
 
+const ContentWrapper = styled(ContainerGrid)`
+  margin-bottom: 32px;
+`;
+
 const ContainerTeamsCard = styled.div`
-  width: 1140px;
+  max-width: 1212px;
+  height: 100%;
+  padding: 0 32px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   @media ${(props) => props.theme.tablet} {
     margin: 0 auto;
     width: 100%;
@@ -174,8 +181,8 @@ const InputSearch = styled.input`
   border-color: #d1d1d1;
   border-style: solid;
   border-width: 1px;
-  width: 364px;
   height: 40px;
+  width: 364px;
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
@@ -183,8 +190,8 @@ const InputSearch = styled.input`
   padding-left: 12px;
   border-radius: 4px;
   @media ${(props) => props.theme.tablet} {
-    width: 100%;
     margin-left: 0;
+    width: 100%;
     margin-top: 16px;
   }
   @media ${(props) => props.theme.mobile} {
@@ -250,11 +257,10 @@ export const ButtonText = styled.span`
 export const SectionPaginate = styled.section`
   display: flex;
   flex-direction: row;
-  margin-top: 32px;
+  margin-top: auto;
+  margin-bottom: 32px;
   justify-content: space-between;
   align-items: center;
-  margin-top: 32px;
-  margin-bottom: 0;
   @media ${(props) => props.theme.tablet} {
     width: 100%;
   }

@@ -77,10 +77,11 @@ const Section = styled.section`
   background-color: #f6f6f6;
   margin-top: 80px;
   width: calc(100vw - 140px);
-  min-height: 100%;
+  min-height: calc(100vh - 80px);
   margin-left: 140px;
   @media ${(props) => props.theme.tablet} {
     margin-left: 0;
+    height: auto;
     width: 100%;
   }
   @media ${(props) => props.theme.mobile} {

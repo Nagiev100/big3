@@ -9,6 +9,7 @@ import { fetchPlayer } from "../../../core/redux/reducer/player/playerThunk";
 import { Container } from "../../../common/components/shared/CenterImage";
 import { AddTextLogo } from "../../../common/components/shared/AddTextLogo";
 import { Name } from "../../teams/components/TeamDetailing";
+import { CustomNavLink } from "../../teams/components/addTeam";
 
 export const PlayerDetail: FC = () => {
   const navigate = useNavigate();
@@ -56,9 +57,11 @@ export const PlayerDetail: FC = () => {
         <ContainerDitailPlayer>
           <ContainerNamePlayer>
             <ContainerLogo>
-              <AddTextLogo beforePaddingLeft="45px">
-                Players {playerDetail.name}
-              </AddTextLogo>
+              <CustomNavLink to={"/layout/playersCard"}>
+                <AddTextLogo beforePaddingLeft="45px">
+                  Players {playerDetail.name}
+                </AddTextLogo>
+              </CustomNavLink>
             </ContainerLogo>
             <ContainerImg>
               <Img src={Create} onClick={upDatePlayer} />

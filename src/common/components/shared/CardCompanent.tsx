@@ -21,20 +21,19 @@ export const Card = ({ imageUrl, contentName, contentYear }: ICard) => {
   );
 };
 const ContainerCard = styled.div`
-  width: 364px;
+  //width: 364px;
   height: fit-content;
   background: linear-gradient(121.57deg, #707070 1.62%, #393939 81.02%);
   display: flex;
+  //width: auto;
   flex-direction: column;
   justify-content: flex-end;
   @media ${(props) => props.theme.tablet} {
-    width: 100%;
     heigth: auto;
   }
-  @media ${(props) => props.theme.mobile} {
-    width: 100%;
-    heigth: auto;
-  }
+  // @media ${(props) => props.theme.mobile} {
+  //   heigth: auto;
+  // }
 `;
 const ImageContainer = styled.div`
   flex: 1;
@@ -52,11 +51,13 @@ const ImageContainer = styled.div`
 export const CardContent = styled.div`
   width: 100%;
   height: 100px;
+  display: grid;
   background-color: #303030;
   color: #fff;
   align-self: flex-end;
   text-align: center;
-  padding: 24px 0;
+  padding: 24px 24px;
+  overflow: hidden;
   @media ${(props) => props.theme.tablet} {
     width: 100%;
     height: 94px;
@@ -75,6 +76,8 @@ const Text = styled.p`
 `;
 
 const Title = styled.p`
+  text-overflow: ellipsis;
+  overflow: hidden;
   @media ${(props) => props.theme.tablet} {
     max-width: calc((100vw - 60px) / 2);
   }
