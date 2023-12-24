@@ -88,7 +88,6 @@ export const Sidebar: FC<{ showMenu?: boolean }> = ({ showMenu }) => {
             <Image src={UserImg} widthProps="48px" heightProps="48px" />
             <UserNameSidebar>{name}</UserNameSidebar>
           </UserSidebar>
-
           <NavBar>
             <CustomNavLink to="teamsCard">
               <IconComponent
@@ -137,11 +136,11 @@ const SidebarPanel = styled(MySideBarLayout)<{ showMenu: boolean | undefined }>`
   position: fixed;
   display: block;
   z-index: 11;
-  top: 86px;
+  top: 85px;
   @media ${(props) => props.theme.tablet} {
     display: block;
     left: ${({ showMenu }) => (showMenu ? "0" : "-250px")};
-    top: 85px;
+    top: 72px;
     width: 250px;
     transition: left 0.3s ease-in-out;
     hight: 100%;
@@ -157,17 +156,38 @@ const SidebarPanel = styled(MySideBarLayout)<{ showMenu: boolean | undefined }>`
 `;
 const UserSidebar = styled.div`
   display: none;
+  position: relative;
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 36px;
+    left: -20px;
+    max-width: 201px;
+    width: 138px;
+    height: 20px;
+    border-bottom: 1px solid #9c9c9c;
+  }
+  div {
+    margin-bottom: 24px;
+  }
   @media ${(props) => props.theme.tablet} {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 16px auto;
+    &::after {
+      width: 138px;
+    }
   }
   @media ${(props) => props.theme.mobile} {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 16px auto;
+    &::after {
+      width: 143px;
+    }
   }
 `;
 const UserNameSidebar = styled.p`
@@ -208,6 +228,13 @@ const ButtonText = styled.p`
 const ImgButton = styled.img``;
 const NavBar = styled.nav`
   padding-right: 10px;
+  @media ${(props) => props.theme.tablet} {
+    margin-top: 24px;
+  }
+  @media ${(props) => props.theme.mobile} {
+    margin-top: 24px;
+  }
+\` ;
 `;
 
 const CustomNavLink = styled(NavLink)`

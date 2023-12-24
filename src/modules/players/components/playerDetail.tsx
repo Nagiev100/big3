@@ -219,6 +219,8 @@ const ContainerImg = styled.div`
 const ContainerNumber = styled.div`
   display: flex;
   align-items: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
   @media ${(props) => props.theme.tablet} {
     margin: 0 auto;
     width: 100%;

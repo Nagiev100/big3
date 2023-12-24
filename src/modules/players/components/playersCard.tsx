@@ -324,9 +324,6 @@ const ContainerSelect = styled.div`
   }
   .react-select__multi-value__remove {
     margin-left: auto;
-    //& :hover {
-    //  background-color: gray;
-    //}
   }
   .react-select__multi-value__label {
     color: #fff;

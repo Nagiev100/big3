@@ -249,6 +249,8 @@ const ContainerImg = styled.div`
 `;
 
 export const Name = styled.h1`
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 36px;
   font-weight: 800;
   line-height: normal;

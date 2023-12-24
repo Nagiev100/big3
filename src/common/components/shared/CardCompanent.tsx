@@ -21,19 +21,14 @@ export const Card = ({ imageUrl, contentName, contentYear }: ICard) => {
   );
 };
 const ContainerCard = styled.div`
-  //width: 364px;
   height: fit-content;
   background: linear-gradient(121.57deg, #707070 1.62%, #393939 81.02%);
   display: flex;
-  //width: auto;
   flex-direction: column;
   justify-content: flex-end;
   @media ${(props) => props.theme.tablet} {
     heigth: auto;
   }
-  // @media ${(props) => props.theme.mobile} {
-  //   heigth: auto;
-  // }
 `;
 const ImageContainer = styled.div`
   flex: 1;

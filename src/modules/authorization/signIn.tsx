@@ -10,6 +10,7 @@ import { Container } from "../../common/components/shared/CenterImage";
 import { Image } from "../../common/components/shared/ImageCompanent";
 import { Input } from "../../common/components/shared/InputComponent";
 import { useNotifyAlert } from "../../common/hooks/useNotifyAlert";
+import { ContainerErrors, ErrorsP } from "./signUp";
 
 interface SignInFormData {
   login: "string";
@@ -20,12 +21,12 @@ export const SignIn: FC = () => {
   const {
     handleSubmit,
     register,
+    setError,
     formState: { errors, isValid },
   } = useForm<SignInFormData>({
     mode: "onBlur",
   });
   const [typePassword, setTypePassword] = useState("password");
-  const [textError, setTextError] = useState(false);
   const { triggerNotifyComponent, notifyComponent } = useNotifyAlert();
   const navigate = useNavigate();
 
@@ -36,7 +37,10 @@ export const SignIn: FC = () => {
       localStorage.setItem("token", response?.token);
       navigate("/layout/teamsCard");
     } catch {
-      setTextError(true);
+      setError("password", {
+        type: "manual",
+        message: "Wrong password. Please, try again.",
+      });
       triggerNotifyComponent({
         text: "User with the specified username / password was not found.",
       });
@@ -65,6 +69,11 @@ export const SignIn: FC = () => {
                 background="#F6F6F6"
                 {...register("login", { required: true })}
               />
+              <ContainerErrors>
+                {errors?.login && (
+                  <ErrorsP>{errors?.login.message || "Required"}</ErrorsP>
+                )}
+              </ContainerErrors>
               <ContainerInput>
                 <Label htmlFor="password">Password</Label>
                 <Input
@@ -85,9 +94,11 @@ export const SignIn: FC = () => {
                     <img src={openEye} />
                   </ContainerIcon>
                 )}
-                {textError && (
-                  <TextError>Wrong password. Please, try again.</TextError>
-                )}
+                <ContainerErrors>
+                  {errors?.password && (
+                    <ErrorsP>{errors?.password.message || "Required"}</ErrorsP>
+                  )}
+                </ContainerErrors>
               </ContainerInput>
             </Form>
             <Container
