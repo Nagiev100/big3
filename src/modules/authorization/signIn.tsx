@@ -115,7 +115,7 @@ export const SignIn: FC = () => {
               </ButtonSignIn>
               <AuthorizationText>
                 Not a member yet?{" "}
-                <Link to="signUp" style={{ color: "red" }}>
+                <Link to="signUp" style={{ color: "#E4163A" }}>
                   Sign Up
                 </Link>
               </AuthorizationText>

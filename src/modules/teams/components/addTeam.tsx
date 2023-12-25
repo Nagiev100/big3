@@ -146,15 +146,15 @@ export const AddTeam: FC = () => {
             <Form>
               <Label>Name</Label>
               <Input
-                borderColor={errors?.name ? "red" : "#F6F6F6"}
+                borderColor={errors?.name ? "#FF768E" : "#F6F6F6"}
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"
                 {...register("name", {
                   required: "Required",
                   pattern: {
-                    value: /[A-Z]/,
-                    message: "Only letters can be used",
+                    value: /[a-z]/,
+                    message: "Only [a-z] can be used",
                   },
                 })}
               />
@@ -165,7 +165,7 @@ export const AddTeam: FC = () => {
               </ContainerErrors>
               <Label>Division</Label>
               <Input
-                borderColor={errors?.division ? "red" : "#F6F6F6"}
+                borderColor={errors?.division ? "#FF768E" : "#F6F6F6"}
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"
@@ -178,7 +178,7 @@ export const AddTeam: FC = () => {
               </ContainerErrors>
               <Label>Conference</Label>
               <Input
-                borderColor={errors?.conference ? "red" : "#F6F6F6"}
+                borderColor={errors?.conference ? "#FF768E" : "#F6F6F6"}
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"
@@ -191,7 +191,7 @@ export const AddTeam: FC = () => {
               </ContainerErrors>
               <Label>Year of foundation</Label>
               <Input
-                borderColor={errors?.foundationYear ? "red" : "#F6F6F6"}
+                borderColor={errors?.foundationYear ? "#FF768E" : "#F6F6F6"}
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"

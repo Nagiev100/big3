@@ -228,7 +228,7 @@ export const AddPlayer: FC = () => {
             <Form>
               <Label htmlFor="name">Name</Label>
               <Input
-                borderColor={errors?.name ? "red" : "#F6F6F6"}
+                borderColor={errors?.name ? "#FF768E" : "#F6F6F6"}
                 background="#F6F6F6"
                 widthProps="366px"
                 heightProps="40px"
@@ -236,8 +236,8 @@ export const AddPlayer: FC = () => {
                 {...register("name", {
                   required: "Required",
                   pattern: {
-                    value: /[A-Z]/,
-                    message: "Only letters can be used",
+                    value: /[a-z]/,
+                    message: "Only [a-z] can be used",
                   },
                 })}
               />

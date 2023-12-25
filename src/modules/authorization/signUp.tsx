@@ -51,7 +51,7 @@ export const SignUp: FC = () => {
     if (data.password !== data.returnPassword) {
       setError("returnPassword", {
         type: "manual",
-        message: "Пароли не совпадают",
+        message: "Passwords do not match",
       });
     } else {
       try {
@@ -191,7 +191,7 @@ export const SignUp: FC = () => {
                 </ButtonSignUp>
                 <AuthorizationText>
                   Not a member yet?{" "}
-                  <Link to="/" style={{ color: "red" }}>
+                  <Link to="/" style={{ color: "#E4163A" }}>
                     Sign In
                   </Link>
                 </AuthorizationText>
