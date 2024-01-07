@@ -286,7 +286,7 @@ export const ButtonSave = styled.button`
   }
 `;
 const ContainerAddTeam = styled.div`
-  width: 1140px;
+  max-width: 1140px;
   height: 545px;
   background-color: #ffffff;
   margin-left: 80px;

@@ -56,13 +56,13 @@ export const PlayerDetail: FC = () => {
       {playerDetail && (
         <ContainerDitailPlayer>
           <ContainerNamePlayer>
-            <ContainerLogo>
-              <CustomNavLink to={"/layout/playersCard"}>
+            <BreadCrumbLink to={"/layout/playersCard"}>
+              <ContainerLogo>
                 <AddTextLogo beforePaddingLeft="45px">
                   Players {playerDetail.name}
                 </AddTextLogo>
-              </CustomNavLink>
-            </ContainerLogo>
+              </ContainerLogo>
+            </BreadCrumbLink>
             <ContainerImg>
               <Img src={Create} onClick={upDatePlayer} />
               <Img src={Delete} onClick={deletePlayer} />
@@ -72,7 +72,7 @@ export const PlayerDetail: FC = () => {
             <ImgPlayer
               src={"http://dev.trainee.dex-it.ru" + playerDetail.avatarUrl}
             />
-            <div>
+            <TextWrapper>
               <ContainerNumber>
                 <Name>{playerDetail.name}</Name>
                 <Number>#{playerDetail.number}</Number>
@@ -109,7 +109,7 @@ export const PlayerDetail: FC = () => {
                   </ItemContainer>
                 </Container>
               </PlayerDetails>
-            </div>
+            </TextWrapper>
           </ContainerGridAddPlayer>
         </ContainerDitailPlayer>
       )}
@@ -124,6 +124,12 @@ const InfoSection = styled(Container)`
   @media ${(props) => props.theme.mobile} {
     order: 2;
   }
+`;
+
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ItemContainer = styled.div`
@@ -142,10 +148,11 @@ const ItemContainer = styled.div`
 `;
 
 const ContainerDetail = styled.div`
-  width: 1140px;
+  max-width: 1140px;
   height: 525px;
   background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
   margin-left: 80px;
+  margin-right: 80px;
   margin-top: 32px;
   @media ${(props) => props.theme.tablet} {
     width: 100%;
@@ -158,6 +165,12 @@ const ContainerDetail = styled.div`
     margin: 0 auto;
   }
 `;
+
+const BreadCrumbLink = styled(CustomNavLink)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-wrap: nowrap;
+`;
 const ContainerDitailPlayer = styled.div`
   width: 100%;
   @media ${(props) => props.theme.tablet} {
@@ -166,22 +179,25 @@ const ContainerDitailPlayer = styled.div`
     height: fit-content;
   }
   @media ${(props) => props.theme.mobile} {
-    height: 100%;
+    padding-bottom: 24px;
     margin: 0 auto;
+    height: fit-content;
   }
 `;
 const ContainerNamePlayer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 1140px;
+  max-width: 1140px;
+  width: 100%;
+
+  max-width: 100vw;
   height: 69px;
   background-color: #fff;
   @media ${(props) => props.theme.tablet} {
-    width: 100%;
     height: 48px;
   }
   @media ${(props) => props.theme.mobile} {
-    width: 100%;
+    //width: 100%;
     height: 48px;
   }
 `;
@@ -190,12 +206,12 @@ const ContainerLogo = styled.div`
   flex-direction: row;
   width: 100%;
   height: 100%;
-  margin-left: 32px;
+  //margin-left: 32px;
   @media ${(props) => props.theme.tablet} {
-    margin-left: 16px;
+    //margin-left: 16px;
   }
   @media ${(props) => props.theme.mobile} {
-    margin-left: 16px;
+    //margin-left: 16px;
   }
 `;
 const ContainerImg = styled.div`
@@ -204,13 +220,13 @@ const ContainerImg = styled.div`
   align-items: center;
   margin-right: 32px;
   @media ${(props) => props.theme.tablet} {
-    width: 100%;
+    //width: 100%;
     padding-top: 16px;
     margin: 0;
     justify-content: flex-end;
   }
   @media ${(props) => props.theme.mobile} {
-    width: 100%;
+    //width: 100%;
     padding-top: 16px;
     margin: 0;
     justify-content: flex-end;
@@ -220,14 +236,22 @@ const ContainerNumber = styled.div`
   display: flex;
   align-items: center;
   text-overflow: ellipsis;
+  margin-right: auto;
   overflow: hidden;
+  @media ${(props) => props.theme.laptop} {
+    max-width: 300px;
+  }
   @media ${(props) => props.theme.tablet} {
     margin: 0 auto;
     width: 100%;
+    max-width: 380px;
+    justify-content: center;
   }
   @media ${(props) => props.theme.mobile} {
     margin: 0 auto;
     width: 100%;
+    max-width: 380px;
+    justify-content: center;
   }
 `;
 const Img = styled.img`
@@ -246,6 +270,10 @@ const Img = styled.img`
 const ImgPlayer = styled.img`
   width: 450px;
   height: 450px;
+  @media ${(props) => props.theme.laptop} {
+    width: 350px;
+    height: 350px;
+  }
   @media ${(props) => props.theme.tablet} {
     width: 143px;
     height: 112px;
@@ -278,6 +306,7 @@ const ContainerGridAddPlayer = styled.div`
 const Number = styled.p`
   color: #ff5761;
   font-size: 36px;
+  //flex-grow: 1;
   font-weight: 800;
   padding-top: 65px;
   padding-left: 10px;
@@ -297,6 +326,7 @@ const Number = styled.p`
 
 const PlayerDetails = styled.div`
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr 1fr;
   list-style: none;
   @media ${(props) => props.theme.tablet} {
@@ -318,6 +348,11 @@ const LabelPlayer = styled.p`
   font-weight: 800;
   line-height: normal;
   color: #fff;
+  @media ${(props) => props.theme.laptop} {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 25px;
+  }
   @media ${(props) => props.theme.tablet} {
     width: 100%;
     height: fit-content;
@@ -351,7 +386,8 @@ const InformationPlayer = styled.p`
     height: fit-content;
     font-weight: 500;
     line-height: 24px;
-    padding-top:12px;
+    padding-top: 12px;
+  }
   @media ${(props) => props.theme.mobile} {
     font-size: 15px;
     width: auto;
@@ -360,4 +396,12 @@ const InformationPlayer = styled.p`
     line-height: 24px;
     padding-top: 12px;
   }
+  // @media ${(props) => props.theme.mobile} {
+  //   font-size: 15px;
+  //   width: auto;
+  //   height: fit-content;
+  //   font-weight: 500;
+  //   line-height: 24px;
+  //   padding-top: 12px;
+  // }
 `;

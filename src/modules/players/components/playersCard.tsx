@@ -129,7 +129,6 @@ export const PlayersCard: FC = () => {
         <InputsContainer>
           <ContainerSearch>
             <InputSearch
-              type="search"
               placeholder="Search..."
               onChange={(val) => setName(val.target.value)}
             />

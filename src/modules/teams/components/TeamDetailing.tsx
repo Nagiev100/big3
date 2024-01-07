@@ -78,13 +78,13 @@ export const TeamDetailing: FC = () => {
       {teamDetail && (
         <ContainerDitailTeam>
           <ContainerNameTeam>
-            <ContainerLogo>
-              <CustomNavLink to={"/layout/teamsCard"}>
+            <BreadCrumbLink to={"/layout/teamsCard"}>
+              <ContainerLogo>
                 <AddTextLogo beforePaddingLeft="34px">
                   Team {teamDetail.name}
                 </AddTextLogo>
-              </CustomNavLink>
-            </ContainerLogo>
+              </ContainerLogo>
+            </BreadCrumbLink>
             <ContainerImg>
               <Img src={Create} onClick={upDateTeam} />
               <Img src={Delete} onClick={deleteTeam} />
@@ -95,7 +95,7 @@ export const TeamDetailing: FC = () => {
               src={"http://dev.trainee.dex-it.ru" + teamDetail.imageUrl}
             />
             <TeamDetails>
-              <div>
+              <TextWrapper>
                 <Name>{teamDetail.name}</Name>
                 <ItemContainer>
                   <LabelTeam>Year of foundation</LabelTeam>
@@ -105,7 +105,7 @@ export const TeamDetailing: FC = () => {
                   <LabelTeam>Conference</LabelTeam>
                   <InformationTeam>{teamDetail.conference}</InformationTeam>
                 </ItemContainer>
-              </div>
+              </TextWrapper>
               <ContainerDivision>
                 <ItemContainer>
                   <LabelTeam>Division</LabelTeam>
@@ -117,6 +117,7 @@ export const TeamDetailing: FC = () => {
         </ContainerDitailTeam>
       )}
       {!!playersInTeam && (
+        //todo add margin
         <div>
           <TableTeamDetail playersInTeam={playersInTeam} />
         </div>
@@ -125,9 +126,10 @@ export const TeamDetailing: FC = () => {
   );
 };
 const ContainerDetail = styled.div`
-  width: 1140px;
+  max-width: 1140px;
   height: 525px;
   margin-left: 80px;
+  margin-right: 80px;
   margin-top: 32px;
   @media ${(props) => props.theme.tablet} {
     width: 100%;
@@ -154,10 +156,11 @@ const ContainerDitailTeam = styled.div`
 `;
 const ContainerNameTeam = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  width: 1140px;
+  max-width: 1140px;
+  flex-wrap: nowrap;
   height: 69px;
+  max-width: 100vw;
   background-color: #fff;
   @media ${(props) => props.theme.tablet} {
     width: 100%;
@@ -168,12 +171,18 @@ const ContainerNameTeam = styled.div`
     height: 48px;
   }
 `;
+
+const BreadCrumbLink = styled(CustomNavLink)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-wrap: nowrap;
+`;
+
 const ContainerLogo = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  flex-shrink: 1;
   height: 100%;
-  margin-left: 32px;
+  //margin-left: 32px;
   @media ${(props) => props.theme.tablet} {
     margin-left: 16px;
   }
@@ -185,15 +194,21 @@ const ContainerGridAddTeam = styled.div`
   display: grid;
   grid-template-columns: 3fr 4fr;
   max-width: 1140px;
+  padding-bottom: 50px;
+  @media ${(props) => props.theme.laptop} {
+    padding-bottom: 80px;
+  }
   @media ${(props) => props.theme.tablet} {
     grid-template-columns: 1fr;
     width: 100%;
     margin: 0 auto;
+    padding-bottom: 0;
   }
   @media ${(props) => props.theme.mobile} {
     grid-template-columns: 1fr;
     width: 100%;
     margin: 0 auto;
+    padding-bottom: 0;
   }
 `;
 
@@ -215,6 +230,10 @@ const ImgTeamDitail = styled.img`
   height: 210px;
   margin-left: 146px;
   margin-top: 97px;
+  @media ${(props) => props.theme.laptop} {
+    margin-left: 40px;
+    margin-top: 40px;
+  }
   @media ${(props) => props.theme.tablet} {
     width: 89px;
     height: 90px;
@@ -225,24 +244,25 @@ const ImgTeamDitail = styled.img`
   @media ${(props) => props.theme.mobile} {
     width: 89px;
     height: 90px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 48px;
   }
 `;
 
 const ContainerImg = styled.div`
   display: flex;
+  width: fit-content;
   flex-direction: row;
   margin-right: 32px;
   margin-top: 23px;
   padding-bottom: 20px;
   align-items: center;
   @media ${(props) => props.theme.tablet} {
-    width: 100%;
     margin-top: 30px;
     justify-content: flex-end;
   }
   @media ${(props) => props.theme.mobile} {
-    width: 100%;
     margin-top: 30px;
     justify-content: flex-end;
   }
@@ -252,24 +272,33 @@ export const Name = styled.h1`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 36px;
+  max-width: 400px;
+  text-align: center;
   font-weight: 800;
   line-height: normal;
   color: #ffffff;
   margin-top: 65px;
+
+  @media ${(props) => props.theme.laptop} {
+    font-size: 28px;
+  }
 
   @media ${(props) => props.theme.tablet} {
     text-align: center;
     font-size: 17px;
     font-weight: 800;
     line-height: 25px;
+    max-width: 340px;
     margin-top: 0;
   }
   @media ${(props) => props.theme.mobile} {
-    margin-left: 160px;
+    //margin-left: 160px;
+    margin-top: 0;
     font-size: 17px;
+    max-width: 250px;
     font-weight: 800;
     line-height: 25px;
-    margin-top: 0;
+    //align-items: center;
   }
 `;
 const TeamDetails = styled.div`
@@ -285,6 +314,22 @@ const TeamDetails = styled.div`
     grid-template-columns: 1fr;
     width: 100%;
     margin: 0 auto;
+  }
+`;
+
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: baseline;
+  @media ${(props) => props.theme.laptop} {
+    align-items: baseline;
+  }
+  @media ${(props) => props.theme.tablet} {
+    align-items: center;
+  }
+  @media ${(props) => props.theme.mobile} {
+    align-items: center;
   }
 `;
 

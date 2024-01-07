@@ -384,7 +384,7 @@ export const AddPlayer: FC = () => {
 };
 
 const ContainerAddPlayer = styled.div`
-  width: 1140px;
+  max-width: 1140px;
   height: 655px;
   background-color: #ffffff;
   margin-left: 80px;

@@ -6,7 +6,11 @@ interface IAddTextLogo {
 
 export const AddTextLogo = styled.p<IAddTextLogo>`
   height: 100%;
-  width: 100%;
+  width: min-content;
+  display: initial;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   position: relative;
   color: #e4163a;
   font-size: 14px;
