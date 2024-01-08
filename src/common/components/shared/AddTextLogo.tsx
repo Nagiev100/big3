@@ -30,7 +30,7 @@ export const AddTextLogo = styled.p<IAddTextLogo>`
   }
   @media ${(props) => props.theme.tablet} {
     padding-top: 16px;
-    padding-left: 0px;
+    padding-left: 16px;
   }
   @media ${(props) => props.theme.mobile} {
     padding-top: 16px;
